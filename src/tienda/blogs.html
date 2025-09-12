@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog de Repostería | Pastelería Mil Sabores</title>
+    <link rel="stylesheet" href="../../Assets/CSS/blogs.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #FFF5E1;
+            font-family: 'Lato', sans-serif;
+            color: #5D4037;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            text-align: center;
+            padding: 2rem 1rem 1rem 1rem;
+        }
+        header h1 {
+            font-family: 'Pacifico', cursive;
+            color: #8B4513;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        header p {
+            color: #B0BEC5;
+            font-size: 1.2rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(139,69,19,0.08);
+            padding: 2rem;
+        }
+        .blog {
+            display: flex;
+            align-items: flex-start;
+            background: #FFF5E1;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(139,69,19,0.08);
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            gap: 1.5rem;
+        }
+        .blog-img {
+            flex: 0 0 160px;
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(139,69,19,0.10);
+        }
+        .blog-info {
+            flex: 1;
+        }
+        .blog-title {
+            font-family: 'Pacifico', cursive;
+            color: #8B4513;
+            font-size: 1.7rem;
+            margin-bottom: 0.5rem;
+        }
+        .blog-date {
+            color: #B0BEC5;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content {
+            font-size: 1.1rem;
+            color: #5D4037;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Blog de Repostería</h1>
+        <p>Descubre datos curiosos e historias dulces sobre el mundo de la pastelería</p>
+    </header>
+    <div class="container">
+        <div class="blog">
+            <img src="../../Assets/IMG/pastel%20mas%20largo%20del%20mundo.jpg" alt="Pastel más largo del mundo" class="blog-img">
+            <div class="blog-info">
+                <div class="blog-title">¿Sabías que el pastel más largo del mundo fue hecho en Francia?</div>
+                <div class="blog-date">2025</div>
+                <div class="blog-content">
+                    La pastelería Maison Héloïse, ubicada cerca de París, Francia, creó el pastel de fresas más largo del mundo el 23 de abril de 2025, con una longitud certificada de 121.88 metros.
+                </div>
+            </div>
+        </div>
+        <div class="blog">
+            <img src="../../Assets/IMG/tiramisu.avif" alt="Tiramisú" class="blog-img">
+            <div class="blog-info">
+                <div class="blog-title">La historia del tiramisú</div>
+                <div class="blog-date">10 de septiembre de 2025</div>
+                <div class="blog-content">
+                    El tiramisú, uno de los postres más famosos de Italia, nació en la región de Véneto en los años 60. Su nombre significa "levántame el ánimo" y combina café, queso mascarpone y cacao.
+                </div>
+            </div>
+        </div>
+        <div class="blog">
+            <img src="../../Assets/IMG/pastel%20mas%20largo%20del%20mundo.jpg" alt="Pastel de cumpleaños" class="blog-img">
+            <div class="blog-info">
+                <div class="blog-title">¿Por qué los pasteles de cumpleaños llevan velas?</div>
+                <div class="blog-date">8 de septiembre de 2025</div>
+                <div class="blog-content">
+                    La tradición de soplar velas en los pasteles de cumpleaños proviene de la antigua Grecia, donde se ofrecían pasteles redondos con velas a la diosa Artemisa como símbolo de la luna.
+                </div>
+            </div>
+        </div>
+        <div class="blog">
+            <img src="../../Assets/IMG/tiramisu.avif" alt="Alfajores" class="blog-img">
+            <div class="blog-info">
+                <div class="blog-title">El origen de los alfajores</div>
+                <div class="blog-date">5 de septiembre de 2025</div>
+                <div class="blog-content">
+                    Los alfajores tienen raíces árabes y llegaron a América Latina durante la colonización española. Hoy son un clásico de la repostería argentina y peruana, rellenos de dulce de leche y cubiertos de chocolate o azúcar glas.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
