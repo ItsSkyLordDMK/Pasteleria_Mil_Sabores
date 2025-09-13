@@ -1,0 +1,86 @@
+body {
+    background-color: #FFF5E1;
+    font-family: 'Lato', sans-serif;
+    color: #5D4037;
+    margin: 0;
+    padding: 0;
+}
+header {
+    text-align: center;
+    padding: 2rem 1rem 1rem 1rem;
+}
+header h1 {
+    font-family: 'Pacifico', cursive;
+    color: #8B4513;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+header p {
+    color: #B0BEC5;
+    font-size: 1.2rem;
+}
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(139,69,19,0.08);
+    padding: 2rem;
+}
+.blog {
+    display: flex;
+    align-items: flex-start;
+    background: #FFF5E1;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(139,69,19,0.08);
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    gap: 1.5rem;
+}
+.blog-img {
+    flex: 0 0 160px;
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(139,69,19,0.10);
+}
+.blog-info {
+    flex: 1;
+}
+.blog-title {
+    font-family: 'Pacifico', cursive;
+    color: #8B4513;
+    font-size: 1.7rem;
+    margin-bottom: 0.5rem;
+}
+.blog-date {
+    color: #B0BEC5;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+.blog-content {
+    font-size: 1.1rem;
+    color: #5D4037;
+}
+@media (max-width: 600px) {
+    .container {
+        padding: 1rem;
+    }
+}
+.blog-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1.2rem;
+    background-color: #8B4513;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    transition: background 0.2s;
+}
+.blog-btn:hover {
+    background-color: #A0522D;
+}
