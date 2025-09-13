@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mil Sabores</title>
   <link rel="stylesheet" href="src/assets/css/styles.css" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <script src="src/assets/js/filtro.js" defer></script>
   <script src="src/assets/js/inicio_sesion.js" defer></script>
   <script src="src/assets/js/validaciones.js" defer></script>
@@ -17,7 +21,7 @@
     </div>
 
     <div>
-      <strong>Tienda online - Mil Sabores</strong>
+      <strong>Pasteleria Mil Sabores</strong>
     </div>
 
 
@@ -25,13 +29,13 @@
     <nav class="navegacion" aria-label="Navegación principal">
       <a href="#">Home</a>
       <a href="#productos">Productos</a>
-      <a href="src/assets/tienda/nosotros.html">Nosotros</a>
+      <a href="src/tienda/nosotros.html">Nosotros</a>
       <a href="html/blog.html">Blog</a>
       <a href="html/contacto.html">Contacto</a>
     </nav>
 
     <div class="usuario">
-      <a href="src/assets/tienda/iniciarSesion.html">Iniciar sesión</a>
+      <a href="src/tienda/iniciarSesion.html">Iniciar sesión</a>
   <div id="notificacion-bienvenida" style="display:none; background:#8B4513; color:#FFF; padding:8px 16px; border-radius:8px; margin-top:8px;">¡Bienvenido</div>
 
       <!--=============== MODAL LOGIN / REGISTRO ===============-->
@@ -183,7 +187,7 @@
       <!-- =========== /MODAL =========== -->
 
       <span class="separar">|</span>
-      <a href="src/assets/tienda/registro.html">Registrarse</a>
+      <a href="src/tienda/registro.html">Registrarse</a>
       <span class="separar">|</span>
       <span>Carrito (0)</span>
     </div>
@@ -204,297 +208,52 @@
 Nuestro catálogo incluye tortas personalizadas, postres tradicionales y opciones saludables para todos los gustos, desde clásicos de siempre hasta innovaciones pensadas para sorprender. Ya sea un cumpleaños, una boda o un simple antojo, tenemos el postre perfecto para acompañar tus momentos inolvidables.
 
 Más que una pastelería, somos un espacio donde la dulzura se transforma en recuerdos. Porque en Mil Sabores, cada bocado cuenta una historia.
-      </p>
-      <a href="index.html#productos" class="btn">Ver productos</a>
+
+      <!-- Bootstrap Carousel -->
+      <div id="presentacionCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#presentacionCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#presentacionCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#presentacionCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#presentacionCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          <button type="button" data-bs-target="#presentacionCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+          <button type="button" data-bs-target="#presentacionCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
+        </div>
+        
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="src/assets/img/presentacion1.jpg" class="d-block w-100" alt="Presentación 1 - Mil Sabores">
+          </div>
+          <div class="carousel-item">
+            <img src="src/assets/img/presentacion2.jpg" class="d-block w-100" alt="Presentación 2 - Mil Sabores">
+          </div>
+          <div class="carousel-item">
+            <img src="src/assets/img/presentacion3.jpg" class="d-block w-100" alt="Presentación 3 - Mil Sabores">
+          </div>
+          <div class="carousel-item">
+            <img src="src/assets/img/presentacion4.jpg" class="d-block w-100" alt="Presentación 4 - Mil Sabores">
+          </div>
+          <div class="carousel-item">
+            <img src="src/assets/img/presentacion5.jpg" class="d-block w-100" alt="Presentación 5 - Mil Sabores">
+          </div>
+          <div class="carousel-item">
+            <img src="src/assets/img/presentacion6.jpg" class="d-block w-100" alt="Presentación 6 - Mil Sabores">
+          </div>
+        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#presentacionCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#presentacionCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
-    <figure class="hero-media">
-      <img src="src/assets/img/mision.png" width="250" alt="Logo de Mil Sabores" />
-    </figure>
   </section>
 
-  <!-- ======================= MAIN ======================= -->
-  <main class="main">
-    <!-- Filtros -->
-    <section class="filtros" aria-labelledby="categorias">
-      <h2 id="categorias">Categorías</h2>
-      <label for="filtro">Filtrar por categoría: </label>
-      <select id="filtro" name="filtro">
-        <option value="all">Todas</option>
-        <option value="tortas_cuadradas">Tortas Cuadradas</option>
-        <option value="tortas_circulares">Tortas Circulares</option>
-        <option value="postres_individuales">Postres Individuales</option>
-        <option value="productos_sin_azucar">Productos sin azúcar</option>
-        <option value="pasteleria_tradicional">Pastelería Tradicional</option>
-        <option value="productos_sin_gluten">Productos sin gluten</option>
-        <option value="vegano">Vegano</option>
-        <option value="especiales">Especiales</option>
-      </select>
-      <div id="mensaje" aria-live="polite" class="status"></div>
-    </section>
-
-    <!-- Productos -->
-    <section id="productos" class="productos" aria-labelledby="titulo-productos">
-      <h2 id="titulo-productos">Productos</h2>
-
-      <div class="buscador">
-        <article class="item" data-category="tortas_cuadradas">
-          <a href="html/productos/torta_cuadrada_chocolate.html">
-            <img src="src/assets/img/torta_cuadrada_chocolate.png" width="200" alt="Torta cuadrada de chocolate" />
-          </a>
-          <div class="item-content">
-            <h3>Torta Cuadrada de Chocolate</h3>
-            <p>Deliciosa torta de chocolate con capas de ganache y un toque de avellanas. Personalizable con mensajes especiales.</p>
-            <p class="precio">$45.000 CLP</p>
-          </div>
-          <div class="item-overlay">
-           
-            
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="tortas_cuadradas">
-          <a href="html/productos/torta_cuadrada_frutas.html">
-            <img src="src/assets/img/torta_cuadrada_frutas.png" width="200" alt="Torta cuadrada de frutas" />
-          </a>
-          <div class="item-content">
-            <h3>Torta Cuadrada de Frutas</h3>
-            <p>Mezcla de frutas frescas y crema chantilly sobre un suave bizcocho de vainilla, ideal para celebraciones.</p>
-            <p class="precio">$50.000 CLP</p>
-          </div>
-          <div class="item-overlay">
-            
-            
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="tortas_circulares">
-          <a href="html/productos/torta_circular_vainilla.html">
-            <img src="src/assets/img/torta_circular_vainilla.png" width="200" alt="Torta circular de vainilla" />
-          </a>
-          <div class="item-content">
-            <h3>Torta Circular de Vainilla</h3>
-            <p>Bizcocho de vainilla clásico con crema pastelera y glaseado dulce, perfecto para cualquier ocasión.</p>
-            <p class="precio">$40.000 CLP</p>
-          </div>
-          <div class="item-overlay">
-            
-            
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="tortas_circulares">
-          <a href="html/productos/torta_circular_manjar.html">
-            <img src="src/assets/img/torta_circular_manjar.png" width="200" alt="Torta circular de manjar" />
-          </a>
-          <div class="item-content">
-            <h3>Torta Circular de Manjar</h3>
-            <p>Torta tradicional chilena con manjar y nueces, para amantes de los sabores dulces y clásicos.</p>
-            <p class="precio">$42.000 CLP</p>
-          </div>
-          <div class="item-overlay">
-            
-            
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="postres_individuales">
-          <a href="html/productos/postre_individual_mousse.html">
-            <img src="src/assets/img/individual_mousse_chocolate.png" width="200" alt="Mousse de chocolate individual" />
-          </a>
-          <div class="item-content">
-            <h3>Mousse de Chocolate</h3>
-            <p>Postre individual cremoso y suave con chocolate de alta calidad.</p>
-            <p class="precio">$5.000 CLP</p>
-          </div>
-          <div class="item-overlay">
-            
-            
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="postres_individuales">
-          <a href="html/productos/postre_individual_tiramisu.html">
-            <img src="src/assets/img/individual_tiramisu_clasico.png" width="200" alt="Tiramisú clásico individual" />
-          </a>
-          <div class="item-content">
-            <h3>Tiramisú clásico</h3>
-            <p>Capas de café, mascarpone y cacao. Un clásico para cerrar cualquier comida.</p>
-            <p class="precio">$5.500 CLP</p>
-          </div>
-          <div class="item-overlay">
-            
-            
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="productos_sin_azucar">
-          <a href="html/productos/torta_sin_azucar_naranja.html">
-            <img src="src/assets/img/sin_azucar_torta_naranja.png" width="200" alt="Torta sin azúcar de naranja" />
-          </a>
-          <div class="item-content">
-            <h3>Torta Sin Azúcar de Naranja</h3>
-            <p>Torta ligera, endulzada naturalmente. Ideal para opciones más saludables.</p>
-            <p class="precio">$48.000 CLP</p>
-          </div>
-          <div class="item-overlay">
-            
-            
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="productos_sin_azucar">
-          <a href="html/productos/torta_sin_azucar_cheesecake.html">
-            <img src="src/assets/img/sin_azucar_cheesecake_naranja.png" width="200" alt="Cheesecake de naranja sin azúcar" />
-          </a>
-          <div class="item-content">
-            <h3>Cheesecake de Naranja</h3>
-            <p>Suave y cremoso, una opción perfecta para disfrutar sin culpa.</p>
-            <p class="precio">$47.000 CLP</p>
-          </div>
-          <div class="item-overlay">
-           
-            
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="pasteleria_tradicional">
-          <a href="html/productos/tradicional_empanada.html">
-            <img src="src/assets/img/pasteleria_tradicional_empanada_manzana.png" width="200" alt="Empanada de manzana" />
-          </a>
-          <div class="item-content">
-            <h3>Empanada de Manzana</h3>
-            <p>Rellena de manzanas especiadas. Ideal para desayuno o merienda.</p>
-            <p class="precio">$3.000 CLP</p>
-          </div>
-          <div class="item-overlay">
-            
-            
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="pasteleria_tradicional">
-          <a href="html/productos/tradicional_tarta.html">
-            <img src="src/assets/img/pasteleria_tradicional_tarta_santiago.png" width="200" alt="Tarta de Santiago" />
-          </a>
-          <div class="item-content">
-            <h3>Tarta de Santiago</h3>
-            <p>Clásica tarta de almendras, azúcar y huevos. Sencilla y deliciosa.</p>
-            <p class="precio">$6.000 CLP</p>
-          </div>
-          <div class="item-overlay">
-           
-            
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="productos_sin_gluten">
-          <a href="html/productos/sin_gluten_brownie.html">
-            <img src="src/assets/img/sin_gluten_brownie.png" width="200" alt="Brownie sin gluten" />
-          </a>
-          <div class="item-content">
-            <h3>Brownie Sin Gluten</h3>
-            <p>Denso y sabroso, sin gluten y con mucho chocolate.</p>
-            <p class="precio">$4.000 CLP</p>
-          </div>
-          <div class="item-overlay">
-           
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="productos_sin_gluten">
-          <a href="html/productos/pan_sin_gluten.html">
-            <img src="src/assets/img/sin_gluten_pan.png" width="200" alt="Pan sin gluten" />
-          </a>
-          <div class="item-content">
-            <h3>Pan Sin Gluten</h3>
-            <p>Suave y esponjoso, ideal para sándwiches o acompañar comidas.</p>
-            <p class="precio">$3.500 CLP</p>
-          </div>
-          <div class="item-overlay">
-           
-            
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="vegano">
-          <a href="html/productos/torta_vegana.html">
-            <img src="src/assets/img/vegana_torta_chocolate.png" width="200" alt="Torta vegana de chocolate" />
-          </a>
-          <div class="item-content">
-            <h3>Torta Vegana de Chocolate</h3>
-            <p>Húmeda y deliciosa, sin productos de origen animal.</p>
-            <p class="precio">$50.000 CLP</p>
-          </div>
-          <div class="item-overlay">
-            
-           
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="vegano">
-          <a href="html/productos/galleta_vegana.html">
-            <img src="src/assets/img/vegana_galleta_avena.png" width="200" alt="Galletas veganas de avena" />
-          </a>
-          <div class="item-content">
-            <h3>Galletas Veganas de Avena</h3>
-            <p>Crujientes y sabrosas; snack saludable y vegano.</p>
-            <p class="precio">$4.500 CLP</p>
-          </div>
-          <div class="item-overlay">
-            
-            
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="especiales">
-          <a href="html/productos/especial_cumpleanos.html">
-            <img src="src/assets/img/especial_torta_cumpleanos.png" width="200" alt="Torta especial de cumpleaños" />
-          </a>
-          <div class="item-content">
-            <h3>Torta Especial de Cumpleaños</h3>
-            <p>Personalizable con decoraciones y mensajes únicos.</p>
-            <p class="precio">$55.000 CLP</p>
-          </div>
-          <div class="item-overlay">
-            
-            
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-
-        <article class="item" data-category="especiales">
-          <a href="html/productos/especial_boda.html">
-            <img src="src/assets/img/especial_torta_boda.png" width="200" alt="Torta especial de boda" />
-          </a>
-          <div class="item-content">
-            <h3>Torta Especial de Boda</h3>
-            <p>Elegante y deliciosa; el centro de la celebración.</p>
-            <p class="precio">$60.000 CLP</p>
-          </div>
-          <div class="item-overlay">
-            
-            
-            <button class="btn-comprar">Agregar al Carrito</button>
-          </div>
-        </article>
-      </div>
-    </section>
-
-   
+  
   <!-- ======================= FOOTER ======================= -->
   <footer class="footer" id="contacto">
     <nav aria-label="Redes">
@@ -509,6 +268,9 @@ Más que una pastelería, somos un espacio donde la dulzura se transforma en rec
       <button type="submit">Subscribirse</button>
     </form>
   </footer>
+  
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
 

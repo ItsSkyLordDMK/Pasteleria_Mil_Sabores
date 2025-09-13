@@ -158,6 +158,7 @@ html, body {
   display: block;
   filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15));
   transition: var(--transition);
+  min-width: 300px;
 }
 
 .hero-media img:hover {
@@ -1148,12 +1149,12 @@ html, body {
 /* ================== Página Nosotros ================== */
 .nosotros-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--background-color) 0%, #FFF8DC 100%);
+  background: linear-gradient(135deg, var(--background-color) 0%, #ffffff 100%);
 }
 
 .nosotros-hero {
-  background: linear-gradient(135deg, var(--primary-color) 0%, #A0522D 100%);
-  color: white;
+  background: #F8BBD9;
+  color: #2C2C2C;
   padding: 80px 20px;
   text-align: center;
   position: relative;
@@ -1182,14 +1183,16 @@ html, body {
   font-size: 3.5rem;
   font-weight: 900;
   margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: #8B4A6B;
+  text-shadow: 2px 2px 4px rgba(139, 74, 107, 0.2);
 }
 
 .nosotros-hero p {
   font-size: 1.3rem;
   line-height: 1.8;
-  opacity: 0.95;
+  opacity: 0.9;
   margin-bottom: 0;
+  color: #5A3A4A;
 }
 
 .nosotros-main {
@@ -1258,7 +1261,7 @@ html, body {
   border-radius: 20px;
   box-shadow: var(--shadow-hover);
   transition: var(--transition);
-  border: 4px solid white;
+  border: 4px solid rgb(221, 196, 196);
 }
 
 .nosotros-image img:hover {
@@ -1274,7 +1277,7 @@ html, body {
 }
 
 .nosotros-value-card {
-  background: linear-gradient(135deg, #fff 0%, #fefefe 100%);
+  background: linear-gradient(135deg, #a67878 0rgb(81, 11, 11)efe 100%);
   padding: 40px 30px;
   border-radius: 20px;
   box-shadow: var(--shadow);
@@ -1517,4 +1520,268 @@ html, body {
   }
 }
 
+/* ================== CARRUSEL DE PRESENTACIÓN ================== */
+.carousel-container {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
 
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+.carousel-slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* Botones de navegación */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn.prev {
+  left: 15px;
+}
+
+.carousel-btn.next {
+  right: 15px;
+}
+
+/* Indicadores */
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: var(--primary-color);
+  transform: scale(1.2);
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive para el carrusel */
+@media (max-width: 768px) {
+  .carousel-container {
+    max-width: 350px;
+  }
+  
+  .carousel-wrapper {
+    height: 300px;
+  }
+  
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  
+  .carousel-btn.prev {
+    left: 10px;
+  }
+  
+  .carousel-btn.next {
+    right: 10px;
+  }
+  
+  .carousel-indicators {
+    bottom: 15px;
+  }
+  
+  .indicator {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* ================== INTEGRACIÓN CON BOOTSTRAP ================== */
+
+/* Carrusel personalizado */
+.hero-media .carousel {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.hero-media .carousel-item img {
+  height: 400px;
+  object-fit: cover;
+}
+
+.hero-media .carousel-control-prev,
+.hero-media .carousel-control-next {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hero-media .carousel-control-prev {
+  left: 15px;
+}
+
+.hero-media .carousel-control-next {
+  right: 15px;
+}
+
+.hero-media .carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  margin: 0 5px;
+}
+
+.hero-media .carousel-indicators .active {
+  background: var(--primary-color);
+}
+
+/* Cards de productos */
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 15px;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-img-container {
+  height: 250px;
+}
+
+.card-img-container img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .card-img-container img {
+  transform: scale(1.05);
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-card:hover .card-overlay {
+  opacity: 1;
+}
+
+/* Responsive para el carrusel */
+@media (max-width: 768px) {
+  .hero-media .carousel {
+    max-width: 350px;
+  }
+  
+  .hero-media .carousel-item img {
+    height: 300px;
+  }
+  
+  .hero-media .carousel-control-prev,
+  .hero-media .carousel-control-next {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .hero-media .carousel-control-prev {
+    left: 10px;
+  }
+  
+  .hero-media .carousel-control-next {
+    right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-media .carousel {
+    max-width: 280px;
+  }
+  
+  .hero-media .carousel-item img {
+    height: 250px;
+  }
+}
