@@ -1,0 +1,108 @@
+
+:root {
+    --color-fondo-principal: #FFF5E1;
+
+    /*botones*/
+    --color-acento-suave: #FFC0CB;
+    --color-acento-chocolate: #8B4513;
+
+    /*texto*/
+    --color-texto-principal: #5D4037;
+    --color-texto-secundario: #B0BEC5;
+}
+
+body, html{
+    background-color: var(--color-fondo-principal);
+    margin: 0;
+    padding: 0;
+}
+
+.titulo-productos {
+    background-color: var(--color-fondo-principal);
+    width: 100%;
+    text-align: center;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.titulo-productos h1 {
+    font-size: 2.5rem;
+    color: var(--color-texto-principal);
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.productos-grid {
+    background-color: var(--color-fondo-principal);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+}
+
+.producto-container {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 16px rgba(110, 57, 18, 0.08);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 340px;
+}
+
+.producto-img {
+    width: 100%;
+    max-width: 180px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.producto-titulo {
+    font-size: 1.2rem;
+    color: #8B4513;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.producto-precio {
+    font-size: 1.1rem;
+    color: #A0522D;
+    /*font-weight: bold;*/
+    margin-bottom: 12px;
+}
+
+.btn-añadir {
+    background: linear-gradient(135deg, #8B4513 0%, #944c2b 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-añadir:hover {
+    background: linear-gradient(135deg, var(--color-acento-suave) 0%, #d898a2 100%);
+    color: #8B4513;
+    transform: translateY(-2px);
+}
+
+/* Responsive para móviles */
+@media (max-width: 900px) {
+    .productos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+@media (max-width: 600px) {
+    .productos-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
