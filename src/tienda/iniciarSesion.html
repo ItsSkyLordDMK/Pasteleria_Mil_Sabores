@@ -155,22 +155,58 @@
         const correo = correoInput.value.trim();
         const password = passwordInput.value;
         const recordar = document.getElementById('recordar').checked;
-
-        if (!correo || !validarEmail(correo)) { mostrarError('correo','Correo inválido'); return; }
-        if (!password || password.length<4) { mostrarError('password','Contraseña inválida'); return; }
-
-        const r = iniciarSesion(correo, password, recordar);
-        if (r.exito) {
-          mostrarExitoLogin();
-          const s = r.usuario;
-          let msg='';
-          if (s.descuento===50) msg='¡Tienes 50% de descuento en todos los productos!';
-          else if (s.descuento===10) msg='¡Tienes 10% de descuento de por vida!';
-          if (s.tortaGratis) msg += (msg?' y ':'')+'¡Tienes una torta gratis por ser estudiante Duoc en tu cumpleaños!';
-          if (msg) alert(msg);
-          setTimeout(()=>{ window.location.href='../../index.html'; },1500);
+        let esValido = true;
+        // Validación correo
+        if (!correo) {
+          mostrarError('correo', 'El correo electrónico es requerido');
+          esValido = false;
+        } else if (correo.length > 100) {
+          mostrarError('correo', 'El correo no puede superar los 100 caracteres');
+          esValido = false;
+        } else if (!/^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i.test(correo)) {
+          mostrarError('correo', 'Solo se permiten correos @duoc.cl, @profesor.duoc.cl o @gmail.com');
+          esValido = false;
+        }
+        // Validación contraseña
+        if (!password) {
+          mostrarError('password', 'La contraseña es requerida');
+          esValido = false;
+        } else if (password.length < 4 || password.length > 10) {
+          mostrarError('password', 'La contraseña debe tener entre 4 y 10 caracteres');
+          esValido = false;
+        }
+        if (esValido) {
+          const resultado = iniciarSesion(correo, password, recordar);
+          if (resultado.exito) {
+            mostrarExitoLogin();
+            const sesion = resultado.usuario;
+            let mensaje = '';
+            if (sesion.descuento === 50) mensaje = '¡Tienes 50% de descuento en todos los productos!';
+            else if (sesion.descuento === 10) mensaje = '¡Tienes 10% de descuento de por vida!';
+            if (sesion.tortaGratis) mensaje += (mensaje ? ' y ' : '') + '¡Tienes una torta gratis por ser estudiante Duoc en tu cumpleaños!';
+            if (mensaje) alert(mensaje);
+            // Redirección especial para profesor.duoc.cl
+            if (/^[^\s@]+@profesor\.duoc\.cl$/i.test(correo)) {
+              setTimeout(() => {
+                window.location.href = '../admin/home.html';
+              }, 1200);
+            } else {
+              setTimeout(() => {
+                window.location.href = '../../index.html';
+              }, 1200);
+            }
+          } else {
+            mostrarErrorLogin('Credenciales incorrectas. Verifica tu correo y contraseña.');
+            correoInput.classList.add('invalid');
+            passwordInput.classList.add('invalid');
+            form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
         } else {
-          mostrarErrorLogin('Credenciales incorrectas. Verifica tu correo y contraseña.');
+          // Si hay errores de validación, desplazarse suavemente al primer error
+          const primerError = document.querySelector('.error-message.show');
+          if (primerError) {
+            primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
         }
       });
     });

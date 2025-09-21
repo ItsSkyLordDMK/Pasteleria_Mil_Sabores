@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Administrador - Mil Sabores</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    body {
+      margin: 0;
+      background: #FFF5E1;
+      font-family: 'Lato', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: #5D4037;
+    }
+    .admin-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 220px;
+      background: #fff8f0;
+      border-right: 2px solid #ffe4ec;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px 0 16px 0;
+    }
+    .sidebar .logo {
+      font-family: 'Pacifico', cursive;
+      color: #8B4513;
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 32px;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 24px;
+      color: #8B4513;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 8px 0 0 8px;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sidebar nav a.active, .sidebar nav a:hover {
+      background: #FFC0CB;
+      color: #fff;
+    }
+    .sidebar .bottom-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .sidebar .profile {
+      margin-top: 24px;
+      text-align: center;
+      color: #8B4513;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 8px 0 0 0;
+      border-top: 1px solid #ffe4ec;
+    }
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #FFF5E1;
+      padding: 36px 32px;
+    }
+    .admin-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px #f3e6d8;
+      padding: 32px 28px;
+      margin-bottom: 24px;
+      min-height: 180px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .admin-card h1 {
+      font-family: 'Pacifico', cursive;
+      color: #8B4513;
+      font-size: 2rem;
+      margin: 0;
+    }
+    @media (max-width: 700px) {
+      .admin-layout { flex-direction: column; }
+      .sidebar { width: 100%; flex-direction: row; border-right: none; border-bottom: 2px solid #ffe4ec; }
+      .sidebar nav { flex-direction: row; gap: 0; }
+      .sidebar nav a { border-radius: 8px 8px 0 0; padding: 10px 12px; }
+      .main-content { padding: 16px 6px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <div>
+        <div class="logo">
+          <img src="../assets/img/logo.png" alt="Logo" style="height: 36px; width: 36px; border-radius: 50%; box-shadow: 0 2px 8px #f3e6d8;">
+          Mil Sabores
+        </div>
+        <nav>
+          <a href="#" class="active"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+          <a href="#"><i class="bi bi-bag"></i> Orders</a>
+          <a href="#"><i class="bi bi-box"></i> Inventory</a>
+          <a href="#"><i class="bi bi-bar-chart"></i> Reports</a>
+          <a href="#"><i class="bi bi-people"></i> Employees</a>
+          <a href="#"><i class="bi bi-person-lines-fill"></i> Customers</a>
+        </nav>
+        <div class="bottom-menu">
+          <a href="#"><i class="bi bi-gear"></i> Settings</a>
+          <a href="#"><i class="bi bi-person"></i> Profile</a>
+          <a href="#"><i class="bi bi-search"></i> Search</a>
+          <a href="#"><i class="bi bi-question-circle"></i> Help</a>
+        </div>
+      </div>
+      <div class="profile">
+        <i class="bi bi-person-circle"></i> Admin
+      </div>
+    </aside>
+    <main class="main-content">
+      <div class="admin-card">
+        <h1>¡HOLA Administrador!</h1>
+        <i class="bi bi-suit-spade-fill" style="font-size: 1.8rem; color: #8B4513;"></i>
+      </div>
+      <div class="admin-card" style="min-height: 220px;"></div>
+    </main>
+  </div>
+</body>
+</html>

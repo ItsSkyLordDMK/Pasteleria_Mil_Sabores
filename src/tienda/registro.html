@@ -393,15 +393,32 @@
       // Validación del formulario completo
       form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+        const correo = document.getElementById('correo').value.trim();
+        const password = document.getElementById('password').value;
         let esValido = true;
-        
+        // Validación correo
+        if (!correo) {
+          mostrarError('correo', 'El correo electrónico es requerido');
+          esValido = false;
+        } else if (correo.length > 100) {
+          mostrarError('correo', 'El correo no puede superar los 100 caracteres');
+          esValido = false;
+        } else if (!/^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i.test(correo)) {
+          mostrarError('correo', 'Solo se permiten correos @duoc.cl, @profesor.duoc.cl o @gmail.com');
+          esValido = false;
+        }
+        // Validación contraseña
+        if (!password) {
+          mostrarError('password', 'La contraseña es requerida');
+          esValido = false;
+        } else if (password.length < 4 || password.length > 10) {
+          mostrarError('password', 'La contraseña debe tener entre 4 y 10 caracteres');
+          esValido = false;
+        }
         // Validar todos los campos requeridos
         const run = document.getElementById('run').value.trim();
         const nombre = document.getElementById('nombre').value.trim();
-        const correo = document.getElementById('correo').value.trim();
         const correo2 = document.getElementById('correo2').value.trim();
-        const password = document.getElementById('password').value;
         const password2 = document.getElementById('password2').value;
         const fecha = document.getElementById('fecha').value;
         const comuna = document.getElementById('comuna').value;
