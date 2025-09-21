@@ -1,173 +1,294 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mil Sabores</title>
-  <link rel="stylesheet" href="src/assets/css/styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mil Sabores</title>
+    <link rel="stylesheet" href="src/assets/css/styles.css" />
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <script src="src/assets/js/filtro.js" defer></script>
-  <script src="src/assets/js/inicio_sesion.js" defer></script>
-  <script src="src/assets/js/validaciones.js" defer></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+      body {
+        background: #FFC0CB;
+        color: #5D4037;
+      }
+      .sticky-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: #FFC0CB;
+        box-shadow: 0 2px 8px #f3e6d8;
+        transition: all 0.3s cubic-bezier(.4,0,.2,1);
+        padding: 8px 0;
+      }
+      .sticky-header.shrink {
+        padding: 6px 0;
+        box-shadow: 0 1px 4px #f3e6d8;
+      }
+      .sticky-header .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .sticky-header .logo img {
+        height: 38px;
+        width: 38px;
+        border-radius: 50%;
+        box-shadow: 0 2px 8px #f3e6d8;
+        transition: height 0.3s, width 0.3s;
+      }
+      .sticky-header.shrink .logo img {
+        height: 32px;
+        width: 32px;
+      }
+      .sticky-header nav {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+      }
+      .sticky-header nav a {
+        color: #8B4513;
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 1.08rem;
+        transition: color 0.2s;
+        padding: 2px 8px;
+        border-radius: 6px;
+      }
+      .sticky-header nav a:hover {
+        background: #FFC0CB;
+        color: #fff;
+      }
+      /* Colores de acento para botones */
+      .btn-acento {
+        background: linear-gradient(90deg, #FFC0CB 0%, #FFF5E1 100%);
+        color: #8B4513;
+        font-weight: 700;
+        border-radius: 10px;
+        border: none;
+        padding: 10px 24px;
+        font-family: 'Lato', sans-serif;
+        transition: background 0.2s;
+      }
+      .btn-acento:hover {
+        background: #8B4513;
+        color: #fff;
+      }
+      .text-principal { color: #5D4037 !important; }
+      .text-secundario { color: #B0BEC5 !important; }
+    </style>
 </head>
-<body>
-  <!--======================= HEADER =======================-->
-  <header class="bg-pink-100 px-4 py-3 shadow-sm">
-    <div class="container-fluid d-flex flex-wrap justify-content-between align-items-center gap-3">
-      
-      <!-- Logo y nombre -->
-      <div class="d-flex align-items-center gap-3">
-        <img src="src/assets/img/Logo.png" alt="Logo de Pastelería Mil Sabores" style="height: 60px;" class="rounded-circle shadow-sm" />
-        <strong class="fs-4 text-pink-700">Pastelería Mil Sabores</strong>
-      </div>
+<body style="background: linear-gradient(135deg, #FFF5E1 0%, #FFE4EC 100%); font-family: 'Lato', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;">
+    <!--======================= HEADER =======================-->
+    <header class="sticky-header" id="mainHeader" style="padding: 8px 0;">
+      <div class="usuario-info" id="usuario-info" style="margin-left:auto; font-weight:600; color:#8B4513;"></div>
 
-      <!-- Navegación principal -->
-      <nav class="d-flex flex-wrap gap-3 text-pink-800 fw-medium" aria-label="Navegación principal">
-        <a href="#" class="text-decoration-none hover:text-pink-600">Home</a>
-        <a href="#productos" class="text-decoration-none hover:text-pink-600">Productos</a>
-        <a href="src/tienda/nosotros.html" class="text-decoration-none hover:text-pink-600">Nosotros</a>
-        <a href="html/blog.html" class="text-decoration-none hover:text-pink-600">Blog</a>
-        <a href="html/contacto.html" class="text-decoration-none hover:text-pink-600">Contacto</a>
-      </nav>
-
-      <!-- Usuario y acciones -->
-      <div class="d-flex flex-column align-items-end text-sm text-pink-900 gap-1">
-        <div class="d-flex gap-2 align-items-center">
-          <a href="src/tienda/iniciarSesion.html" class="text-decoration-none hover:text-pink-600">Iniciar sesión</a>
-          <span class="text-pink-400">|</span>
-          <a href="src/tienda/registro.html" class="text-decoration-none hover:text-pink-600">Registrarse</a>
-          <span class="text-pink-400">|</span>
-          <span>Carrito (0)</span>
+      <div class="container-fluid d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <!-- Logo y nombre -->
+        <div class="d-flex align-items-center gap-2">
+          <img src="src/assets/img/Logo.png" alt="Logo de Pastelería Mil Sabores" style="height: 38px; border-radius: 50%; box-shadow: 0 2px 8px #f3e6d8;" class="shadow-sm" />
+          <strong class="fs-5 text-principal" style="font-family: 'Pacifico', cursive; letter-spacing: 1px; font-size: 1.3rem;">Pastelería Mil Sabores</strong>
         </div>
-
-        <div id="notificacion-bienvenida" class="d-none bg-amber-700 text-white px-3 py-2 rounded shadow-sm mt-2">
-          ¡Bienvenido!
+        <!-- Navegación principal -->
+        <nav class="d-flex flex-wrap gap-3" aria-label="Navegación principal">
+          <a href="#" class="text-decoration-none text-principal">Home</a>
+          <a href="#productos" class="text-decoration-none text-principal">Productos</a>
+          <a href="src/tienda/nosotros.html" class="text-decoration-none text-principal">Nosotros</a>
+          <a href="html/blog.html" class="text-decoration-none text-principal">Blog</a>
+          <a href="html/contacto.html" class="text-decoration-none text-principal">Contacto</a>
+        </nav>
+        <!-- Usuario y acciones -->
+        <div class="d-flex flex-column align-items-end text-sm gap-1">
+          <div class="d-flex gap-2 align-items-center">
+            <a href="src/tienda/iniciarSesion.html" class="text-decoration-none text-principal">Iniciar sesión</a>
+            <span class="text-secundario">|</span>
+            <a href="src/tienda/registro.html" class="text-decoration-none text-principal">Registrarse</a>
+            <span class="text-secundario">|</span>
+            <span class="text-principal">Carrito (0)</span>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
+    <script>
+      // Header shrink al hacer scroll
+      window.addEventListener('scroll', function() {
+        const header = document.getElementById('mainHeader');
+        if (window.scrollY > 40) {
+          header.classList.add('shrink');
+        } else {
+          header.classList.remove('shrink');
+        }
+      });
+    </script>
 
-  <!--=============== MODAL LOGIN / REGISTRO ===============-->
-  <dialog id="modal" aria-labelledby="modal-title" class="rounded shadow p-4 bg-white mx-auto" style="max-width: 500px;">
-    <section>
-      <!-- Header del modal -->
-      <header class="d-flex justify-content-between align-items-center mb-3">
-        <h2 id="modal-title" class="m-0 text-pink-700 fw-bold">Cuenta</h2>
-        <button id="cerrar" type="button" aria-label="Cerrar" class="btn-close"></button>
-      </header>
+    <!--=============== MODAL LOGIN / REGISTRO ===============-->
+    <dialog id="modal" aria-labelledby="modal-title" class="rounded shadow p-4 bg-white mx-auto" style="max-width: 500px;">
+        <section>
+            <!-- Header del modal -->
+            <header class="d-flex justify-content-between align-items-center mb-3">
+                <h2 id="modal-title" class="m-0 text-pink-700 fw-bold">Cuenta</h2>
+                <button id="cerrar" type="button" aria-label="Cerrar" class="btn-close"></button>
+            </header>
 
-      <!-- Tabs -->
-      <nav class="d-flex gap-3 mb-3" role="tablist" aria-label="Selector de formulario">
-        <button id="tab-login" class="btn btn-outline-pink" role="tab" aria-selected="true" aria-controls="panel-login">
-          Iniciar sesión
-        </button>
-        <button id="tab-register" class="btn btn-outline-pink" role="tab" aria-selected="false" aria-controls="panel-register">
-          Registrarse
-        </button>
-      </nav>
+            <!-- Tabs -->
+            <nav class="d-flex gap-3 mb-3" role="tablist" aria-label="Selector de formulario">
+                <button id="tab-login" class="btn btn-outline-pink" role="tab" aria-selected="true" aria-controls="panel-login">
+                    Iniciar sesión
+                </button>
+                <button id="tab-register" class="btn btn-outline-pink" role="tab" aria-selected="false" aria-controls="panel-register">
+                    Registrarse
+                </button>
+            </nav>
 
-      <!-- Panel: Login -->
-      <div id="panel-login" role="tabpanel" aria-labelledby="tab-login">
-        <form id="form-login" method="post" autocomplete="on">
-          <div class="d-flex gap-2 flex-wrap align-items-center">
-            <button id="btn-login" class="btn btn-primary" type="submit">Iniciar sesión</button>
-            <button type="button" id="btn-ir-registro" class="btn btn-link text-pink-600">¿No tienes cuenta? Registrarse</button>
+            <!-- Panel: Login -->
+            <div id="panel-login" role="tabpanel" aria-labelledby="tab-login">
+                <form id="form-login" method="post" autocomplete="on">
+                    <div class="d-flex gap-2 flex-wrap align-items-center">
+                        <button id="btn-login" class="btn btn-primary" type="submit">Iniciar sesión</button>
+                        <button type="button" id="btn-ir-registro" class="btn btn-link text-pink-600">¿No tienes cuenta? Registrarse</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Panel: Registro -->
+            <div id="panel-register" role="tabpanel" aria-labelledby="tab-register" hidden>
+                <form id="form-register" method="post">
+                    <div class="d-flex gap-2 flex-wrap align-items-center mt-3">
+                        <button id="btn-register" class="btn btn-primary" type="submit">Registrar</button>
+                        <button type="button" id="btn-ir-login" class="btn btn-link text-pink-600">¿Ya tienes cuenta? Iniciar sesión</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </dialog>
+
+    <!-- ======================= HERO ======================= -->
+    <section class="flex items-center justify-center text-center h-screen bg-pink-50 px-6" aria-labelledby="titulo-hero">
+      <div class="max-w-xl space-y-4" style="background: #fff; border-radius: 18px; box-shadow: 0 4px 24px #f3e6d8; margin: 40px auto; padding: 36px 32px 28px 32px;">
+        <h1 id="titulo-hero" class="text-5xl font-bold text-principal" style="font-family: 'Pacifico', cursive;">MIL SABORES</h1>
+        <p class="text-lg text-secundario">Delicias que endulzan tu vida</p>
+        <p class="text-base text-secundario">
+          Nuestra pastelería <strong class="text-principal">Mil Sabores</strong> tiene como objetivo ofrecer delicias únicas. Descubre, saborea y crea momentos inolvidables
+          con nosotros.
+        </p>
+        <p class="text-base text-secundario">
+          Con ingredientes de alta calidad y un toque creativo, ofrece tortas personalizadas, postres tradicionales y opciones saludables para todos los gustos.
+        </p>
+
+        <!-- =========== /Bootstrap Carousel =========== -->
+
+        <div class="container my-5">
+          <div id="presentacionCarousel" class="carousel slide mx-auto shadow-lg rounded-4 overflow-hidden" style="max-width: 500px;" data-bs-ride="carousel" data-bs-interval="4000">
+            
+            <!-- Indicadores -->
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#presentacionCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#presentacionCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#presentacionCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+
+            <!-- Imágenes -->
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="src/assets/img/presentacion1.jpg" class="d-block w-100" alt="Presentación 1 - Mil Sabores">
+              </div>
+              <div class="carousel-item">
+                <img src="src/assets/img/presentacion2.jpg" class="d-block w-100" alt="Presentación 2 - Mil Sabores">
+              </div>
+              <div class="carousel-item">
+                <img src="src/assets/img/presentacion3.jpg" class="d-block w-100" alt="Presentación 3 - Mil Sabores">
+              </div>
+            </div>
+
+            <!-- Controles -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#presentacionCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#presentacionCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Siguiente</span>
+            </button>
           </div>
-        </form>
-      </div>
-
-      <!-- Panel: Registro -->
-      <div id="panel-register" role="tabpanel" aria-labelledby="tab-register" hidden>
-        <form id="form-register" method="post">
-          <div class="d-flex gap-2 flex-wrap align-items-center mt-3">
-            <button id="btn-register" class="btn btn-primary" type="submit">Registrar</button>
-            <button type="button" id="btn-ir-login" class="btn btn-link text-pink-600">¿Ya tienes cuenta? Iniciar sesión</button>
-          </div>
-        </form>
+        </div>
       </div>
     </section>
-  </dialog>
-</body>
-</html>
 
-
-  <!-- ======================= HERO ======================= -->
-   <section class="flex items-center justify-center text-center h-screen bg-pink-50 px-6" aria-labelledby="titulo-hero">
-  <div class="max-w-xl space-y-4">
-    <h1 id="titulo-hero" class="text-5xl font-bold text-pink-700">MIL SABORES</h1>
-    <p class="text-lg text-pink-600">Delicias que endulzan tu vida</p>
-    <p class="text-base text-gray-700">
-      Nuestra pastelería <strong>Mil Sabores</strong> tiene como objetivo ofrecer delicias únicas. Descubre, saborea y crea momentos inolvidables
-        con nosotros.
-    </p>
-    <p class="text-base text-gray-700">
-      Con ingredientes de alta calidad y un toque creativo, ofrece tortas personalizadas, postres tradicionales y opciones saludables para todos los gustos.
-    </p>
-
-
-     
-      <!-- =========== /Bootstrap Carousel =========== -->
-
-   <div class="container my-5">
-  <div id="presentacionCarousel" class="carousel slide mx-auto shadow-lg rounded-4 overflow-hidden" style="max-width: 500px;" data-bs-ride="carousel" data-bs-interval="4000">
+    <!-- ======================= FOOTER ======================= -->
+    <footer class="footer" id="contacto" style="background: #fff8f0; border-top: 2px solid #ffe4ec; margin-top: 40px;">
+      <nav aria-label="Redes" style="text-align: center; margin-bottom: 10px;">
+        <a href="#" style="color: #8B4513; font-weight: 600;">X</a> ·
+        <a href="#" id="blog" style="color: #8B4513; font-weight: 600;">Instagram</a> ·
+        <a href="#" style="color: #8B4513; font-weight: 600;">WhatsApp</a>
+      </nav>
+      <form class="newsletter" action="#" method="post" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+        <label for="email" style="color: #8B4513; font-weight: 600;">Suscríbete a nuestro newsletter</label>
+        <input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" style="border-radius: 8px; border: 1.5px solid #ffe4ec; padding: 8px 12px; background: #fff8f0; font-size: 1rem;" />
+        <button type="submit" style="background: linear-gradient(90deg, #FFC0CB 0%, #FFF5E1 100%); color: #8B4513; font-weight: 700; border-radius: 8px; border: none; padding: 8px 18px; font-size: 1rem; margin-top: 2px; font-family: 'Lato', sans-serif;">Suscribirse</button>
+      </form>
+    </footer>
     
-    <!-- Indicadores -->
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#presentacionCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#presentacionCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#presentacionCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="src/assets/js/cerrarSesion.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const usuarioDiv = document.createElement('div');
+        usuarioDiv.id = 'usuario-logueado';
+        usuarioDiv.style.display = 'flex';
+        usuarioDiv.style.alignItems = 'center';
+        usuarioDiv.style.gap = '10px';
+        const sesion = JSON.parse(localStorage.getItem('sesionActiva') || 'null');
+        if (sesion && sesion.nombre) {
+          usuarioDiv.innerHTML = `<span style="color:#8B4513;font-weight:600">Hola, ${sesion.nombre}</span> <button onclick="cerrarSesion()" style="background:#8B4513;color:#fff;border:none;border-radius:6px;padding:4px 12px;cursor:pointer;">Cerrar sesión</button>`;
+          // Insertar en el header, después de la navegación
+          const header = document.querySelector('header .container-fluid');
+          if (header) header.appendChild(usuarioDiv);
+        }
+      });
+    </script>
 
-    <!-- Imágenes -->
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="src/assets/img/presentacion1.jpg" class="d-block w-100" alt="Presentación 1 - Mil Sabores">
-      </div>
-      <div class="carousel-item">
-        <img src="src/assets/img/presentacion2.jpg" class="d-block w-100" alt="Presentación 2 - Mil Sabores">
-      </div>
-      <div class="carousel-item">
-        <img src="src/assets/img/presentacion3.jpg" class="d-block w-100" alt="Presentación 3 - Mil Sabores">
-      </div>
-    </div>
+    <!-- 👇 AGREGADO: soporte para sessionStorage y para usar #usuario-info si no se pintó antes -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Si ya se pintó con el bloque anterior (localStorage), no hacemos nada
+        if (document.getElementById('usuario-logueado')) return;
 
-    <!-- Controles -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#presentacionCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Anterior</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#presentacionCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Siguiente</span>
-    </button>
-  </div>
-</div>
+        // Revisar también sessionStorage
+        let sesion = null;
+        const rawLocal = localStorage.getItem('sesionActiva');
+        const rawSession = sessionStorage.getItem('sesionActiva');
+        if (rawLocal) sesion = JSON.parse(rawLocal);
+        else if (rawSession) sesion = JSON.parse(rawSession);
 
-  
-  <!-- ======================= FOOTER ======================= -->
-  <footer class="footer" id="contacto">
-    <nav aria-label="Redes">
-      <a href="#">X</a> ·
-      <a href="#" id="blog">Instagram</a> ·
-      <a href="#">WhatsApp</a>
-    </nav>
-
-    <form class="newsletter" action="#" method="post">
-      <label for="email">Enter Email</label>
-      <input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" />
-      <button type="submit">Subscribirse</button>
-    </form>
-  </footer>
-  
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        if (sesion && sesion.nombre) {
+          // Usar el contenedor existente en el header si está disponible
+          const userBox = document.getElementById('usuario-info');
+          if (userBox) {
+            userBox.innerHTML = `
+              <span style="color:#8B4513;font-weight:600">Hola, ${sesion.nombre}</span>
+              <button onclick="cerrarSesion()" style="margin-left:8px;background:#8B4513;color:#fff;border:none;border-radius:6px;padding:4px 12px;cursor:pointer;">
+                Cerrar sesión
+              </button>
+            `;
+          } else {
+            // Fallback: mismo comportamiento que tu bloque original
+            const usuarioDiv = document.createElement('div');
+            usuarioDiv.id = 'usuario-logueado';
+            usuarioDiv.style.display = 'flex';
+            usuarioDiv.style.alignItems = 'center';
+            usuarioDiv.style.gap = '10px';
+            usuarioDiv.innerHTML = `<span style="color:#8B4513;font-weight:600">Hola, ${sesion.nombre}</span> <button onclick="cerrarSesion()" style="background:#8B4513;color:#fff;border:none;border-radius:6px;padding:4px 12px;cursor:pointer;">Cerrar sesión</button>`;
+            const header = document.querySelector('header .container-fluid');
+            if (header) header.appendChild(usuarioDiv);
+          }
+        }
+      });
+    </script>
 </body>
 </html>
-
-
-
-

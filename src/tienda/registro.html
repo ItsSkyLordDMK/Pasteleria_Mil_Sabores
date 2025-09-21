@@ -5,98 +5,131 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Registro - Mil Sabores</title>
   <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #FFF5E1;
+      color: #5D4037;
+    }
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #FFC0CB;
+      box-shadow: 0 2px 8px #f3e6d8;
+      transition: all 0.3s cubic-bezier(.4,0,.2,1);
+      padding: 8px 0;
+    }
+    .sticky-header.shrink {
+      padding: 6px 0;
+      box-shadow: 0 1px 4px #f3e6d8;
+    }
+    .sticky-header .logo img {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px #f3e6d8;
+      transition: height 0.3s, width 0.3s;
+    }
+    .sticky-header.shrink .logo img {
+      height: 32px;
+      width: 32px;
+    }
+    .text-principal { color: #5D4037 !important; }
+    .text-secundario { color: #B0BEC5 !important; }
+  </style>
 </head>
-<body>
+<body style="background: linear-gradient(135deg, #FFF5E1 0%, #FFE4EC 100%); font-family: 'Lato', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;">
   <!--======================= HEADER =======================-->
-  <header class="topbar">
-    <div class="logo">
-      <img src="../assets/img/logo.png" alt="Logo Mil Sabores">
+  <header class="topbar sticky-header" id="mainHeader" style="padding: 8px 0;">
+    <div class="logo" style="display: flex; align-items: center; gap: 8px;">
+      <img src="../assets/img/logo.png" alt="Logo Mil Sabores" style="height: 32px; width: 32px; border-radius: 50%; box-shadow: 0 2px 8px #f3e6d8;">
+      <strong style="font-family: 'Pacifico', cursive; font-size: 1.3rem; color: #8B4513; letter-spacing: 1px;">Mil Sabores</strong>
     </div>
-
     <div>
-      <strong>Tienda online - Mil Sabores</strong>
+      <strong style="font-family: 'Lato', sans-serif; color: #8B4513; font-size: 1rem;">Tienda online - Mil Sabores</strong>
     </div>
 
     <nav class="navegacion" aria-label="Navegación principal">
-      <a href="../index.html">Página principal</a>
+      <a href="../index.html" class="text-principal" style="font-weight: 600;">Página principal</a>
     </nav>
-
     <div class="usuario">
-      
-      <span class="separar">|</span>
-      <a href="iniciarSesion.html">¿Tienes una cuenta? Inicia sesión aquí</a>
-      <span class="separar">|</span>
+      <span class="separar text-secundario">|</span>
+      <a href="iniciarSesion.html" class="text-principal" style="font-weight: 600;">¿Tienes una cuenta? Inicia sesión aquí</a>
+      <span class="separar text-secundario">|</span>
     </div>
   </header>
+  <script>
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('mainHeader');
+      if (window.scrollY > 40) {
+        header.classList.add('shrink');
+      } else {
+        header.classList.remove('shrink');
+      }
+    });
+  </script>
 
   <!-- ======================= MAIN ======================= -->
   <main class="main">
-    <div class="form-container">
-      <h1>Crear Cuenta</h1>
-      <p style="text-align: center; color: var(--text-color); margin-bottom: 30px;">
+    <div class="form-container" style="background: #fff; border-radius: 18px; box-shadow: 0 4px 24px #f3e6d8; max-width: 500px; margin: 40px auto; padding: 36px 32px 28px 32px;">
+      <h1 style="font-family: 'Pacifico', cursive; font-size: 2.1rem; text-align: center; margin-bottom: 10px;" class="text-principal">Crear Cuenta</h1>
+      <p class="text-secundario" style="text-align: center; margin-bottom: 30px; font-size: 1.05rem;">
         Únete a nuestra comunidad y disfruta de los mejores postres
       </p>
-
       <form id="form-registro" method="post" novalidate>
         <!-- RUN -->
-        <div class="form-group">
-          <label for="run">RUN (sin puntos ni guión):</label>
-          <input type="text" id="run" name="run" minlength="7" maxlength="9" required />
-          <div class="error-message" id="error-run"></div>
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="run" style="font-weight: 600; color: #8B4513;">RUN (sin puntos ni guión):</label>
+          <input type="text" id="run" name="run" minlength="7" maxlength="9" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+          <div class="error-message" id="error-run" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
         </div>
-
         <!-- Nombre Completo -->
-        <div class="form-group">
-          <label for="nombre">Nombre Completo:</label>
-          <input type="text" id="nombre" name="nombre" required />
-          <div class="error-message" id="error-nombre"></div>
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="nombre" style="font-weight: 600; color: #8B4513;">Nombre Completo:</label>
+          <input type="text" id="nombre" name="nombre" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+          <div class="error-message" id="error-nombre" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
         </div>
-
         <!-- Correo -->
-        <div class="form-group">
-          <label for="correo">Correo Electrónico:</label>
-          <input type="email" id="correo" name="correo" required />
-          <div class="error-message" id="error-correo"></div>
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="correo" style="font-weight: 600; color: #8B4513;">Correo Electrónico:</label>
+          <input type="email" id="correo" name="correo" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+          <div class="error-message" id="error-correo" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
         </div>
-
         <!-- Confirmar Correo -->
-        <div class="form-group">
-          <label for="correo2">Confirmar Correo Electrónico:</label>
-          <input type="email" id="correo2" name="correo2" required />
-          <div class="error-message" id="error-correo2"></div>
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="correo2" style="font-weight: 600; color: #8B4513;">Confirmar Correo Electrónico:</label>
+          <input type="email" id="correo2" name="correo2" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+          <div class="error-message" id="error-correo2" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
         </div>
-
         <!-- Contraseña -->
-        <div class="form-group">
-          <label for="password">Contraseña:</label>
-          <input type="password" id="password" name="password" minlength="4" maxlength="10" required />
-          <div class="error-message" id="error-password"></div>
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="password" style="font-weight: 600; color: #8B4513;">Contraseña:</label>
+          <input type="password" id="password" name="password" minlength="4" maxlength="10" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+          <div class="error-message" id="error-password" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
         </div>
-
         <!-- Confirmar Contraseña -->
-        <div class="form-group">
-          <label for="password2">Confirmar Contraseña:</label>
-          <input type="password" id="password2" name="password2" required />
-          <div class="error-message" id="error-password2"></div>
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="password2" style="font-weight: 600; color: #8B4513;">Confirmar Contraseña:</label>
+          <input type="password" id="password2" name="password2" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+          <div class="error-message" id="error-password2" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
         </div>
-
         <!-- Fecha de Nacimiento -->
-        <div class="form-group">
-          <label for="fecha">Fecha de Nacimiento:</label>
-          <input type="date" id="fecha" name="fecha" required />
-          <div class="error-message" id="error-fecha"></div>
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="fecha" style="font-weight: 600; color: #8B4513;">Fecha de Nacimiento:</label>
+          <input type="date" id="fecha" name="fecha" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+          <div class="error-message" id="error-fecha" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
         </div>
-
         <!-- Teléfono -->
-        <div class="form-group">
-          <label for="telefono">Teléfono (opcional):</label>
-          <input type="tel" id="telefono" name="telefono" />
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="telefono" style="font-weight: 600; color: #8B4513;">Teléfono (opcional):</label>
+          <input type="tel" id="telefono" name="telefono" style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
         </div>
-
         <!-- Comuna -->
-        <div class="form-group">
-          <label for="comuna">Comuna:</label>
-          <select name="comuna" id="comuna" required>
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="comuna" style="font-weight: 600; color: #8B4513;">Comuna:</label>
+          <select name="comuna" id="comuna" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;">
             <option value="">-- Seleccione la comuna --</option>
             <option value="Cerrillos">Cerrillos</option>
             <option value="Cerro Navia">Cerro Navia</option>
@@ -151,39 +184,38 @@
             <option value="Padre Hurtado">Padre Hurtado</option>
             <option value="Peñaflor">Peñaflor</option>
           </select>
-          <div class="error-message" id="error-comuna"></div>
+          <div class="error-message" id="error-comuna" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
         </div>
-
+        <!-- Código de descuento -->
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="codigo" style="font-weight: 600; color: #8B4513;">Código de Descuento (opcional):</label>
+          <input type="text" id="codigo" name="codigo" style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+        </div>
         <!-- Botones -->
-        <button type="submit" class="btn-primaria">Crear Cuenta</button>
-        <button type="button" class="btn-secundaria" onclick="window.location.href='iniciarSesion.html'">
-          ¿Ya tienes cuenta? Iniciar Sesión
-        </button>
+        <button type="submit" class="btn-primaria" style="width: 100%; background: #8B4513; color: #fff; font-weight: 700; border-radius: 10px; border: none; padding: 12px 0; font-size: 1.08rem; margin-bottom: 10px; font-family: 'Lato', sans-serif;">Crear Cuenta</button>
+        <button type="button" class="btn-secundaria" onclick="window.location.href='iniciarSesion.html'" style="width: 100%; background: #fff8f0; color: #8B4513; font-weight: 600; border-radius: 10px; border: 1.5px solid #FFC0CB; padding: 10px 0; font-size: 1rem; margin-bottom: 0; font-family: 'Lato', sans-serif;">¿Ya tienes cuenta? Iniciar Sesión</button>
       </form>
-
       <!-- Mensaje de éxito -->
-      <div class="success-message" id="success-message" style="display: none;">
-        ¡Cuenta creada exitosamente! Redirigiendo al inicio de sesión...
-      </div>
+      <div class="success-message" id="success-message" style="display: none; text-align: center; color: #10B981; font-weight: 700; margin-top: 18px; font-size: 1.05rem;">¡Cuenta creada exitosamente! Redirigiendo al inicio de sesión...</div>
     </div>
   </main>
 
   <!-- ======================= FOOTER ======================= -->
-  <footer class="footer" id="contacto">
-    <nav aria-label="Redes">
-      <a href="#">X</a> ·
-      <a href="#" id="blog">Instagram</a> ·
-      <a href="#">WhatsApp</a>
+  <footer class="footer" id="contacto" style="background: #fff8f0; border-top: 2px solid #ffe4ec; margin-top: 40px;">
+    <nav aria-label="Redes" style="text-align: center; margin-bottom: 10px;">
+      <a href="#" style="color: #8B4513; font-weight: 600;">X</a> ·
+      <a href="#" id="blog" style="color: #8B4513; font-weight: 600;">Instagram</a> ·
+      <a href="#" style="color: #8B4513; font-weight: 600;">WhatsApp</a>
     </nav>
-
-    <form class="newsletter" action="#" method="post">
-      <label for="email">Suscríbete a nuestro newsletter</label>
-      <input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" />
-      <button type="submit">Suscribirse</button>
+    <form class="newsletter" action="#" method="post" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+      <label for="email" style="color: #8B4513; font-weight: 600;">Suscríbete a nuestro newsletter</label>
+      <input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" style="border-radius: 8px; border: 1.5px solid #ffe4ec; padding: 8px 12px; background: #fff8f0; font-size: 1rem;" />
+      <button type="submit" style="background: linear-gradient(90deg, #FFC0CB 0%, #FFF5E1 100%); color: #8B4513; font-weight: 700; border-radius: 8px; border: none; padding: 8px 18px; font-size: 1rem; margin-top: 2px; font-family: 'Lato', sans-serif;">Suscribirse</button>
     </form>
   </footer>
 
   <!-- JavaScript para validaciones -->
+  <script src="../assets/js/registro.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const form = document.getElementById('form-registro');
@@ -416,15 +448,28 @@
         }
         
         if (esValido) {
-          // Mostrar mensaje de éxito
-          const successMessage = document.getElementById('success-message');
-          successMessage.style.display = 'block';
-          
-          // Simular envío del formulario
-          setTimeout(() => {
-            alert('¡Cuenta creada exitosamente!');
-            window.location.href = 'iniciarSesion.html';
-          }, 2000);
+          // Crear objeto usuario
+          const usuario = {
+            run: document.getElementById('run').value.trim(),
+            nombre: document.getElementById('nombre').value.trim(),
+            correo: document.getElementById('correo').value.trim(),
+            password: document.getElementById('password').value,
+            fecha: document.getElementById('fecha').value,
+            telefono: document.getElementById('telefono').value.trim(),
+            comuna: document.getElementById('comuna').value,
+            codigo: document.getElementById('codigo').value.trim()
+          };
+          // Guardar usuario usando registro.js
+          const resultado = registrarUsuario(usuario);
+          if (resultado.exito) {
+            const successMessage = document.getElementById('success-message');
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+              window.location.href = 'iniciarSesion.html';
+            }, 2000);
+          } else {
+            alert(resultado.mensaje);
+          }
         } else {
           // Scroll al primer error
           const primerError = form.querySelector('.invalid');

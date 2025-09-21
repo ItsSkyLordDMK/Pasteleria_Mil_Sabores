@@ -1,337 +1,183 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Iniciar Sesión - Mil Sabores</title>
   <link rel="stylesheet" href="../assets/css/styles.css" />
+  <style>
+    body {
+      background: #FFF5E1;
+      color: #5D4037;
+    }
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #FFC0CB;
+      box-shadow: 0 2px 8px #f3e6d8;
+      transition: all 0.3s cubic-bezier(.4,0,.2,1);
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .sticky-header.shrink {
+      padding: 6px 0;
+      box-shadow: 0 1px 4px #f3e6d8;
+    }
+    .sticky-header .logo img {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px #f3e6d8;
+      transition: height 0.3s, width 0.3s;
+    }
+    .text-principal { color: #5D4037 !important; }
+    .text-secundario { color: #B0BEC5 !important; }
+  </style>
 </head>
-<body>
+<body style="background: linear-gradient(135deg, #FFF5E1 0%, #FFE4EC 100%); font-family: 'Lato', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;">
   <!--======================= HEADER =======================-->
-  <header class="topbar">
-    <div class="logo">
-      <img src="../assets/img/logo.png" alt="Logo Mil Sabores">
+  <header class="topbar sticky-header" id="mainHeader" style="padding: 8px 0;">
+    <div class="logo" style="display: flex; align-items: center; gap: 8px;">
+      <img src="../assets/img/logo.png" alt="Logo Mil Sabores" style="height: 32px; width: 32px; border-radius: 50%; box-shadow: 0 2px 8px #f3e6d8;">
+      <strong style="font-family: 'Pacifico', cursive; font-size: 1.3rem; color: #8B4513; letter-spacing: 1px;">Mil Sabores</strong>
     </div>
-
     <div>
-      <strong>Tienda online - Mil Sabores</strong>
+      <strong style="font-family: 'Lato', sans-serif; color: #8B4513; font-size: 1rem;">Tienda online - Mil Sabores</strong>
     </div>
-
     <nav class="navegacion" aria-label="Navegación principal">
-      <a href="/index.html">Página principal</a>
+      <a href="/index.html" class="text-principal" style="font-weight: 600;">Página principal</a>
     </nav>
-
     <div class="usuario">
-      <span class="separar">|</span>
-      <a href="registro.html">¿No tienes cuenta? Registrate Aquí</a>
-      <span class="separar">|</span>
+      <span class="separar text-secundario">|</span>
+      <a href="registro.html" class="text-principal" style="font-weight: 600;">¿No tienes cuenta? Registrate Aquí</a>
+      <span class="separar text-secundario">|</span>
     </div>
+    <!-- Aquí aparecerá el usuario -->
+    <div id="usuario-info" style="margin-left:auto; font-weight:600; color:#8B4513;"></div>
   </header>
 
   <!-- ======================= MAIN ======================= -->
   <main class="main">
-    <div class="form-container">
-      <h1>Iniciar Sesión</h1>
-      <p style="text-align: center; color: var(--text-color); margin-bottom: 30px;">
+    <div class="form-container" style="background: #fff; border-radius: 18px; box-shadow: 0 4px 24px #f3e6d8; max-width: 400px; margin: 40px auto; padding: 36px 32px 28px 32px;">
+      <h1 style="font-family: 'Pacifico', cursive; font-size: 2.1rem; text-align: center; margin-bottom: 10px;" class="text-principal">Iniciar Sesión</h1>
+      <p class="text-secundario" style="text-align: center; margin-bottom: 30px; font-size: 1.05rem;">
         Accede a tu cuenta para disfrutar de nuestros deliciosos postres
       </p>
-
       <form id="form-login" method="post" novalidate>
         <!-- Correo Electrónico -->
-        <div class="form-group">
-          <label for="correo">Correo Electrónico:</label>
-          <input type="email" id="correo" name="correo" required />
-          <div class="error-message" id="error-correo"></div>
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="correo" style="font-weight: 600; color: #8B4513;">Correo Electrónico:</label>
+          <input type="email" id="correo" name="correo" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem;" />
+          <div class="error-message" id="error-correo" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
         </div>
-
         <!-- Contraseña -->
-        <div class="form-group">
-          <label for="password">Contraseña:</label>
-          <input type="password" id="password" name="password" required />
-          <div class="error-message" id="error-password"></div>
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="password" style="font-weight: 600; color: #8B4513;">Contraseña:</label>
+          <input type="password" id="password" name="password" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem;" />
+          <div class="error-message" id="error-password" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
         </div>
-
         <!-- Recordar sesión -->
         <div class="form-group" style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px;">
-          <input type="checkbox" id="recordar" name="recordar" />
-          <label for="recordar" style="margin-bottom: 0; font-weight: 500;">Recordar mi sesión</label>
+          <input type="checkbox" id="recordar" name="recordar" style="accent-color: #FFC0CB; width: 18px; height: 18px;" />
+          <label for="recordar" style="margin-bottom: 0; font-weight: 500; color: #8B4513;">Recordar mi sesión</label>
         </div>
-
         <!-- Botones -->
-        <button type="submit" class="btn-primaria">Iniciar Sesión</button>
-        <button type="button" class="btn-secundaria" onclick="window.location.href='registro.html'">
-          ¿No tienes cuenta? Regístrate aquí
-        </button>
+        <button type="submit" class="btn-primaria" style="width: 100%; background: #8B4513; color: #fff; font-weight: 700; border-radius: 10px; border: none; padding: 12px 0; font-size: 1.08rem; margin-bottom: 10px; font-family: 'Lato', sans-serif;">Iniciar Sesión</button>
+        <button type="button" class="btn-secundaria" onclick="window.location.href='registro.html'" style="width: 100%; background: #fff8f0; color: #8B4513; font-weight: 600; border-radius: 10px; border: 1.5px solid #FFC0CB; padding: 10px 0; font-size: 1rem;">¿No tienes cuenta? Regístrate aquí</button>
       </form>
-
-      <!-- Enlaces adicionales -->
       <div style="text-align: center; margin-top: 20px;">
-        <a href="#" style="color: var(--primary-color); text-decoration: none; font-size: 0.9rem;">
-          ¿Olvidaste tu contraseña?
-        </a>
+        <a href="#" style="color: #8B4513; text-decoration: underline; font-size: 0.95rem;">¿Olvidaste tu contraseña?</a>
       </div>
-
-      <!-- Mensajes de estado -->
-      <div class="success-message" id="success-message" style="display: none;">
-        ¡Inicio de sesión exitoso! Redirigiendo...
-      </div>
-      
-      <div class="error-message" id="login-error" style="display: none; text-align: center; margin-top: 20px;">
-        Credenciales incorrectas. Verifica tu correo y contraseña.
-      </div>
+      <div class="success-message" id="success-message" style="display: none; text-align: center; color: #10B981; font-weight: 700; margin-top: 18px; font-size: 1.05rem;">¡Inicio de sesión exitoso! Redirigiendo...</div>
+      <div class="error-message" id="login-error" style="display: none; text-align: center; margin-top: 20px; color: #EF4444; font-weight: 600; font-size: 1.05rem;">Credenciales incorrectas. Verifica tu correo y contraseña.</div>
     </div>
   </main>
 
   <!-- ======================= FOOTER ======================= -->
-  <footer class="footer" id="contacto">
-    <nav aria-label="Redes">
-      <a href="#">X</a> ·
-      <a href="#" id="blog">Instagram</a> ·
-      <a href="#">WhatsApp</a>
+  <footer class="footer" id="contacto" style="background: #fff8f0; border-top: 2px solid #ffe4ec; margin-top: 40px;">
+    <nav aria-label="Redes" style="text-align: center; margin-bottom: 10px;">
+      <a href="#" style="color: #8B4513; font-weight: 600;">X</a> ·
+      <a href="#" id="blog" style="color: #8B4513; font-weight: 600;">Instagram</a> ·
+      <a href="#" style="color: #8B4513; font-weight: 600;">WhatsApp</a>
     </nav>
-
-    <form class="newsletter" action="#" method="post">
-      <label for="email">Suscríbete a nuestro newsletter</label>
-      <input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" />
-      <button type="submit">Suscribirse</button>
-    </form>
   </footer>
 
-  <!-- JavaScript para validaciones y autenticación -->
+  <!-- JavaScript -->
+  <script defer src="../assets/js/iniciarSesion.js"></script>
+  <script defer src="../assets/js/cerrarSesion.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const form = document.getElementById('form-login');
       const correoInput = document.getElementById('correo');
       const passwordInput = document.getElementById('password');
-      
-      // Simulación de base de datos de usuarios (en un proyecto real esto vendría del servidor)
-      const usuariosRegistrados = JSON.parse(localStorage.getItem('usuariosRegistrados') || '[]');
-      
-      // Función para validar email
-      function validarEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-      }
-      
-      // Función para mostrar error
-      function mostrarError(campoId, mensaje) {
-        const campo = document.getElementById(campoId);
-        const errorDiv = document.getElementById('error-' + campoId);
-        
-        campo.classList.remove('valid');
-        campo.classList.add('invalid');
-        errorDiv.textContent = mensaje;
-        errorDiv.classList.add('show');
-      }
-      
-      // Función para mostrar éxito
-      function mostrarExito(campoId) {
-        const campo = document.getElementById(campoId);
-        const errorDiv = document.getElementById('error-' + campoId);
-        
-        campo.classList.remove('invalid');
-        campo.classList.add('valid');
-        errorDiv.classList.remove('show');
-      }
-      
-      // Función para limpiar error
-      function limpiarError(campoId) {
-        const campo = document.getElementById(campoId);
-        const errorDiv = document.getElementById('error-' + campoId);
-        
-        campo.classList.remove('invalid', 'valid');
-        errorDiv.classList.remove('show');
-      }
-      
-      // Función para mostrar error de login
-      function mostrarErrorLogin(mensaje) {
-        const errorDiv = document.getElementById('login-error');
-        errorDiv.textContent = mensaje;
-        errorDiv.classList.add('show');
-        errorDiv.style.display = 'block';
-        
-        // Ocultar mensaje de éxito si está visible
-        document.getElementById('success-message').style.display = 'none';
-      }
-      
-      // Función para mostrar éxito de login
-      function mostrarExitoLogin() {
-        const successDiv = document.getElementById('success-message');
-        successDiv.style.display = 'block';
-        
-        // Ocultar error de login si está visible
-        document.getElementById('login-error').style.display = 'none';
-      }
-      
-      // Validación en tiempo real para correo
-      correoInput.addEventListener('blur', function() {
-        const valor = this.value.trim();
-        
-        if (valor && !validarEmail(valor)) {
-          mostrarError('correo', 'Ingresa un correo electrónico válido');
-        } else if (valor) {
-          mostrarExito('correo');
+
+      // ✅ Mostrar nombre en el header si hay sesión activa
+      (function pintarUsuarioHeader(){
+        const userDiv = document.getElementById('usuario-info');
+        if (!userDiv) return;
+
+        let sesion = null;
+        const rawLocal = localStorage.getItem('sesionActiva');
+        const rawSession = sessionStorage.getItem('sesionActiva');
+        if (rawLocal) sesion = JSON.parse(rawLocal);
+        else if (rawSession) sesion = JSON.parse(rawSession);
+
+        if (sesion && sesion.nombre) {
+          userDiv.innerHTML = `
+            <span>Hola, ${sesion.nombre}</span>
+            <button onclick="cerrarSesion()" style="margin-left:8px; background:#8B4513; color:#fff; border:none; border-radius:6px; padding:4px 10px; cursor:pointer;">
+              Cerrar sesión
+            </button>
+          `;
         } else {
-          limpiarError('correo');
+          userDiv.innerHTML = `<a href="iniciarSesion.html" style="color:#8B4513; font-weight:600;">Iniciar sesión</a>`;
         }
-      });
-      
-      // Validación en tiempo real para contraseña
-      passwordInput.addEventListener('blur', function() {
-        const valor = this.value;
-        
-        if (valor && valor.length < 4) {
-          mostrarError('password', 'La contraseña debe tener al menos 4 caracteres');
-        } else if (valor) {
-          mostrarExito('password');
-        } else {
-          limpiarError('password');
-        }
-      });
-      
-      // Función para verificar credenciales
-      function verificarCredenciales(correo, password) {
-        // Buscar usuario en la "base de datos" local
-        const usuario = usuariosRegistrados.find(user => 
-          user.correo === correo && user.password === password
-        );
-        
-        return usuario;
-      }
-      
-      // Función para guardar sesión
-      function guardarSesion(usuario) {
-        const sesionActiva = {
-          correo: usuario.correo,
-          nombre: usuario.nombre,
-          fechaLogin: new Date().toISOString()
-        };
-        
-        localStorage.setItem('sesionActiva', JSON.stringify(sesionActiva));
-        
-        // Si el usuario marcó "recordar sesión", guardar por más tiempo
-        const recordar = document.getElementById('recordar').checked;
-        if (recordar) {
-          localStorage.setItem('recordarSesion', 'true');
-        }
-      }
-      
-      // Función para verificar si hay sesión activa
-      function verificarSesionActiva() {
-        const sesionActiva = localStorage.getItem('sesionActiva');
-        const recordarSesion = localStorage.getItem('recordarSesion');
-        
-        if (sesionActiva && recordarSesion === 'true') {
-          const sesion = JSON.parse(sesionActiva);
-          const fechaLogin = new Date(sesion.fechaLogin);
-          const ahora = new Date();
-          const diferenciaDias = (ahora - fechaLogin) / (1000 * 60 * 60 * 24);
-          
-          // Si han pasado menos de 30 días, mantener sesión activa
-          if (diferenciaDias < 30) {
-            mostrarExitoLogin();
-            setTimeout(() => {
-              window.location.href = '../../index.html';
-            }, 1500);
-            return true;
-          }
-        }
-        
-        return false;
-      }
-      
-      // Verificar sesión activa al cargar la página
-      if (verificarSesionActiva()) {
-        return; // Si hay sesión activa, no continuar con el resto del código
-      }
-      
-      // Validación del formulario completo
+      })();
+
+      // ✅ ahora usamos siempre la función que decodifica HEX
+      const usuariosRegistrados = obtenerUsuarios();
+
+      function validarEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+      function mostrarError(id, msg){ const c=document.getElementById(id),e=document.getElementById('error-'+id); c.classList.remove('valid'); c.classList.add('invalid'); e.textContent=msg; e.classList.add('show'); }
+      function mostrarExito(id){ const c=document.getElementById(id),e=document.getElementById('error-'+id); c.classList.remove('invalid'); c.classList.add('valid'); e.classList.remove('show'); }
+      function limpiarError(id){ const c=document.getElementById(id),e=document.getElementById('error-'+id); c.classList.remove('invalid','valid'); e.classList.remove('show'); }
+      function mostrarErrorLogin(msg){ const e=document.getElementById('login-error'); e.textContent=msg; e.classList.add('show'); e.style.display='block'; document.getElementById('success-message').style.display='none'; }
+      function mostrarExitoLogin(){ const s=document.getElementById('success-message'); s.style.display='block'; document.getElementById('login-error').style.display='none'; }
+
       form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
         const correo = correoInput.value.trim();
         const password = passwordInput.value;
-        
-        let esValido = true;
-        
-        // Validar correo
-        if (!correo) {
-          mostrarError('correo', 'El correo electrónico es requerido');
-          esValido = false;
-        } else if (!validarEmail(correo)) {
-          mostrarError('correo', 'Ingresa un correo electrónico válido');
-          esValido = false;
-        }
-        
-        // Validar contraseña
-        if (!password) {
-          mostrarError('password', 'La contraseña es requerida');
-          esValido = false;
-        } else if (password.length < 4) {
-          mostrarError('password', 'La contraseña debe tener al menos 4 caracteres');
-          esValido = false;
-        }
-        
-        if (esValido) {
-          // Verificar credenciales
-          const usuario = verificarCredenciales(correo, password);
-          
-          if (usuario) {
-            // Credenciales correctas
-            guardarSesion(usuario);
-            mostrarExitoLogin();
-            
-            // Redirigir después de 1.5 segundos
-            setTimeout(() => {
-              window.location.href = '../../index.html';
-            }, 1500);
-          } else {
-            // Credenciales incorrectas
-            mostrarErrorLogin('Credenciales incorrectas. Verifica tu correo y contraseña.');
-            
-            // Limpiar campos
-            correoInput.classList.add('invalid');
-            passwordInput.classList.add('invalid');
-            
-            // Scroll al formulario
-            form.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
+        const recordar = document.getElementById('recordar').checked;
+
+        if (!correo || !validarEmail(correo)) { mostrarError('correo','Correo inválido'); return; }
+        if (!password || password.length<4) { mostrarError('password','Contraseña inválida'); return; }
+
+        const r = iniciarSesion(correo, password, recordar);
+        if (r.exito) {
+          mostrarExitoLogin();
+          const s = r.usuario;
+          let msg='';
+          if (s.descuento===50) msg='¡Tienes 50% de descuento en todos los productos!';
+          else if (s.descuento===10) msg='¡Tienes 10% de descuento de por vida!';
+          if (s.tortaGratis) msg += (msg?' y ':'')+'¡Tienes una torta gratis por ser estudiante Duoc en tu cumpleaños!';
+          if (msg) alert(msg);
+          setTimeout(()=>{ window.location.href='../../index.html'; },1500);
         } else {
-          // Scroll al primer error
-          const primerError = form.querySelector('.invalid');
-          if (primerError) {
-            primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
+          mostrarErrorLogin('Credenciales incorrectas. Verifica tu correo y contraseña.');
         }
       });
-      
-      // Función para mostrar usuarios registrados (solo para desarrollo)
-      function mostrarUsuariosRegistrados() {
-        console.log('Usuarios registrados:', usuariosRegistrados);
-        if (usuariosRegistrados.length === 0) {
-          console.log('No hay usuarios registrados. Regístrate primero.');
-        }
-      }
-      
-      // Mostrar usuarios registrados en consola (para desarrollo)
-      mostrarUsuariosRegistrados();
-      
-      // Función para limpiar campos
-      function limpiarCampos() {
-        correoInput.value = '';
-        passwordInput.value = '';
-        correoInput.classList.remove('valid', 'invalid');
-        passwordInput.classList.remove('valid', 'invalid');
-        document.getElementById('error-correo').classList.remove('show');
-        document.getElementById('error-password').classList.remove('show');
-        document.getElementById('login-error').style.display = 'none';
-        document.getElementById('success-message').style.display = 'none';
-      }
-      
-      // Limpiar campos al hacer clic en "Regístrate aquí"
-      document.querySelector('.btn-secundaria').addEventListener('click', function() {
-        limpiarCampos();
-      });
+    });
+
+    window.addEventListener('scroll', function(){
+      const header=document.getElementById('mainHeader');
+      if (window.scrollY>40) header.classList.add('shrink'); else header.classList.remove('shrink');
     });
   </script>
 </body>
