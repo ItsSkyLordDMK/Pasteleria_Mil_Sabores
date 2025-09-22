@@ -1,0 +1,58 @@
+/* Colores personalizados */
+:root {
+  --color-fondo-principal: #fff5e1;
+  --color-acento-suave: #ffc0cb;
+  --color-acento-chocolate: #8b4513;
+  --color-texto-principal: #5d4037;
+  --color-texto-secundario: #b0bec5;
+}
+
+/* Nuevo estilo para hacer el modal más ancho en pantallas grandes */
+@media (min-width: 992px) {
+  .modal-dialog {
+    max-width: 700px; /* O el tamaño que desees, por ejemplo, 700px */
+  }
+}
+
+/* Personaliza el header del modal Bootstrap */
+.modal-header {
+  background: var(--color-acento-suave) !important;
+  border-bottom: 2px solid var(--color-acento-chocolate) !important;
+}
+
+.modal-title {
+  color: var(--color-acento-chocolate) !important;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* Personaliza el contenido del modal */
+.modal-content {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(139, 69, 19, 0.15);
+  border: 2px solid var(--color-acento-suave);
+}
+
+/* Personaliza el cuerpo del modal */
+.modal-body {
+  color: var(--color-texto-principal);
+  font-size: 1.1rem;
+  padding: 24px;
+}
+
+/* Personaliza el botón de cerrar */
+.btn-close {
+  filter: none;
+  background: none;
+  color: var(--color-acento-chocolate);
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.btn-close:hover {
+  opacity: 1;
+}
+
+/* Tamaño fullscreen en xxl y menores ya lo maneja Bootstrap con la clase modal-fullscreen-xxl-down */
+
+/* Responsive: puedes agregar más estilos si lo necesitas */

@@ -12,6 +12,7 @@
 
 .topbar {
   display: flex;
+  width: 100%;
   gap: 20px;
   align-items: center;
   justify-content: space-between;
@@ -24,6 +25,7 @@
   z-index: 100;
   backdrop-filter: blur(10px);
   transition: transform 0.3s ease;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -47,8 +49,10 @@
   display: flex;
   gap: 24px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
+/* Estilos para los enlaces de navegación */
 .navegacion a {
   text-decoration: none;
   color: #8b4513;
@@ -59,12 +63,14 @@
   position: relative;
 }
 
+/*Efecto hover para los enlaces de navegación*/
 .navegacion a:hover {
   background: rgba(255, 255, 255, 0.3);
   color: #5d4037;
   transform: translateY(-2px);
 }
 
+/* Subrayado animado de los enlaces de navegacion*/
 .navegacion a::after {
   content: "";
   position: absolute;
@@ -77,6 +83,7 @@
   transform: translateX(-50%);
 }
 
+/* Al hacer hover, el subrayado se expande */
 .navegacion a:hover::after {
   width: 80%;
 }
@@ -109,17 +116,24 @@
   transform: translateY(-2px);
 }
 
-/* Responsive para header */
-@media (max-width: 768px) {
+@media (max-width: 760px) {
   .topbar {
     flex-direction: column;
     gap: 16px;
     padding: 20px;
+    width: 100%;
+    position: static; /* <-- Cambia aquí */
+    top: unset;
+    z-index: 100;
   }
   .navegacion {
     flex-wrap: wrap;
     justify-content: center;
     gap: 16px;
+  }
+
+  .titulo-productos h1{
+    font-size: 1.8rem;
   }
 }
 
