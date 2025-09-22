@@ -17,6 +17,17 @@ body, html{
     padding: 0;
 }
 
+.enlace-titulo {
+    color: var(--color-texto-principal);
+    text-decoration: underline;
+    text-decoration-color: var(--color-acento-suave);
+}
+
+.enlace-titulo:hover h2.producto-titulo {
+    color: var(--color-acento-suave);
+    text-decoration-color: var(--color-acento-chocolate);
+}
+
 .titulo-productos {
     background-color: var(--color-fondo-principal);
     width: 100%;
