@@ -1,3 +1,4 @@
+
 :root {
   --color-fondo-principal: #FFF5E1;
   /*botones*/
@@ -8,7 +9,7 @@
   --color-texto-secundario: #B0BEC5;
 }
 
-body, html{
+body, html {
   background-color: var(--color-fondo-principal);
   margin: 0;
   padding: 0;
@@ -114,14 +115,15 @@ body, html{
 
 .mini-imagen {
     cursor: pointer;
-    border: 2px solid transparent;
+    border: 2px solid #8B4513;
     transition: border-color 0.2s;
 }
 
 .mini-imagen:hover {
-    border-color: var(--color-acento-chocolate);
+    border-color: #5D4037;
 }
 
+/* Estilo para el botón Añadir al carrito */
 .btn-anadir-carro {
     background: linear-gradient(135deg, #8B4513 0%, #944c2b 100%);
     color: #fff;
@@ -140,33 +142,50 @@ body, html{
     transform: translateY(-2px);
 }
 
-/* Estilos para el carrusel */
-.carrusel-container {
-    position: relative;
-    max-width: 500px;
+/* Estilos para el carrusel y las flechas */
+/* Contenedor principal para la imagen y las flechas, con posición relativa para los botones */
+.carrusel-completo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
     width: 100%;
-    height: 400px; /* Tamaño fijo para el contenedor */
-    overflow: hidden; /* Oculta el contenido que se desborde */
-    margin: auto;
 }
 
 .carrusel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(139, 69, 19, 0.7); /* Color chocolate semi-transparente */
-    color: white;
+    background: var(--color-acento-chocolate, #8B4513);
+    color: #fff;
     border: none;
-    padding: 10px 15px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
     font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    z-index: 10;
-    border-radius: 50%; /* Circular */
-    transition: background-color 0.3s;
+    margin: 0 8px;
+    transition: background 0.2s;
 }
 
 .carrusel-btn:hover {
-    background-color: rgba(139, 69, 19, 1); /* Se vuelve más sólido */
+    background: var(--color-acento-suave, #FFC0CB);
+    color: var(--color-acento-chocolate, #8B4513);
+}
+
+.carrusel-img-container {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carrusel-img {
+    max-width: 350px;
+    max-height: 350px;
+    object-fit: contain;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(139, 69, 19, 0.08);
 }
 
 .prev-btn {
