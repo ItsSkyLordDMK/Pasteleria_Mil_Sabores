@@ -1,15 +1,15 @@
 // Función para mostrar los productos en la grilla
 function mostrarProductos(productos) {
-  const grid = document.getElementById('productos-grid');
+  const grid = document.getElementById("productos-grid");
   if (!grid) {
     console.error('El elemento con ID "productos-grid" no se encontró.');
     return;
   }
 
-  productos.forEach(producto => {
-    const div = document.createElement('div');
-    div.className = 'producto-container';
-    
+  productos.forEach((producto) => {
+    const div = document.createElement("div");
+    div.className = "producto-container";
+
     // Crea el enlace con el ID del producto para la URL
     const urlDetalle = `detalle_producto.html?id=${producto.id}`;
 
@@ -28,18 +28,48 @@ function mostrarProductos(productos) {
 }
 
 // Ejecutar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-  fetch('../assets/data/productos.json')
-    .then(response => {
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("../assets/data/productos.json")
+    .then((response) => {
       if (!response.ok) {
-        throw new Error('La respuesta de la red no fue correcta');
+        throw new Error("La respuesta de la red no fue correcta");
       }
       return response.json();
     })
-    .then(productos => {
+    .then((productos) => {
       mostrarProductos(productos);
     })
-    .catch(error => {
-      console.error('Hubo un problema al obtener el archivo de productos:', error);
+    .catch((error) => {
+      console.error(
+        "Hubo un problema al obtener el archivo de productos:",
+        error
+      );
     });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const header = document.querySelector(".topbar");
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    function onScroll() {
+      if (window.innerWidth <= 768) {
+        if (window.scrollY > lastScrollY) {
+          header.style.transform = "translateY(-100%)";
+        } else {
+          header.style.transform = "translateY(0)";
+        }
+        lastScrollY = window.scrollY;
+      } else {
+        header.style.transform = "translateY(0)";
+      }
+      ticking = false;
+    }
+
+    window.addEventListener("scroll", function () {
+      if (!ticking) {
+        window.requestAnimationFrame(onScroll);
+        ticking = true;
+      }
+    });
+  });
 });
