@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registro - Mil Sabores</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #FFF5E1;
+      color: #5D4037;
+    }
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #FFC0CB;
+      box-shadow: 0 2px 8px #f3e6d8;
+      transition: all 0.3s cubic-bezier(.4,0,.2,1);
+      padding: 8px 0;
+    }
+    .sticky-header.shrink {
+      padding: 6px 0;
+      box-shadow: 0 1px 4px #f3e6d8;
+    }
+    .sticky-header .logo img {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px #f3e6d8;
+      transition: height 0.3s, width 0.3s;
+    }
+    .sticky-header.shrink .logo img {
+      height: 32px;
+      width: 32px;
+    }
+    .text-principal { color: #5D4037 !important; }
+    .text-secundario { color: #B0BEC5 !important; }
+  </style>
+</head>
+<body style="background: linear-gradient(135deg, #FFF5E1 0%, #FFE4EC 100%); font-family: 'Lato', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;">
+  <!--======================= HEADER =======================-->
+  <header class="topbar sticky-header" id="mainHeader" style="padding: 8px 0;">
+    <div class="logo" style="display: flex; align-items: center; gap: 8px;">
+      <img src="../assets/img/logo.png" alt="Logo Mil Sabores" style="height: 32px; width: 32px; border-radius: 50%; box-shadow: 0 2px 8px #f3e6d8;">
+      <strong style="font-family: 'Pacifico', cursive; font-size: 1.3rem; color: #8B4513; letter-spacing: 1px;">Mil Sabores</strong>
+    </div>
+    <div>
+      <strong style="font-family: 'Lato', sans-serif; color: #8B4513; font-size: 1rem;">Tienda online - Mil Sabores</strong>
+    </div>
+
+    <nav class="navegacion" aria-label="Navegación principal">
+      <a href="../index.html" class="text-principal" style="font-weight: 600;">Página principal</a>
+    </nav>
+    <div class="usuario">
+      <span class="separar text-secundario">|</span>
+      <a href="iniciarSesion.html" class="text-principal" style="font-weight: 600;">¿Tienes una cuenta? Inicia sesión aquí</a>
+      <span class="separar text-secundario">|</span>
+    </div>
+  </header>
+  <script>
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('mainHeader');
+      if (window.scrollY > 40) {
+        header.classList.add('shrink');
+      } else {
+        header.classList.remove('shrink');
+      }
+    });
+  </script>
+
+  <!-- ======================= MAIN ======================= -->
+  <main class="main">
+    <div class="form-container" style="background: #fff; border-radius: 18px; box-shadow: 0 4px 24px #f3e6d8; max-width: 500px; margin: 40px auto; padding: 36px 32px 28px 32px;">
+      <h1 style="font-family: 'Pacifico', cursive; font-size: 2.1rem; text-align: center; margin-bottom: 10px;" class="text-principal">Crear Cuenta</h1>
+      <p class="text-secundario" style="text-align: center; margin-bottom: 30px; font-size: 1.05rem;">
+        Únete a nuestra comunidad y disfruta de los mejores postres
+      </p>
+      <form id="form-registro" method="post" novalidate>
+        <!-- RUN -->
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="run" style="font-weight: 600; color: #8B4513;">RUN (sin puntos ni guión):</label>
+          <input type="text" id="run" name="run" minlength="7" maxlength="9" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+          <div class="error-message" id="error-run" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
+        </div>
+        <!-- Nombre Completo -->
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="nombre" style="font-weight: 600; color: #8B4513;">Nombre Completo:</label>
+          <input type="text" id="nombre" name="nombre" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+          <div class="error-message" id="error-nombre" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
+        </div>
+        <!-- Correo -->
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="correo" style="font-weight: 600; color: #8B4513;">Correo Electrónico:</label>
+          <input type="email" id="correo" name="correo" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+          <div class="error-message" id="error-correo" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
+        </div>
+        <!-- Confirmar Correo -->
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="correo2" style="font-weight: 600; color: #8B4513;">Confirmar Correo Electrónico:</label>
+          <input type="email" id="correo2" name="correo2" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+          <div class="error-message" id="error-correo2" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
+        </div>
+        <!-- Contraseña -->
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="password" style="font-weight: 600; color: #8B4513;">Contraseña:</label>
+          <input type="password" id="password" name="password" minlength="4" maxlength="10" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+          <div class="error-message" id="error-password" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
+        </div>
+        <!-- Confirmar Contraseña -->
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="password2" style="font-weight: 600; color: #8B4513;">Confirmar Contraseña:</label>
+          <input type="password" id="password2" name="password2" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+          <div class="error-message" id="error-password2" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
+        </div>
+        <!-- Fecha de Nacimiento -->
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="fecha" style="font-weight: 600; color: #8B4513;">Fecha de Nacimiento:</label>
+          <input type="date" id="fecha" name="fecha" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+          <div class="error-message" id="error-fecha" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
+        </div>
+        <!-- Teléfono -->
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="telefono" style="font-weight: 600; color: #8B4513;">Teléfono (opcional):</label>
+          <input type="tel" id="telefono" name="telefono" style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+        </div>
+        <!-- Comuna -->
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="comuna" style="font-weight: 600; color: #8B4513;">Comuna:</label>
+          <select name="comuna" id="comuna" required style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;">
+            <option value="">-- Seleccione la comuna --</option>
+            <option value="Cerrillos">Cerrillos</option>
+            <option value="Cerro Navia">Cerro Navia</option>
+            <option value="Conchalí">Conchalí</option>
+            <option value="El Bosque">El Bosque</option>
+            <option value="Estación Central">Estación Central</option>
+            <option value="Huechuraba">Huechuraba</option>
+            <option value="Independencia">Independencia</option>
+            <option value="La Cisterna">La Cisterna</option>
+            <option value="La Florida">La Florida</option>
+            <option value="La Granja">La Granja</option>
+            <option value="La Pintana">La Pintana</option>
+            <option value="La Reina">La Reina</option>
+            <option value="Las Condes">Las Condes</option>
+            <option value="Lo Barnechea">Lo Barnechea</option>
+            <option value="Lo Espejo">Lo Espejo</option>
+            <option value="Lo Prado">Lo Prado</option>
+            <option value="Macul">Macul</option>
+            <option value="Maipú">Maipú</option>
+            <option value="Ñuñoa">Ñuñoa</option>
+            <option value="Pedro Aguirre Cerda">Pedro Aguirre Cerda</option>
+            <option value="Peñalolén">Peñalolén</option>
+            <option value="Providencia">Providencia</option>
+            <option value="Pudahuel">Pudahuel</option>
+            <option value="Quilicura">Quilicura</option>
+            <option value="Quinta Normal">Quinta Normal</option>
+            <option value="Recoleta">Recoleta</option>
+            <option value="Renca">Renca</option>
+            <option value="San Joaquín">San Joaquín</option>
+            <option value="San Miguel">San Miguel</option>
+            <option value="San Ramón">San Ramón</option>
+            <option value="Santiago">Santiago</option>
+            <option value="Vitacura">Vitacura</option>
+            <option value="Puente Alto">Puente Alto</option>
+            <option value="Pirque">Pirque</option>
+            <option value="San José de Maipo">San José de Maipo</option>
+            <option value="Colina">Colina</option>
+            <option value="Lampa">Lampa</option>
+            <option value="Tiltil">Tiltil</option>
+            <option value="San Bernardo">San Bernardo</option>
+            <option value="Buin">Buin</option>
+            <option value="Calera de Tango">Calera de Tango</option>
+            <option value="Paine">Paine</option>
+            <option value="Melipilla">Melipilla</option>
+            <option value="Alhué">Alhué</option>
+            <option value="Curacaví">Curacaví</option>
+            <option value="María Pinto">María Pinto</option>
+            <option value="San Pedro">San Pedro</option>
+            <option value="Talagante">Talagante</option>
+            <option value="El Monte">El Monte</option>
+            <option value="Isla de Maipo">Isla de Maipo</option>
+            <option value="Padre Hurtado">Padre Hurtado</option>
+            <option value="Peñaflor">Peñaflor</option>
+          </select>
+          <div class="error-message" id="error-comuna" style="color: #EF4444; font-size: 0.92rem; margin-top: 4px;"></div>
+        </div>
+        <!-- Código de descuento -->
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label for="codigo" style="font-weight: 600; color: #8B4513;">Código de Descuento (opcional):</label>
+          <input type="text" id="codigo" name="codigo" style="border-radius: 10px; border: 1.5px solid #ffe4ec; padding: 10px; background: #fff8f0; font-size: 1rem; transition: border-color 0.2s, background 0.2s;" />
+        </div>
+        <!-- Botones -->
+        <button type="submit" class="btn-primaria" style="width: 100%; background: #8B4513; color: #fff; font-weight: 700; border-radius: 10px; border: none; padding: 12px 0; font-size: 1.08rem; margin-bottom: 10px; font-family: 'Lato', sans-serif;">Crear Cuenta</button>
+        <button type="button" class="btn-secundaria" onclick="window.location.href='iniciarSesion.html'" style="width: 100%; background: #fff8f0; color: #8B4513; font-weight: 600; border-radius: 10px; border: 1.5px solid #FFC0CB; padding: 10px 0; font-size: 1rem; margin-bottom: 0; font-family: 'Lato', sans-serif;">¿Ya tienes cuenta? Iniciar Sesión</button>
+      </form>
+      <!-- Mensaje de éxito -->
+      <div class="success-message" id="success-message" style="display: none; text-align: center; color: #10B981; font-weight: 700; margin-top: 18px; font-size: 1.05rem;">¡Cuenta creada exitosamente! Redirigiendo al inicio de sesión...</div>
+    </div>
+  </main>
+
+  <!-- ======================= FOOTER ======================= -->
+  <footer class="footer" id="contacto" style="background: #fff8f0; border-top: 2px solid #ffe4ec; margin-top: 40px;">
+    <nav aria-label="Redes" style="text-align: center; margin-bottom: 10px;">
+      <a href="#" style="color: #8B4513; font-weight: 600;">X</a> ·
+      <a href="#" id="blog" style="color: #8B4513; font-weight: 600;">Instagram</a> ·
+      <a href="#" style="color: #8B4513; font-weight: 600;">WhatsApp</a>
+    </nav>
+    <form class="newsletter" action="#" method="post" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+      <label for="email" style="color: #8B4513; font-weight: 600;">Suscríbete a nuestro newsletter</label>
+      <input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" style="border-radius: 8px; border: 1.5px solid #ffe4ec; padding: 8px 12px; background: #fff8f0; font-size: 1rem;" />
+      <button type="submit" style="background: linear-gradient(90deg, #FFC0CB 0%, #FFF5E1 100%); color: #8B4513; font-weight: 700; border-radius: 8px; border: none; padding: 8px 18px; font-size: 1rem; margin-top: 2px; font-family: 'Lato', sans-serif;">Suscribirse</button>
+    </form>
+  </footer>
+
+  <!-- JavaScript para validaciones -->
+  <script src="../assets/js/registro.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('form-registro');
+      const inputs = form.querySelectorAll('input[required], select[required]');
+      
+      // Función para validar RUN
+      function validarRUN(run) {
+        const runRegex = /^[0-9]{7,9}$/;
+        return runRegex.test(run);
+      }
+      
+      // Función para validar email
+      function validarEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+      
+      // Función para validar nombre
+      function validarNombre(nombre) {
+        return nombre.trim().length >= 2;
+      }
+      
+      // Función para validar contraseña
+      function validarPassword(password) {
+        return password.length >= 4 && password.length <= 10;
+      }
+      
+      // Función para validar fecha
+      function validarFecha(fecha) {
+        const fechaNacimiento = new Date(fecha);
+        const hoy = new Date();
+        const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+        return edad >= 18 && edad <= 100;
+      }
+      
+      // Función para mostrar error
+      function mostrarError(campoId, mensaje) {
+        const campo = document.getElementById(campoId);
+        const errorDiv = document.getElementById('error-' + campoId);
+        
+        campo.classList.remove('valid');
+        campo.classList.add('invalid');
+        errorDiv.textContent = mensaje;
+        errorDiv.classList.add('show');
+      }
+      
+      // Función para mostrar éxito
+      function mostrarExito(campoId) {
+        const campo = document.getElementById(campoId);
+        const errorDiv = document.getElementById('error-' + campoId);
+        
+        campo.classList.remove('invalid');
+        campo.classList.add('valid');
+        errorDiv.classList.remove('show');
+      }
+      
+      // Función para limpiar error
+      function limpiarError(campoId) {
+        const campo = document.getElementById(campoId);
+        const errorDiv = document.getElementById('error-' + campoId);
+        
+        campo.classList.remove('invalid', 'valid');
+        errorDiv.classList.remove('show');
+      }
+      
+      // Validación en tiempo real
+      inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+          const campoId = this.id;
+          const valor = this.value.trim();
+          
+          switch(campoId) {
+            case 'run':
+              if (valor && !validarRUN(valor)) {
+                mostrarError(campoId, 'El RUN debe tener entre 7 y 9 dígitos');
+              } else if (valor) {
+                mostrarExito(campoId);
+              } else {
+                limpiarError(campoId);
+              }
+              break;
+              
+            case 'nombre':
+              if (valor && !validarNombre(valor)) {
+                mostrarError(campoId, 'El nombre debe tener al menos 2 caracteres');
+              } else if (valor) {
+                mostrarExito(campoId);
+              } else {
+                limpiarError(campoId);
+              }
+              break;
+              
+            case 'correo':
+              if (valor && !validarEmail(valor)) {
+                mostrarError(campoId, 'Ingresa un correo electrónico válido');
+              } else if (valor) {
+                mostrarExito(campoId);
+              } else {
+                limpiarError(campoId);
+              }
+              break;
+              
+            case 'correo2':
+              const correo1 = document.getElementById('correo').value;
+              if (valor && valor !== correo1) {
+                mostrarError(campoId, 'Los correos no coinciden');
+              } else if (valor && valor === correo1) {
+                mostrarExito(campoId);
+              } else {
+                limpiarError(campoId);
+              }
+              break;
+              
+            case 'password':
+              if (valor && !validarPassword(valor)) {
+                mostrarError(campoId, 'La contraseña debe tener entre 4 y 10 caracteres');
+              } else if (valor) {
+                mostrarExito(campoId);
+              } else {
+                limpiarError(campoId);
+              }
+              break;
+              
+            case 'password2':
+              const password1 = document.getElementById('password').value;
+              if (valor && valor !== password1) {
+                mostrarError(campoId, 'Las contraseñas no coinciden');
+              } else if (valor && valor === password1) {
+                mostrarExito(campoId);
+              } else {
+                limpiarError(campoId);
+              }
+              break;
+              
+            case 'fecha':
+              if (valor && !validarFecha(valor)) {
+                mostrarError(campoId, 'Debes ser mayor de 18 años');
+              } else if (valor) {
+                mostrarExito(campoId);
+              } else {
+                limpiarError(campoId);
+              }
+              break;
+              
+            case 'comuna':
+              if (valor) {
+                mostrarExito(campoId);
+              } else {
+                limpiarError(campoId);
+              }
+              break;
+          }
+        });
+        
+        // Validación en tiempo real para confirmaciones
+        if (input.id === 'correo') {
+          input.addEventListener('input', function() {
+            const correo2 = document.getElementById('correo2');
+            if (correo2.value) {
+              correo2.dispatchEvent(new Event('blur'));
+            }
+          });
+        }
+        
+        if (input.id === 'password') {
+          input.addEventListener('input', function() {
+            const password2 = document.getElementById('password2');
+            if (password2.value) {
+              password2.dispatchEvent(new Event('blur'));
+            }
+          });
+        }
+      });
+      
+      // Validación del formulario completo
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const correo = document.getElementById('correo').value.trim();
+        const password = document.getElementById('password').value;
+        let esValido = true;
+        // Validación correo
+        if (!correo) {
+          mostrarError('correo', 'El correo electrónico es requerido');
+          esValido = false;
+        } else if (correo.length > 100) {
+          mostrarError('correo', 'El correo no puede superar los 100 caracteres');
+          esValido = false;
+        } else if (!/^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i.test(correo)) {
+          mostrarError('correo', 'Solo se permiten correos @duoc.cl, @profesor.duoc.cl o @gmail.com');
+          esValido = false;
+        }
+        // Validación contraseña
+        if (!password) {
+          mostrarError('password', 'La contraseña es requerida');
+          esValido = false;
+        } else if (password.length < 4 || password.length > 10) {
+          mostrarError('password', 'La contraseña debe tener entre 4 y 10 caracteres');
+          esValido = false;
+        }
+        // Validar todos los campos requeridos
+        const run = document.getElementById('run').value.trim();
+        const nombre = document.getElementById('nombre').value.trim();
+        const correo2 = document.getElementById('correo2').value.trim();
+        const password2 = document.getElementById('password2').value;
+        const fecha = document.getElementById('fecha').value;
+        const comuna = document.getElementById('comuna').value;
+        
+        // Validaciones
+        if (!validarRUN(run)) {
+          mostrarError('run', 'El RUN es requerido y debe tener entre 7 y 9 dígitos');
+          esValido = false;
+        }
+        
+        if (!validarNombre(nombre)) {
+          mostrarError('nombre', 'El nombre es requerido y debe tener al menos 2 caracteres');
+          esValido = false;
+        }
+        
+        if (!validarEmail(correo)) {
+          mostrarError('correo', 'El correo electrónico es requerido y debe ser válido');
+          esValido = false;
+        }
+        
+        if (correo !== correo2) {
+          mostrarError('correo2', 'Los correos no coinciden');
+          esValido = false;
+        }
+        
+        if (!validarPassword(password)) {
+          mostrarError('password', 'La contraseña es requerida y debe tener entre 4 y 10 caracteres');
+          esValido = false;
+        }
+        
+        if (password !== password2) {
+          mostrarError('password2', 'Las contraseñas no coinciden');
+          esValido = false;
+        }
+        
+        if (!validarFecha(fecha)) {
+          mostrarError('fecha', 'La fecha de nacimiento es requerida y debes ser mayor de 18 años');
+          esValido = false;
+        }
+        
+        if (!comuna) {
+          mostrarError('comuna', 'Debes seleccionar una comuna');
+          esValido = false;
+        }
+        
+        if (esValido) {
+          // Crear objeto usuario
+          const usuario = {
+            run: document.getElementById('run').value.trim(),
+            nombre: document.getElementById('nombre').value.trim(),
+            correo: document.getElementById('correo').value.trim(),
+            password: document.getElementById('password').value,
+            fecha: document.getElementById('fecha').value,
+            telefono: document.getElementById('telefono').value.trim(),
+            comuna: document.getElementById('comuna').value,
+            codigo: document.getElementById('codigo').value.trim()
+          };
+          // Guardar usuario usando registro.js
+          const resultado = registrarUsuario(usuario);
+          if (resultado.exito) {
+            const successMessage = document.getElementById('success-message');
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+              window.location.href = 'iniciarSesion.html';
+            }, 2000);
+          } else {
+            alert(resultado.mensaje);
+          }
+        } else {
+          // Scroll al primer error
+          const primerError = form.querySelector('.invalid');
+          if (primerError) {
+            primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sobre nosotros pasteleria Mil Sabores</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #FFC0CB;
+      color: #5D4037;
+    }
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #FFC0CB;
+      box-shadow: 0 2px 8px #f3e6d8;
+      transition: all 0.3s cubic-bezier(.4,0,.2,1);
+      padding: 8px 0;
+    }
+    .sticky-header.shrink {
+      padding: 6px 0;
+      box-shadow: 0 1px 4px #f3e6d8;
+    }
+    .sticky-header .logo img {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px #f3e6d8;
+      transition: height 0.3s, width 0.3s;
+    }
+    .sticky-header.shrink .logo img {
+      height: 32px;
+      width: 32px;
+    }
+    .text-principal { color: #5D4037 !important; }
+    .text-secundario { color: #B0BEC5 !important; }
+  </style>
+</head>
+<body style="background: linear-gradient(135deg, #FFF5E1 0%, #FFE4EC 100%); font-family: 'Lato', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;">
+  <!--======================= HEADER =======================-->
+  <header class="topbar sticky-header" id="mainHeader" style="padding: 8px 0;">
+    <div class="logo" style="display: flex; align-items: center; gap: 8px;">
+      <img src="../assets/img/logo.png" alt="Logo Mil Sabores" style="height: 32px; width: 32px; border-radius: 50%; box-shadow: 0 2px 8px #f3e6d8;">
+      <strong style="font-family: 'Pacifico', cursive; font-size: 1.3rem; color: #8B4513; letter-spacing: 1px;">Mil Sabores</strong>
+    </div>
+    <div>
+      <strong style="font-family: 'Lato', sans-serif; color: #8B4513; font-size: 1rem;">Tienda online - Mil Sabores</strong>
+    </div>
+    <nav class="navegacion" aria-label="Navegación principal">
+      <a href="../../index.html" class="text-principal" style="font-weight: 600;">Página Principal</a>
+      <a href="../../index.html#productos" class="text-principal" style="font-weight: 600;">Productos</a>
+      <a href="nosotros.html" class="text-principal" style="font-weight: 600;">Nosotros</a>
+      <a href="../../html/blog.html" class="text-principal" style="font-weight: 600;">Blog</a>
+      <a href="../../html/contacto.html" class="text-principal" style="font-weight: 600;">Contacto</a>
+    </nav>
+    <div class="usuario">
+      <a href="iniciarSesion.html" class="text-principal" style="font-weight: 600;">Iniciar sesión</a>
+      <span class="separar text-secundario">|</span>
+      <a href="registro.html" class="text-principal" style="font-weight: 600;">Registrarse</a>
+      <span class="separar text-secundario">|</span>
+      <span class="text-principal">Carrito (0)</span>
+    </div>
+  </header>
+  <script>
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('mainHeader');
+      if (window.scrollY > 40) {
+        header.classList.add('shrink');
+      } else {
+        header.classList.remove('shrink');
+      }
+    });
+  </script>
+
+  <!-- ======================= MAIN ======================= -->
+  <main class="main">
+    <div class="nosotros-container" style="background: #fff; border-radius: 18px; box-shadow: 0 4px 24px #f3e6d8; max-width: 900px; margin: 40px auto; padding: 36px 32px 28px 32px;">
+      <!-- Hero Section -->
+      <section class="nosotros-hero" style="text-align: center; margin-bottom: 32px;">
+        <h1 style="font-family: 'Pacifico', cursive; font-size: 2.1rem; text-align: center; margin-bottom: 10px;" class="text-principal">Conoce Nuestra Historia</h1>
+        <p class="text-secundario" style="font-size: 1.08rem;">
+          En Mil Sabores, cada postre cuenta una historia de pasión, tradición y amor por la repostería. 
+          Desde nuestros inicios, hemos dedicado nuestro corazón a crear experiencias dulces únicas.
+        </p>
+      </section>
+      <!-- Contenido Principal -->
+      <section class="nosotros-content" style="display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: center; margin-bottom: 32px;">
+        <div class="nosotros-text" style="flex: 1 1 320px; min-width: 280px;">
+          <h2 class="text-principal" style="font-family: 'Lato', sans-serif; font-weight: 700;">Nuestra Pasión por la Repostería</h2>
+          <p class="text-secundario">Fundada con el sueño de llevar la dulzura a cada hogar, Mil Sabores nació de la pasión por crear postres que no solo deleiten el paladar, sino que también calienten el corazón.</p>
+          <p class="text-secundario">Cada receta que preparamos lleva consigo años de experiencia, ingredientes cuidadosamente seleccionados y, sobre todo, el amor que ponemos en cada preparación. Desde tortas clásicas hasta innovaciones modernas, cada producto refleja nuestro compromiso con la excelencia.</p>
+          <p class="text-secundario">Creemos que los momentos especiales merecen postres especiales. Por eso, trabajamos incansablemente para que cada celebración, cada cumpleaños, cada ocasión importante tenga el acompañamiento dulce perfecto.</p>
+        </div>
+        <div class="nosotros-image" style="flex: 1 1 260px; min-width: 220px; text-align: center;">
+          <img src="../assets/img/equipo.jpg" alt="Equipo de Mil Sabores trabajando" style="max-width: 100%; border-radius: 18px; box-shadow: 0 2px 12px #ffe4ec;" />
+        </div>
+      </section>
+      <!-- Valores -->
+      <section class="nosotros-values" style="display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin-bottom: 32px;"></section>
+        <div class="value-card" style="background: #fff8f0; border-radius: 14px; box-shadow: 0 2px 8px #f3e6d8; padding: 18px 16px; flex: 1 1 220px; min-width: 200px; max-width: 260px;">
+          <h3 class="text-principal" style="font-family: 'Lato', sans-serif;">🍰 Calidad Artesanal</h3>
+          <p class="text-secundario">Utilizamos técnicas tradicionales combinadas con ingredientes de la más alta calidad para garantizar que cada postre sea una obra de arte culinaria.</p>
+        </div>
+        <div class="value-card" style="background: #fff8f0; border-radius: 14px; box-shadow: 0 2px 8px #f3e6d8; padding: 18px 16px; flex: 1 1 220px; min-width: 200px; max-width: 260px;">
+          <h3 class="text-principal" style="font-family: 'Lato', sans-serif;">❤️ Amor por el Detalle</h3>
+          <p class="text-secundario">Cada decoración, cada sabor, cada textura está cuidadosamente pensada para crear una experiencia sensorial completa que perdure en la memoria.</p>
+        </div>
+        <div class="value-card" style="background: #fff8f0; border-radius: 14px; box-shadow: 0 2px 8px #f3e6d8; padding: 18px 16px; flex: 1 1 220px; min-width: 200px; max-width: 260px;">
+          <h3 class="text-principal" style="font-family: 'Lato', sans-serif;">🌱 Ingredientes Frescos</h3>
+          <p class="text-secundario">Trabajamos con proveedores locales para asegurar la frescura de nuestros ingredientes, apoyando también a nuestra comunidad y garantizando sabores auténticos.</p>
+        </div>
+        <div class="value-card" style="background: #fff8f0; border-radius: 14px; box-shadow: 0 2px 8px #f3e6d8; padding: 18px 16px; flex: 1 1 220px; min-width: 200px; max-width: 260px;">
+          <h3 class="text-principal" style="font-family: 'Lato', sans-serif;">🎉 Momentos Especiales</h3>
+          <p class="text-secundario">Entendemos que cada ocasión es única. Por eso, personalizamos nuestros productos para que cada celebración sea verdaderamente memorable.</p>
+        </div>
+        <div class="value-card" style="background: #fff8f0; border-radius: 14px; box-shadow: 0 2px 8px #f3e6d8; padding: 18px 16px; flex: 1 1 220px; min-width: 200px; max-width: 260px;">
+          <h3 class="text-principal" style="font-family: 'Lato', sans-serif;">👥 Compromiso Familiar</h3>
+          <p class="text-secundario">Somos una empresa familiar que valora las tradiciones y el trabajo en equipo. Cada miembro de nuestro equipo comparte la misma pasión por la repostería.</p>
+        </div>
+        <div class="value-card" style="background: #fff8f0; border-radius: 14px; box-shadow: 0 2px 8px #f3e6d8; padding: 18px 16px; flex: 1 1 220px; min-width: 200px; max-width: 260px;">
+          <h3 class="text-principal" style="font-family: 'Lato', sans-serif;">🚀 Innovación Constante</h3>
+          <p class="text-secundario">Aunque respetamos las recetas tradicionales, siempre estamos innovando para ofrecer nuevas experiencias y sabores que sorprendan a nuestros clientes.</p>
+        </div>
+      </section>
+      <!-- Misión y Visión -->
+      <section class="nosotros-content" style="display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: center;">
+        <div class="nosotros-image" style="flex: 1 1 260px; min-width: 220px; text-align: center;">
+          <img src="../assets/img/mision.jpg" alt="Nuestra misión en Mil Sabores" style="max-width: 100%; border-radius: 18px; box-shadow: 0 2px 12px #ffe4ec;" />
+        </div>
+        <div class="nosotros-text" style="flex: 1 1 320px; min-width: 280px;">
+          <h2 class="text-principal" style="font-family: 'Lato', sans-serif; font-weight: 700;">Nuestra Misión</h2>
+          <p class="text-secundario">Crear momentos de felicidad a través de postres excepcionales que combinen tradición e innovación, utilizando ingredientes de calidad y técnicas artesanales que han sido perfeccionadas a lo largo de los años.</p>
+          <h2 class="text-principal" style="font-family: 'Lato', sans-serif; font-weight: 700;">Nuestra Visión</h2>
+          <p class="text-secundario">Ser reconocidos como la pastelería líder en la región, siendo el destino preferido para quienes buscan calidad, sabor y experiencia en cada bocado. Aspiramos a ser parte de los momentos más importantes de las familias de nuestra comunidad.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ======================= FOOTER ======================= -->
+  <footer class="footer" id="contacto" style="background: #fff8f0; border-top: 2px solid #ffe4ec; margin-top: 40px;">
+    <nav aria-label="Redes" style="text-align: center; margin-bottom: 10px;">
+      <a href="#" style="color: #8B4513; font-weight: 600;">X</a> ·
+      <a href="#" id="blog" style="color: #8B4513; font-weight: 600;">Instagram</a> ·
+      <a href="#" style="color: #8B4513; font-weight: 600;">WhatsApp</a>
+    </nav>
+    <form class="newsletter" action="#" method="post" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+      <label for="email" style="color: #8B4513; font-weight: 600;">Suscríbete a nuestro newsletter</label>
+      <input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" style="border-radius: 8px; border: 1.5px solid #ffe4ec; padding: 8px 12px; background: #fff8f0; font-size: 1rem;" />
+      <button type="submit" style="background: linear-gradient(90deg, #FFC0CB 0%, #FFF5E1 100%); color: #8B4513; font-weight: 700; border-radius: 8px; border: none; padding: 8px 18px; font-size: 1rem; margin-top: 2px; font-family: 'Lato', sans-serif;">Suscribirse</button>
+    </form>
+  </footer>
+  <script src="../assets/js/perfil.js"></script>
+  <script>
+    // Ejemplo de uso para actualizar perfil desde un formulario:
+    // actualizarPerfil({nombre: 'Nuevo Nombre', preferencias: {favoritos: ['Torta']}});
+  </script>
+</body>
+</html>
