@@ -1,0 +1,178 @@
+[
+  {
+    "id": "TC001",
+    "categoria": "Tortas Cuadradas",
+    "nombre": "Torta Cuadrada de Chocolate",
+    "descripcion": "Deliciosa torta de chocolate con capas de ganache y un toque de avellanas. Personalizable con mensajes especiales.",
+    "precio": 45000,
+    "imagen_principal": "../assets/img/torta_cuadrada_chocolate.jpg",
+    "imagen1": "../assets/img/tcc_mini_1.webp",
+    "imagen2": "../assets/img/tcc_mini_2.webp",
+    "imagen3": "../assets/img/tcc_mini_3.jpg"
+  },
+  {
+    "id": "TC002",
+    "categoria": "Tortas Cuadradas",
+    "nombre": "Torta Cuadrada de Frutas ",
+    "descripcion": "Una mezcla de frutas frescas y crema chantilly sobre un suave bizcocho de vainilla, ideal para celebraciones.",
+    "precio": 50000,
+    "imagen_principal": "../assets/img/torta_cuadrada_frutas.png",
+    "imagen1": "../assets/img/tcf_mini_1.png",
+    "imagen2": "../assets/img/tcf_mini_2.jpg",
+    "imagen3": "../assets/img/tcf_mini_3.jpg"
+  },
+  {
+    "id": "TT001",
+    "categoria": "Tortas Circulares",
+    "nombre": "Torta Circular de Vainilla",
+    "descripcion": "Bizcocho de vainilla clásico relleno con crema pastelera y cubierto con un glaseado dulce, perfecto para cualquier ocasión.",
+    "precio": 40000,
+    "imagen_principal": "../assets/img/torta_circular_vainilla.jpg",
+    "imagen1": "../assets/img/tcv_mini_1.jpg",
+    "imagen2": "../assets/img/tcv_mini_2.webp",
+    "imagen3": "../assets/img/tcv_mini_3.avif"
+  },
+  {
+    "id": "TT002",
+    "categoria": "Tortas Circulares",
+    "nombre": "Torta Circular de Manjar",
+    "descripcion": " Torta tradicional chilena con manjar y nueces, un deleite para los amantes de los sabores dulces y clásicos.",
+    "precio": 42000,
+    "imagen_principal": "../assets/img/torta_circular_manjar.png",
+    "imagen1": "../assets/img/tcm_mini_1.jfif",
+    "imagen2": "../assets/img/tcm_mini_2.jpg",
+    "imagen3": "../assets/img/tcm_mini_3.jfif"
+  },
+  {
+    "id": "PI001",
+    "categoria": "Postres Individuales",
+    "nombre": "Mousse de Chocolate",
+    "descripcion": "Postre individual cremoso y suave, hecho con chocolate de alta calidad, ideal para los amantes del chocolate.",
+    "precio": 5000,
+    "imagen_principal": "../assets/img/mousse_chocolate.png",
+    "imagen1": "../assets/img/m_mini_1.jpg",
+    "imagen2": "../assets/img/m_mini_2.jpg",
+    "imagen3": "../assets/img/m_mini_3.avif"
+  },
+  {
+    "id": "PI002",
+    "categoria": "Postres Individuales",
+    "nombre": "Tiramisú Clásico",
+    "descripcion": "Un postre italiano individual con capas de café, mascarpone y cacao, perfecto para finalizar cualquier comida.",
+    "precio": 5500,
+    "imagen_principal": "../assets/img/tiramisu.png",
+    "imagen1": "../assets/img/t_mini_1.jpg",
+    "imagen2": "../assets/img/t_mini_2.jpg",
+    "imagen3": "../assets/img/t_mini_3.jpg"
+  },
+  {
+    "id": "PSA001",
+    "categoria": "Productos Sin Azúcar",
+    "nombre": "Torta Sin Azúcar De Naranja",
+    "descripcion": "Torta ligera y deliciosa, endulzada naturalmente, ideal para quienes buscan opciones más saludables.",
+    "precio": 48000,
+    "imagen_principal": "../assets/img/torta_sin_azucar_naranja.webp",
+    "imagen1": "../assets/img/tn_mini_1.jpg",
+    "imagen2": "../assets/img/tn_mini_2.jpg",
+    "imagen3": "../assets/img/tn_mini_3.jpg"
+  },
+  {
+    "id": "PSA002",
+    "categoria": "Productos Sin Azúcar",
+    "nombre": "Cheesecake Sin Azúcar",
+    "descripcion": "Suave y cremoso, este cheesecake es una opción perfecta para disfrutar sin culpa.",
+    "precio": 47000,
+    "imagen_principal": "../assets/img/cheesecake_sin_azucar.jpg",
+    "imagen1": "../assets/img/c_mini_1.webp",
+    "imagen2": "../assets/img/c_mini_2.jfif",
+    "imagen3": "../assets/img/c_mini_3.jpg"
+  },
+  {
+    "id": "PT001",
+    "categoria": "Pastelería Tradicional ",
+    "nombre": "Empanada de Manzana",
+    "descripcion": "Pastelería tradicional rellena de manzanas especiadas, perfecta para un dulce desayuno o merienda.",
+    "precio": 3000,
+    "imagen_principal": "../assets/img/empanada.png",
+    "imagen1": "../assets/img/e_mini_1.jpg",
+    "imagen2": "../assets/img/e_mini_2.webp",
+    "imagen3": "../assets/img/e_mini_3.jpg"
+  },
+  {
+    "id": "PT002",
+    "categoria": "Pastelería Tradicional ",
+    "nombre": "Tarta de Santiago",
+    "descripcion": "Tradicional tarta española hecha con almendras, azúcar, y huevos, una delicia para los amantes de los postres clásicos.",
+    "precio": 6000,
+    "imagen_principal": "../assets/img/tarta_santiago.webp",
+    "imagen1": "../assets/img/ts_mini_1.jpg",
+    "imagen2": "../assets/img/ts_mini_2.jpg",
+    "imagen3": "../assets/img/ts_mini_3.jpg"
+  },
+  {
+    "id": "PG001",
+    "categoria": "Productos Sin Gluten",
+    "nombre": "Brownie Sin Gluten",
+    "descripcion": "Rico y denso, este brownie es perfecto para quienes necesitan evitar el gluten sin sacrificar el sabor.",
+    "precio": 4000,
+    "imagen_principal": "../assets/img/brownie.webp",
+    "imagen1": "../assets/img/b_mini_1.webp",
+    "imagen2": "../assets/img/b_mini_2.png",
+    "imagen3": "../assets/img/b_mini_3.avif"
+  },
+  {
+    "id": "PG002",
+    "categoria": "Productos Sin Gluten",
+    "nombre": "Pan Sin Gluten",
+    "descripcion": "Suave y esponjoso, ideal para sándwiches o para acompañar cualquier comida.",
+    "precio": 3500,
+    "imagen_principal": "../assets/img/pan.png",
+    "imagen1": "../assets/img/p_mini_1.jpg",
+    "imagen2": "../assets/img/p_mini_2.jpg",
+    "imagen3": "../assets/img/p_mini_3.jpg"
+  },
+  {
+    "id": "PV001",
+    "categoria": "Productos Veganos",
+    "nombre": "Torta Vegana de Chocolate",
+    "descripcion": "Torta de chocolate húmeda y deliciosa, hecha sin productos de origen animal, perfecta para veganos.",
+    "precio": 50000,
+    "imagen_principal": "../assets/img/torta_vegana_chocolate.png",
+    "imagen1": "../assets/img/tv_mini_1.jpg",
+    "imagen2": "../assets/img/tv_mini_2.webp",
+    "imagen3": "../assets/img/tv_mini_3.jpg"
+  },
+  {
+    "id": "PV002",
+    "categoria": "Productos Veganos",
+    "nombre": "Galletas Veganas de Avena",
+    "descripcion": "Crujientes y sabrosas, estas galletas son una excelente opción para un snack saludable y vegano.",
+    "precio": 4500,
+    "imagen_principal": "../assets/img/galleta_vegana_avena.jpg",
+    "imagen1": "../assets/img/gv_mini_1.jpg",
+    "imagen2": "../assets/img/gv_mini_2.jpg",
+    "imagen3": "../assets/img/gv_mini_3.jpg"
+  },
+  {
+    "id": "TE001",
+    "categoria": "Tortas Especiales",
+    "descripcion": "Diseñada especialmente para celebraciones, personalizable con decoraciones y mensajes únicos.",
+    "nombre": "Torta Especial de Cumpleaños",
+    "precio": 55000,
+    "imagen_principal": "../assets/img/torta_cumpleanos.png",
+    "imagen1": "../assets/img/tec_mini_1.webp",
+    "imagen2": "../assets/img/tec_mini_2.jfif",
+    "imagen3": "../assets/img/tec_mini_3.webp"
+  },
+  {
+    "id": "TE002",
+    "categoria": "Tortas Especiales",
+    "nombre": "Torta Especial de Bodas",
+    "descripcion": "Elegante y deliciosa, esta torta está diseñada para ser el centro de atención en cualquier boda.",
+    "precio": 60000,
+    "imagen_principal": "../assets/img/torta_boda.webp",
+    "imagen1": "../assets/img/teb_mini_1.webp",
+    "imagen2": "../assets/img/teb_mini_2.webp",
+    "imagen3": "../assets/img/teb_mini_3.jpg"
+  }
+]
