@@ -1,3 +1,8 @@
+// productos.js
+
+// Almacenará los productos una vez que sean cargados
+let productosJSON = [];
+
 // Función para mostrar los productos en la grilla
 function mostrarProductos(productos) {
   const grid = document.getElementById("productos-grid");
@@ -6,11 +11,13 @@ function mostrarProductos(productos) {
     return;
   }
 
+  // Limpia el contenido de la grilla antes de agregar nuevos productos
+  grid.innerHTML = '';
+
   productos.forEach((producto) => {
     const div = document.createElement("div");
     div.className = "producto-container";
 
-    // Crea el enlace con el ID del producto para la URL
     const urlDetalle = `detalle_producto.html?id=${producto.id}`;
 
     div.innerHTML = `
@@ -20,63 +27,62 @@ function mostrarProductos(productos) {
         <h2 class="producto-titulo">${producto.nombre}</h2>
       </a>
       
-      <p class="producto-precio">$${producto.precio}</p>
-      <button class="btn-añadir">Añadir</button>
+      <p class="producto-precio">$${producto.precio.toLocaleString('es-CL')}</p>
+      <button class="btn-añadir" data-id="${producto.id}">
+        <i class="bi bi-cart-plus"></i> Añadir
+      </button>
     `;
     grid.appendChild(div);
   });
+
+  console.log('Productos mostrados:', productos.length);
 }
 
-// Ejecutar cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
+  console.log('Cargando productos...');
+  
+  // Ruta corregida según tu estructura
   fetch("../assets/data/productos.json")
     .then((response) => {
       if (!response.ok) {
-        throw new Error("La respuesta de la red no fue correcta");
+        throw new Error(`Error HTTP: ${response.status}`);
       }
       return response.json();
     })
     .then((productos) => {
+      productosJSON = productos;
       mostrarProductos(productos);
+      console.log('Productos cargados exitosamente');
     })
     .catch((error) => {
-      console.error(
-        "Hubo un problema al obtener el archivo de productos:",
-        error
-      );
+      console.error("Error al cargar productos:", error);
     });
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const header = document.querySelector(".topbar");
-    let lastScrollY = window.scrollY;
-    let ticking = false;
+  // Código del header (tu código original)
+  const header = document.querySelector(".topbar");
+  let lastScrollY = window.scrollY;
+  let ticking = false;
 
-    function onScroll() {
-      if (window.innerWidth <= 768) {
-        if (window.scrollY > lastScrollY) {
-          header.style.transform = "translateY(-100%)";
-        } else {
-          header.style.transform = "translateY(0)";
-        }
-        lastScrollY = window.scrollY;
+  function onScroll() {
+    if (window.innerWidth <= 768) {
+      if (window.scrollY > lastScrollY) {
+        header.style.transform = "translateY(-100%)";
       } else {
         header.style.transform = "translateY(0)";
       }
-      ticking = false;
+      lastScrollY = window.scrollY;
+    } else {
+      header.style.transform = "translateY(0)";
     }
+    ticking = false;
+  }
 
-    window.addEventListener("scroll", function () {
-      if (!ticking) {
-        window.requestAnimationFrame(onScroll);
-        ticking = true;
-      }
-    });
+  window.addEventListener("scroll", function () {
+    if (!ticking) {
+      window.requestAnimationFrame(onScroll);
+      ticking = true;
+    }
   });
 });
 
-//MODAL DE CARRITO
-fetch('carro.html')
-  .then(response => response.text())
-  .then(html => {
-    document.body.insertAdjacentHTML('beforeend', html);
-  });
+console.log('Script productos.js cargado');
