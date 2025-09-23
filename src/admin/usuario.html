@@ -226,6 +226,18 @@
             </button>
           </div>
           <div id="gestionUsuariosContainer"></div>
+          <!-- Modal para eliminar usuario -->
+          <div id="modalEliminarUsuario" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.3); z-index:999; justify-content:center; align-items:center;">
+            <div style="background:#fff; border-radius:16px; padding:32px; min-width:320px; max-width:90vw; box-shadow:0 4px 16px rgba(0,0,0,0.15); position:relative;">
+              <button id="cerrarModalEliminar" style="position:absolute; top:12px; right:12px; background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+              <h2 style="margin-bottom:16px; color:#B71C1C;">Eliminar usuario</h2>
+              <form id="formEliminarUsuario" autocomplete="off">
+                <input type="email" name="correoEliminar" placeholder="Correo del usuario" required style="width:100%; margin-bottom:8px; padding:8px; border-radius:8px; border:1px solid #ccc;">
+                <button type="submit" style="width:100%; padding:10px; border-radius:8px; background:#b71c1c; color:#fff; border:none; font-weight:600; margin-top:8px;">Eliminar</button>
+              </form>
+              <div id="mensajeEliminarUsuario" style="margin-top:12px; color:#B71C1C;"></div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
