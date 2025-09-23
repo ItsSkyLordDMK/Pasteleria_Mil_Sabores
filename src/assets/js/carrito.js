@@ -4,6 +4,7 @@ class CarritoManager {
         this.carrito = JSON.parse(localStorage.getItem('carrito')) || [];
         this.productos = [];
         this.modalInstance = null;
+        this.toastInstance = null; // Instancia de toast
         
         this.init();
     }
@@ -66,6 +67,11 @@ class CarritoManager {
         
         if (modalElement && typeof bootstrap !== 'undefined') {
             this.modalInstance = new bootstrap.Modal(modalElement);
+            // Configurar el toast después de que el modal esté listo
+            const toastElement = document.getElementById('compra-toast');
+            if(toastElement) {
+                this.toastInstance = new bootstrap.Toast(toastElement);
+            }
             console.log('Modal configurado correctamente');
         } else {
             console.error('Bootstrap no está disponible o modal no se pudo crear');
@@ -73,6 +79,7 @@ class CarritoManager {
     }
 
     crearModalHTML() {
+        // Se agregó el ID al botón de Pagar y el HTML del toast
         const modalHTML = `
             <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -97,13 +104,24 @@ class CarritoManager {
                                             <label for="cupon-descuento" class="form-label">Cupón de descuento</label>
                                             <input type="text" id="cupon-descuento" class="form-control" placeholder="Ingresa tu cupón">
                                         </div>
-                                        <button type="button" class="btn btn-pagar w-100">
+                                        <button type="button" id="btn-pagar" class="btn btn-pagar w-100">
                                             <i class="bi bi-credit-card"></i> PAGAR
                                         </button>
                                     </div>
                                 </aside>
                             </div>
                         </main>
+                    </div>
+                </div>
+            </div>
+            <!-- Contenedor para toasts -->
+            <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+                <div id="compra-toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            ¡Compra realizada con éxito!
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                 </div>
             </div>
@@ -144,6 +162,9 @@ class CarritoManager {
                 const id = e.target.closest('.btn-añadir').dataset.id;
                 console.log('Agregar al carrito:', id);
                 this.agregarAlCarrito(id);
+            } else if (e.target.closest('#btn-pagar')) {
+                // Evento para el botón "Pagar" dentro del modal
+                this.realizarPago();
             }
         });
     }
@@ -277,6 +298,28 @@ class CarritoManager {
 
     guardarCarrito() {
         localStorage.setItem('carrito', JSON.stringify(this.carrito));
+    }
+
+    // Método añadido para manejar el pago
+    realizarPago() {
+        if (this.carrito.length > 0) {
+            console.log('Procesando pago...');
+            this.vaciarCarrito();
+            this.modalInstance.hide();
+            this.mostrarToast();
+            console.log('Pago realizado y carrito vaciado');
+        } else {
+            console.log('El carrito está vacío, no se puede realizar el pago');
+        }
+    }
+
+    // Método añadido para mostrar el toast
+    mostrarToast() {
+        if (this.toastInstance) {
+            this.toastInstance.show();
+        } else {
+            console.error('Toast no está inicializado');
+        }
     }
 
     // Métodos públicos

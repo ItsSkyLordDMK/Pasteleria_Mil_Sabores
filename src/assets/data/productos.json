@@ -171,8 +171,8 @@
     "descripcion": "Elegante y deliciosa, esta torta está diseñada para ser el centro de atención en cualquier boda.",
     "precio": 60000,
     "imagen_principal": "../assets/img/torta_boda.webp",
-    "imagen2": "../assets/img/teb_mini_1.webp",
-    "imagen3": "../assets/img/teb_mini_2.webp",
-    "imagen1": "../assets/img/teb_mini_3.webp"
+    "imagen1": "../assets/img/teb_mini_1.webp",
+    "imagen2": "../assets/img/teb_mini_2.webp",
+    "imagen3": "../assets/img/teb_mini_3.jpg"
   }
 ]
