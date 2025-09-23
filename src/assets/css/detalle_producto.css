@@ -1,0 +1,410 @@
+:root {
+  --color-fondo-principal: #fff5e1;
+
+  /*botones*/
+  --color-acento-suave: #ffc0cb;
+  --color-acento-chocolate: #8b4513;
+
+  /*texto*/
+  --color-texto-principal: #5d4037;
+  --color-texto-secundario: #b0bec5;
+}
+
+body, html {
+  background-color: var(--color-fondo-principal);
+  margin: 0;
+  padding: 0;
+}
+
+.topbar {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 2px solid #e5e7eb;
+  background: linear-gradient(135deg, #ffc0cb 0%, #ffb6c1 100%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+  box-sizing: border-box;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo img {
+  height: 75px;
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo:hover img {
+  transform: scale(1.05);
+}
+
+.navegacion {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Estilos para los enlaces de navegación */
+.navegacion a {
+  text-decoration: none;
+  color: var(--color-acento-chocolate);
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+/*Efecto hover para los enlaces de navegación*/
+.navegacion a:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: var(--color-texto-principal);
+  transform: translateY(-2px);
+}
+
+/* Subrayado animado de los enlaces de navegacion*/
+.navegacion a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--color-acento-chocolate);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+
+/* Al hacer hover, el subrayado se expande */
+.navegacion a:hover::after {
+  width: 80%;
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.usuario .separar {
+  color: var(--color-acento-chocolate);
+  font-weight: bold;
+  opacity: 0.6;
+}
+
+.usuario a {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-texto-principal);
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.usuario a:hover {
+  color: var(--color-acento-chocolate);
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Estilos del botón de carrito en el nav (ajustado para ser más específico) */
+.navegacion .btn-acento,
+.usuario .btn-acento {
+  background: linear-gradient(135deg, var(--color-acento-chocolate) 0%, #944c2b 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  text-decoration: none; /* Asegura que no tenga subrayado */
+}
+
+.navegacion .btn-acento:hover,
+.usuario .btn-acento:hover {
+  background: linear-gradient(135deg, var(--color-acento-suave) 0%, #d898a2 100%);
+  color: var(--color-acento-chocolate);
+  transform: translateY(-2px);
+}
+
+/* Reset del pseudoelemento de subrayado para el botón del carrito */
+.navegacion .btn-acento::after {
+  display: none;
+}
+
+.enlace-titulo {
+  text-decoration: none;
+  text-decoration-color: var(--color-acento-suave);
+}
+
+.enlace-titulo:hover h2.producto-titulo {
+  color: var(--color-acento-suave);
+}
+
+.enlace-titulo:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--color-acento-chocolate);
+}
+
+.titulo-productos {
+  background-color: var(--color-fondo-principal);
+  width: 100%;
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 0px;
+}
+
+.titulo-productos h1 {
+  font-size: 2.5rem;
+  color: var(--color-texto-principal);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.productos-grid {
+  background-color: var(--color-fondo-principal);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.producto-container {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 16px rgba(110, 57, 18, 0.08);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 340px;
+}
+
+.producto-img {
+  width: 100%;
+  max-width: 180px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.producto-titulo {
+  font-size: 1.2rem;
+  color: #8B4513;
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.producto-precio {
+  font-size: 1.1rem;
+  color: #A0522D;
+  margin-bottom: 12px;
+}
+
+.btn-añadir {
+  background: linear-gradient(135deg, #8B4513 0%, #944c2b 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn-añadir:hover {
+  background: linear-gradient(135deg, var(--color-acento-suave) 0%, #d898a2 100%);
+  color: #8B4513;
+  transform: translateY(-2px);
+}
+
+/* Estilos para la página de detalle */
+#producto-imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.mini-imagen {
+  cursor: pointer;
+  border: 2px solid #8B4513;
+  transition: border-color 0.2s;
+}
+
+.mini-imagen:hover {
+  border-color: #5D4037;
+}
+
+/* Estilo para el botón Añadir al carrito */
+.btn-anadir-carro {
+  background: linear-gradient(135deg, #8B4513 0%, #944c2b 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.btn-anadir-carro:hover {
+  background: linear-gradient(135deg, var(--color-acento-suave) 0%, #d898a2 100%);
+  color: #8B4513;
+  transform: translateY(-2px);
+}
+
+/* Estilos para el carrusel y las flechas */
+.carrusel-completo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+}
+
+.carrusel-btn {
+  background: var(--color-acento-chocolate, #8B4513);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 8px;
+  transition: background 0.2s;
+}
+
+.carrusel-btn:hover {
+  background: var(--color-acento-suave, #FFC0CB);
+  color: var(--color-acento-chocolate, #8B4513);
+}
+
+.carrusel-img-container {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carrusel-img {
+  max-width: 350px;
+  max-height: 350px;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(139, 69, 19, 0.08);
+}
+
+.prev-btn {
+  left: 10px;
+}
+
+.next-btn {
+  right: 10px;
+}
+
+/* Estilos para los inputs, labels y animaciones */
+#cantidad {
+  border: 2px solid var(--color-acento-suave, #ffc0cb);
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  text-align: center;
+  max-width: 100px;
+}
+
+#cantidad:focus {
+  border-color: var(--color-acento-chocolate, #8b4513);
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(139, 69, 19, 0.25);
+}
+
+.form-label {
+  color: var(--color-texto-principal, #5d4037);
+  font-weight: 500;
+}
+
+/* Animación de carga para el botón */
+.btn-anadir-carro.loading::after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top: 2px solid transparent;
+  animation: spin 1s linear infinite;
+  margin-left: 0.5rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 600px) {
+  .productos-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+@media (max-width: 760px) {
+  .topbar {
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    width: 100%;
+    position: static;
+    top: unset;
+    z-index: 100;
+  }
+  .navegacion {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .titulo-productos h1 {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 768px) {
+  .btn-anadir-carro {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  #cantidad {
+    max-width: 80px;
+  }
+}
+@media (max-width: 900px) {
+  .productos-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
