@@ -288,20 +288,28 @@ body, html {
   color: #fff;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 1.5rem;
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin: 0 8px;
-  transition: background 0.2s;
+  margin: 0 12px;
+  box-shadow: 0 2px 8px rgba(139,69,19,0.10);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  outline: none;
+}
+.carrusel-btn i {
+  font-size: 2rem;
+  pointer-events: none;
 }
 
 .carrusel-btn:hover {
   background: var(--color-acento-suave, #FFC0CB);
   color: var(--color-acento-chocolate, #8B4513);
+  box-shadow: 0 4px 16px rgba(139,69,19,0.18);
+  transform: scale(1.08);
 }
 
 .carrusel-img-container {

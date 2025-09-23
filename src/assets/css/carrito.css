@@ -1,3 +1,10 @@
+/* Forzar z-index alto para el modal y backdrop de Bootstrap */
+.modal-backdrop {
+    z-index: 2050 !important;
+}
+.modal {
+    z-index: 2100 !important;
+}
 /* carrito.css - Estilos del Sistema de Carrito */
 
 /* Variables CSS personalizadas */

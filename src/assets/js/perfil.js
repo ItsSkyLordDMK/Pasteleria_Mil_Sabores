@@ -1,13 +1,16 @@
-// Script para gestión de perfil de usuario
+// Obtiene los usuarios registrados
 function obtenerUsuarios() {
   return JSON.parse(localStorage.getItem('usuariosRegistrados') || '[]');
 }
+// Guarda el array de usuarios en localStorage
 function guardarUsuarios(usuarios) {
   localStorage.setItem('usuariosRegistrados', JSON.stringify(usuarios));
 }
+// Obtiene la sesión activa
 function obtenerSesionActiva() {
   return JSON.parse(localStorage.getItem('sesionActiva') || 'null');
 }
+// Actualiza el perfil del usuario activo
 function actualizarPerfil(nuevosDatos) {
   const sesion = obtenerSesionActiva();
   if (!sesion) return { exito: false, mensaje: 'No hay sesión activa.' };

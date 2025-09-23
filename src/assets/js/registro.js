@@ -1,12 +1,13 @@
-// Script para registro de usuario con descuentos, torta gratis y encriptación (HEX)
 
 const HEX_RE = /^[0-9a-f]+$/i;
 
+// Convierte un string a hexadecimal
 function stringToHex(str) {
   return Array.from(str)
     .map(c => c.charCodeAt(0).toString(16).padStart(2, '0'))
     .join('');
 }
+// Convierte un string hexadecimal a texto
 function hexToString(hex) {
   let out = '';
   for (let i = 0; i < hex.length; i += 2) {
@@ -14,10 +15,12 @@ function hexToString(hex) {
   }
   return out;
 }
+// Verifica si un string es hexadecimal
 function isHexLike(s) {
   return typeof s === 'string' && s.length % 2 === 0 && HEX_RE.test(s);
 }
 
+// Obtiene los usuarios registrados
 function obtenerUsuarios() {
   const raw = localStorage.getItem('usuariosRegistrados');
   if (!raw) return [];
@@ -31,12 +34,14 @@ function obtenerUsuarios() {
   }
 }
 
+// Guarda el array de usuarios en localStorage
 function guardarUsuarios(usuarios) {
   if (!Array.isArray(usuarios)) throw new Error('guardarUsuarios espera un array');
   const json = JSON.stringify(usuarios);
-  localStorage.setItem('usuariosRegistrados', stringToHex(json)); // siempre HEX
+  localStorage.setItem('usuariosRegistrados', stringToHex(json));
 }
 
+// Calcula la edad a partir de la fecha de nacimiento
 function calcularEdad(fechaNacimiento) {
   const hoy = new Date();
   const nacimiento = new Date(fechaNacimiento);
@@ -46,12 +51,14 @@ function calcularEdad(fechaNacimiento) {
   return edad;
 }
 
+// Verifica si hoy es el cumpleaños
 function esCumpleaniosHoy(fechaNacimiento) {
   const hoy = new Date();
   const n = new Date(fechaNacimiento);
   return hoy.getDate() === n.getDate() && hoy.getMonth() === n.getMonth();
 }
 
+// Registra un nuevo usuario
 function registrarUsuario(usuario) {
   const usuarios = obtenerUsuarios();
 
@@ -64,7 +71,7 @@ function registrarUsuario(usuario) {
     nombre: usuario.nombre,
     correo: usuario.correo,
     password: usuario.password,
-    fecha: usuario.fecha,        // yyyy-mm-dd
+    fecha: usuario.fecha,
     telefono: usuario.telefono,
     comuna: usuario.comuna,
     preferencias: usuario.preferencias || {},
@@ -94,7 +101,7 @@ function registrarUsuario(usuario) {
   }
 }
 
-// Permitir actualizar perfil
+// Permite actualizar el perfil de un usuario
 function actualizarUsuario(correo, nuevosDatos) {
   const usuarios = obtenerUsuarios();
   const idx = usuarios.findIndex(u => u.correo === correo);
@@ -103,7 +110,3 @@ function actualizarUsuario(correo, nuevosDatos) {
   guardarUsuarios(usuarios);
   return { exito: true };
 }
-
-// Ejemplo de uso:
-// const r = registrarUsuario({run, nombre, correo, password, fecha, telefono, comuna});
-// if (r.exito) { ... } else { alert(r.mensaje); }

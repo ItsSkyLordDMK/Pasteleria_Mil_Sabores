@@ -1,12 +1,13 @@
-// Script para inicio de sesión con descuentos y torta gratis (usa HEX para usuarios)
 
 const HEX_RE = /^[0-9a-f]+$/i;
 
+// Convierte un string a hexadecimal
 function stringToHex(str) {
   return Array.from(str)
     .map(c => c.charCodeAt(0).toString(16).padStart(2, '0'))
     .join('');
 }
+// Convierte un string hexadecimal a texto
 function hexToString(hex) {
   let out = '';
   for (let i = 0; i < hex.length; i += 2) {
@@ -14,10 +15,12 @@ function hexToString(hex) {
   }
   return out;
 }
+// Verifica si un string es hexadecimal
 function isHexLike(s) {
   return typeof s === 'string' && s.length % 2 === 0 && HEX_RE.test(s);
 }
 
+// Obtiene los usuarios registrados
 function obtenerUsuarios() {
   const raw = localStorage.getItem('usuariosRegistrados');
   if (!raw) return [];
@@ -31,6 +34,7 @@ function obtenerUsuarios() {
   }
 }
 
+// Guarda la sesión activa
 function guardarSesion(sesion, recordar) {
   if (recordar) {
     localStorage.setItem('sesionActiva', JSON.stringify(sesion));
@@ -42,6 +46,7 @@ function guardarSesion(sesion, recordar) {
   }
 }
 
+// Inicia sesión con correo y contraseña
 function iniciarSesion(correo, password, recordar) {
   const usuarios = obtenerUsuarios();
   const usuario = usuarios.find(u => u.correo === correo && u.password === password);
@@ -57,7 +62,3 @@ function iniciarSesion(correo, password, recordar) {
   guardarSesion(sesion, recordar);
   return { exito: true, usuario: sesion };
 }
-
-// Ejemplo de uso:
-// const r = iniciarSesion(correo, password, recordar);
-// if (r.exito) { ... } else { alert(r.mensaje); }

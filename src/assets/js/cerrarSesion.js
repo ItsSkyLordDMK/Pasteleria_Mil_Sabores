@@ -1,4 +1,4 @@
-// Función para cerrar sesión
+// Cierra la sesión del usuario
 function cerrarSesion() {
   localStorage.removeItem('sesionActiva');
   localStorage.removeItem('recordarSesion');

@@ -1,4 +1,3 @@
-
 window.addEventListener("DOMContentLoaded", function () {
   const btnAgregar = document.getElementById("btnAgregarUsuario");
   const btnEliminar = document.getElementById("btnEliminarUsuario");
@@ -89,6 +88,7 @@ window.addEventListener("DOMContentLoaded", function () {
         const raw = localStorage.getItem("usuariosRegistrados");
         if (raw) {
           const HEX_RE = /^[0-9a-f]+$/i;
+          // Convierte un string hexadecimal a texto
           function isHexLike(s) {
             return typeof s === "string" && s.length % 2 === 0 && HEX_RE.test(s);
           }
@@ -121,7 +121,8 @@ window.addEventListener("DOMContentLoaded", function () {
         descuento: 0,
         tortaGratis: false,
       };
-      function calcularEdad(fechaNacimiento) {
+  // Calcula la edad a partir de la fecha de nacimiento
+  function calcularEdad(fechaNacimiento) {
         const hoy = new Date();
         const nacimiento = new Date(fechaNacimiento);
         let edad = hoy.getFullYear() - nacimiento.getFullYear();
@@ -129,7 +130,8 @@ window.addEventListener("DOMContentLoaded", function () {
         if (m < 0 || (m === 0 && hoy.getDate() < nacimiento.getDate())) edad--;
         return edad;
       }
-      function esCumpleaniosHoy(fechaNacimiento) {
+  // Verifica si hoy es el cumpleaños
+  function esCumpleaniosHoy(fechaNacimiento) {
         const hoy = new Date();
         const n = new Date(fechaNacimiento);
         return hoy.getDate() === n.getDate() && hoy.getMonth() === n.getMonth();
@@ -146,6 +148,7 @@ window.addEventListener("DOMContentLoaded", function () {
       usuarios.push(nuevo);
       try {
         const json = JSON.stringify(usuarios);
+        // Convierte un string a hexadecimal
         function stringToHex(str) {
           return Array.from(str)
             .map((c) => c.charCodeAt(0).toString(16).padStart(2, "0"))
@@ -200,6 +203,7 @@ window.addEventListener("DOMContentLoaded", function () {
         const raw = localStorage.getItem("usuariosRegistrados");
         if (raw) {
           const HEX_RE = /^[0-9a-f]+$/i;
+          // Convierte un string hexadecimal a texto
           function isHexLike(s) {
             return typeof s === "string" && s.length % 2 === 0 && HEX_RE.test(s);
           }
@@ -222,6 +226,7 @@ window.addEventListener("DOMContentLoaded", function () {
       usuarios.splice(idx, 1);
       try {
         const json = JSON.stringify(usuarios);
+        // Convierte un string a hexadecimal
         function stringToHex(str) {
           return Array.from(str)
             .map((c) => c.charCodeAt(0).toString(16).padStart(2, "0"))

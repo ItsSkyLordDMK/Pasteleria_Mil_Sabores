@@ -1,3 +1,4 @@
+// Valida y gestiona el formulario de contacto
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
     const nameInput = document.getElementById('name');

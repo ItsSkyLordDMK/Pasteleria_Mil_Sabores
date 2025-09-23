@@ -1,4 +1,4 @@
-// carrito.js - Sistema de Carrito Modular
+// Clase para gestionar el carrito de compras
 class CarritoManager {
     constructor() {
         this.carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -21,6 +21,7 @@ class CarritoManager {
         }
     }
 
+    // Carga los productos desde el archivo JSON
     async cargarProductos() {
         try {
             // Ruta corregida según tu estructura de archivos
@@ -55,6 +56,7 @@ class CarritoManager {
         }
     }
 
+    // Configura el modal del carrito
     setupModal() {
         // Buscar modal existente primero
         let modalElement = document.getElementById('carritoModal');
@@ -78,6 +80,7 @@ class CarritoManager {
         }
     }
 
+    // Crea el HTML del modal del carrito
     crearModalHTML() {
         // Se agregó el ID al botón de Pagar y el HTML del toast
         const modalHTML = `
@@ -86,7 +89,7 @@ class CarritoManager {
                     <div class="modal-content">
                         <header class="modal-header">
                             <h2 class="modal-title" id="carritoModalLabel">Mi carrito de compras</h2>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            <button type="button" data-bs-dismiss="modal" aria-label="Cerrar" style="background:none;border:none;font-size:2rem;line-height:1;color:#333;opacity:0.8;cursor:pointer;">&times;</button>
                         </header>
                         <main class="modal-body">
                             <div class="row">
@@ -129,6 +132,7 @@ class CarritoManager {
         document.body.insertAdjacentHTML('beforeend', modalHTML);
     }
 
+    // Configura los eventos del carrito
     setupEventos() {
         // Evento del botón del carrito
         const cartButton = document.getElementById('cart-button');
@@ -169,6 +173,7 @@ class CarritoManager {
         });
     }
 
+    // Agrega un producto al carrito
     agregarAlCarrito(productoId) {
         console.log('Intentando agregar producto:', productoId);
         console.log('Productos disponibles:', this.productos.length);
@@ -194,6 +199,7 @@ class CarritoManager {
         this.abrirCarrito();
     }
 
+    // Cambia la cantidad de un producto en el carrito
     cambiarCantidad(productoId, cambio) {
         const producto = this.carrito.find(p => p.id === productoId);
         if (!producto) return;
@@ -210,6 +216,7 @@ class CarritoManager {
         this.actualizarContadorCarrito();
     }
 
+    // Abre el modal del carrito
     abrirCarrito() {
         console.log('Intentando abrir carrito...');
         this.renderizarCarrito();
@@ -226,6 +233,7 @@ class CarritoManager {
         }
     }
 
+    // Renderiza el contenido del carrito
     renderizarCarrito() {
         const lista = document.getElementById('lista-productos-carrito');
         const totalElement = document.getElementById('total-carrito');
@@ -244,11 +252,24 @@ class CarritoManager {
         lista.innerHTML = '';
         let total = 0;
 
+
         this.carrito.forEach(producto => {
             const subtotal = producto.precio * producto.cantidad;
             total += subtotal;
 
-            const imagenSrc = producto.imagen_principal || '';
+            let imagenSrc = producto.imagen_principal || '';
+            // Corregir ruta según ubicación de la página
+            if (imagenSrc.startsWith('../img/')) {
+                // Si estamos en index.html (raíz), anteponer 'src/assets/'
+                if (window.location.pathname.endsWith('/index.html') || window.location.pathname === '/index.html' || window.location.pathname === '/Pasteleria_Mil_Sabores/index.html') {
+                    imagenSrc = 'src/assets/' + imagenSrc.substring(3);
+                } else if (window.location.pathname.includes('/src/tienda/')) {
+                    // Si estamos en /src/tienda/, mantener la ruta tal cual
+                } else {
+                    // Otras ubicaciones, intentar ruta absoluta desde assets
+                    imagenSrc = '/src/assets/' + imagenSrc.substring(3);
+                }
+            }
             const imagenHTML = imagenSrc ? 
                 `<img src="${imagenSrc}" alt="${producto.nombre}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">` :
                 `<div style="width: 80px; height: 80px; background-color: var(--color-acento-suave); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
@@ -288,6 +309,7 @@ class CarritoManager {
         console.log('Carrito renderizado:', this.carrito.length, 'productos');
     }
 
+    // Actualiza el contador de productos en el carrito
     actualizarContadorCarrito() {
         const contador = document.getElementById('cart-count');
         if (contador) {
@@ -296,11 +318,13 @@ class CarritoManager {
         }
     }
 
+    // Guarda el carrito en localStorage
     guardarCarrito() {
         localStorage.setItem('carrito', JSON.stringify(this.carrito));
     }
 
     // Método añadido para manejar el pago
+    // Realiza el pago y vacía el carrito
     realizarPago() {
         if (this.carrito.length > 0) {
             console.log('Procesando pago...');
@@ -314,6 +338,7 @@ class CarritoManager {
     }
 
     // Método añadido para mostrar el toast
+    // Muestra un toast de confirmación de compra
     mostrarToast() {
         if (this.toastInstance) {
             this.toastInstance.show();
@@ -323,18 +348,22 @@ class CarritoManager {
     }
 
     // Métodos públicos
+    // Devuelve el array del carrito
     obtenerCarrito() {
         return this.carrito;
     }
 
+    // Devuelve el total del carrito
     obtenerTotal() {
         return this.carrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0);
     }
 
+    // Devuelve la cantidad total de productos en el carrito
     obtenerCantidadTotal() {
         return this.carrito.reduce((acc, producto) => acc + producto.cantidad, 0);
     }
 
+    // Vacía el carrito
     vaciarCarrito() {
         this.carrito = [];
         this.guardarCarrito();
@@ -343,6 +372,7 @@ class CarritoManager {
     }
 
     // Método estático para obtener la instancia única
+    // Devuelve la instancia única del carrito
     static getInstance() {
         if (!window.carritoInstance) {
             window.carritoInstance = new CarritoManager();
@@ -351,7 +381,7 @@ class CarritoManager {
     }
 }
 
-// Inicializar cuando el DOM esté listo
+// Inicializa el carrito cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM cargado, inicializando carrito...');
     // Solo inicializar si no existe ya una instancia
@@ -360,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Funciones globales para usar desde otras páginas
+// Función global para agregar productos al carrito desde otras páginas
 window.agregarAlCarrito = function(productoId) {
     console.log('Función global agregarAlCarrito llamada:', productoId);
     if (window.carritoManager) {
@@ -377,12 +407,14 @@ window.agregarAlCarrito = function(productoId) {
     }
 };
 
+// Función global para abrir el carrito desde otras páginas
 window.abrirCarrito = function() {
     if (window.carritoManager) {
         window.carritoManager.abrirCarrito();
     }
 };
 
+// Función global para obtener el carrito desde otras páginas
 window.obtenerCarrito = function() {
     return window.carritoManager ? window.carritoManager.obtenerCarrito() : [];
 };

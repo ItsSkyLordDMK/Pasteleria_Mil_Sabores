@@ -1,9 +1,6 @@
-// productos.js
-
-// Almacenará los productos una vez que sean cargados
 let productosJSON = [];
 
-// Función para mostrar los productos en la grilla
+// Muestra los productos en la grilla
 function mostrarProductos(productos) {
   const grid = document.getElementById("productos-grid");
   if (!grid) {
@@ -11,7 +8,6 @@ function mostrarProductos(productos) {
     return;
   }
 
-  // Limpia el contenido de la grilla antes de agregar nuevos productos
   grid.innerHTML = '';
 
   productos.forEach((producto) => {
@@ -85,4 +81,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-console.log('Script productos.js cargado');

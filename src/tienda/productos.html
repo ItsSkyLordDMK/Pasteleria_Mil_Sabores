@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Fuente Pacifico -->
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Mil Sabores</title>
@@ -18,16 +23,16 @@
         <div class="logo">
             <img src="../assets/img/logo.png" alt="Logo Mil Sabores" />
         </div>
-        <div>
-            <strong>Tienda online - Mil Sabores</strong>
+            <div>
+                <strong><span style="font-family: 'Pacifico', cursive;">Tienda online - Mil Sabores</span></strong>
         </div>
         <nav class="navegacion" aria-label="Navegación principal">
-            <a href="../../index.html">Página Principal</a>
+            <a href="/index.html">Página Principal</a>
             <a href="/src/tienda/productos.html">Productos</a>
             <a href="nosotros.html">Nosotros</a>
             <a href="/src/tienda/blogs.html">Blog</a>
             <a href="/src/tienda/contacto.html">Contacto</a>
-            <a href="#" id="cart-button" class="btn btn-acento">
+            <a href="/src/tienda/carrito.html" id="cart-button" class="btn btn-acento">
                 Carrito <i class="bi bi-cart3"></i> (<span id="cart-count">0</span>)
             </a>
         </nav>
@@ -37,17 +42,41 @@
             <span class="separar">|</span>
             <a href="registro.html">Registrarse</a>
             <span class="separar">|</span>
+            <div id="usuario-info" style="margin-left:8px; font-weight:600; color:#8B4513; display:flex; flex-direction:column; align-items:flex-start; gap:2px;"></div>
         </div>
     </header>
 
     <main>
         <div class="titulo-productos">
-            <h1>PRODUCTOS</h1>
+            <h1 style="font-family: 'Pacifico', cursive; color: #8B4513;">Productos</h1>
         </div>
         <div id="productos-grid" class="productos-grid"></div>
     </main>
 
     <!-- Bootstrap JS -->
+    <script>
+    function pintarUsuarioHeader(){
+        const userDiv = document.getElementById('usuario-info');
+        if (!userDiv) return;
+        let sesion = null;
+        const rawLocal = localStorage.getItem('sesionActiva');
+        const rawSession = sessionStorage.getItem('sesionActiva');
+        if (rawLocal) sesion = JSON.parse(rawLocal);
+        else if (rawSession) sesion = JSON.parse(rawSession);
+        if (sesion && sesion.nombre) {
+            userDiv.innerHTML = `<span style=\"color:#8B4513;font-weight:600;margin-bottom:2px;\">Hola, ${sesion.nombre}</span><button onclick=\"cerrarSesion()\" style=\"background:#8B4513;color:#fff;border:none;border-radius:6px;padding:4px 14px;cursor:pointer;font-weight:600;transition:background 0.2s;\">Cerrar sesión</button>`;
+        } else {
+            userDiv.innerHTML = '';
+        }
+    }
+    function cerrarSesion() {
+        localStorage.removeItem('sesionActiva');
+        localStorage.removeItem('recordarSesion');
+        sessionStorage.removeItem('sesionActiva');
+        window.location.href = '../../index.html';
+    }
+    window.addEventListener('DOMContentLoaded', pintarUsuarioHeader);
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- IMPORTANTE: Cargar carrito.js ANTES que productos.js -->
