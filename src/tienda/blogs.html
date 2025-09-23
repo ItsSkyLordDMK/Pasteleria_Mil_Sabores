@@ -17,8 +17,8 @@
             <strong>Tienda online - Mil Sabores</strong>
         </div>
         <nav class="navegacion" aria-label="Navegación principal">
-            <a href="../../index.html">Página Principal</a>
-            <a href="/src/tienda/productos.html">Productos</a>
+            <a href="/index.html">Página Principal</a>
+            <a href="#">Productos</a>
             <a href="/src/tienda/nosotros.html">Nosotros</a>
             <a href="/src/tienda/blogs.html">Blog</a>
             <a href="/src/tienda/contacto.html">Contacto</a>
@@ -32,6 +32,7 @@
             <span class="separar">|</span>
             <a href="registro.html">Registrarse</a>
             <span class="separar">|</span>
+            <div id="usuario-info" style="margin-left:8px; font-weight:600; color:#8B4513; display:inline-block;"></div>
         </div>
     </header>
     <div class="container">
@@ -83,4 +84,28 @@
         </div>
     </div>
 </body>
+<script>
+// Mostrar saludo y botón cerrar sesión si hay usuario logueado
+function pintarUsuarioHeader(){
+    const userDiv = document.getElementById('usuario-info');
+    if (!userDiv) return;
+    let sesion = null;
+    const rawLocal = localStorage.getItem('sesionActiva');
+    const rawSession = sessionStorage.getItem('sesionActiva');
+    if (rawLocal) sesion = JSON.parse(rawLocal);
+    else if (rawSession) sesion = JSON.parse(rawSession);
+    if (sesion && sesion.nombre) {
+        userDiv.innerHTML = `Hola, ${sesion.nombre} <button onclick="cerrarSesion()" style="margin-left:8px; background:#8B4513; color:#fff; border:none; border-radius:6px; padding:4px 10px; cursor:pointer;">Cerrar sesión</button>`;
+    } else {
+        userDiv.innerHTML = '';
+    }
+}
+function cerrarSesion() {
+    localStorage.removeItem('sesionActiva');
+    localStorage.removeItem('recordarSesion');
+    sessionStorage.removeItem('sesionActiva');
+    window.location.href = '../../index.html';
+}
+window.addEventListener('DOMContentLoaded', pintarUsuarioHeader);
+</script>
 </html>

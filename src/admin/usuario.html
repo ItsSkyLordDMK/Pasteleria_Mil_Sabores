@@ -57,12 +57,117 @@
       <div class="admin-card">
         <h1>¿Qué desea hacer con los usuarios?</h1>
         <div class="user-actions">
-          <button class="user-action-btn"><i class="bi bi-person-plus"></i> Crear nuevo usuario</button>
-          <button class="user-action-btn"><i class="bi bi-pencil-square"></i> Editar usuario</button>
-          <button class="user-action-btn"><i class="bi bi-people"></i> Mostrar usuarios</button>
+          <button class="user-action-btn" id="btnAgregarUsuario"><i class="bi bi-person-plus"></i> Crear nuevo usuario</button>
+          <button class="user-action-btn" id="btnEditarUsuario"><i class="bi bi-pencil-square"></i> Editar usuario</button>
+          <button class="user-action-btn" id="btnMostrarUsuarios"><i class="bi bi-people"></i> Mostrar usuarios</button>
+          <button class="user-action-btn" id="btnBorrarUsuario"><i class="bi bi-person-x"></i> Borrar usuario</button>
         </div>
       </div>
     </main>
   </div>
 </body>
+<div id="tablaUsuarios" style="margin-top:32px; display:none;"></div>
+<script src="../assets/js/usuario.js"></script>
+<script>
+// Vinculación y lógica para listar, editar y borrar usuarios
+document.addEventListener('DOMContentLoaded', function() {
+  const btnMostrar = document.getElementById('btnMostrarUsuarios');
+  const btnEditar = document.getElementById('btnEditarUsuario');
+  const btnBorrar = document.getElementById('btnBorrarUsuario');
+  const tablaDiv = document.getElementById('tablaUsuarios');
+
+  function obtenerUsuarios() {
+    let usuarios = [];
+    try {
+      const raw = localStorage.getItem('usuariosRegistrados');
+      if (raw) {
+        const HEX_RE = /^[0-9a-f]+$/i;
+        function isHexLike(s) { return typeof s === 'string' && s.length % 2 === 0 && HEX_RE.test(s); }
+        function hexToString(hex) { let out = ''; for (let i = 0; i < hex.length; i += 2) { out += String.fromCharCode(parseInt(hex.substr(i, 2), 16)); } return out; }
+        const json = isHexLike(raw) ? hexToString(raw) : raw;
+        usuarios = JSON.parse(json);
+      }
+    } catch {}
+    return usuarios;
+  }
+
+  function renderTablaUsuarios(usuarios) {
+    if (!usuarios.length) { tablaDiv.innerHTML = '<div style="color:#B71C1C;">No hay usuarios registrados.</div>'; return; }
+    let html = '<table style="width:100%;border-collapse:collapse;background:#fff;"><thead><tr>';
+    html += '<th>RUN</th><th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Comuna</th><th>Fecha Nac.</th><th>Descuento</th><th>Torta Gratis</th></tr></thead><tbody>';
+    usuarios.forEach(u => {
+      html += `<tr><td>${u.run}</td><td>${u.nombre}</td><td>${u.correo}</td><td>${u.telefono}</td><td>${u.comuna}</td><td>${u.fecha}</td><td>${u.descuento||0}%</td><td>${u.tortaGratis?'Sí':'No'}</td></tr>`;
+    });
+    html += '</tbody></table>';
+    tablaDiv.innerHTML = html;
+  }
+
+  if (btnMostrar) {
+    btnMostrar.addEventListener('click', function() {
+      const usuarios = obtenerUsuarios();
+      renderTablaUsuarios(usuarios);
+      tablaDiv.style.display = 'block';
+    });
+  }
+
+  if (btnEditar) {
+    btnEditar.addEventListener('click', function() {
+      let rut = prompt('Ingrese el RUN del usuario a editar:');
+      if (!rut) return;
+      let usuarios = obtenerUsuarios();
+      let usuario = usuarios.find(u => u.run === rut);
+      if (!usuario) { alert('Usuario no encontrado.'); return; }
+      // Rellenar el modal de agregar con los datos del usuario
+      document.getElementById('btnAgregarUsuario').click();
+      setTimeout(() => {
+        const form = document.getElementById('formAgregarUsuario');
+        if (!form) return;
+        form.elements['run'].value = usuario.run;
+        form.elements['nombre'].value = usuario.nombre;
+        form.elements['correo'].value = usuario.correo;
+        form.elements['password'].value = usuario.password;
+        form.elements['fecha'].value = usuario.fecha;
+        form.elements['telefono'].value = usuario.telefono;
+        form.elements['comuna'].value = usuario.comuna;
+        form.elements['codigo'].value = usuario.codigoUsado || '';
+        // Al guardar, sobreescribir el usuario existente
+        form.onsubmit = function(e) {
+          e.preventDefault();
+          let datos = Object.fromEntries(new FormData(form));
+          let usuarios = obtenerUsuarios();
+          let idx = usuarios.findIndex(u => u.run === rut);
+          if (idx === -1) { alert('Usuario no encontrado.'); return; }
+          usuarios[idx] = { ...usuarios[idx], ...datos, codigoUsado: datos.codigo };
+          try {
+            const json = JSON.stringify(usuarios);
+            function stringToHex(str) { return Array.from(str).map(c => c.charCodeAt(0).toString(16).padStart(2, '0')).join(''); }
+            localStorage.setItem('usuariosRegistrados', stringToHex(json));
+            alert('Usuario editado exitosamente.');
+            document.getElementById('modalAgregarUsuario').style.display = 'none';
+          } catch (e) { alert('No se pudo editar el usuario.'); }
+        };
+      }, 300);
+    });
+  }
+
+  if (btnBorrar) {
+    btnBorrar.addEventListener('click', function() {
+      let rut = prompt('Ingrese el RUN del usuario a borrar:');
+      if (!rut) return;
+      let usuarios = obtenerUsuarios();
+      let idx = usuarios.findIndex(u => u.run === rut);
+      if (idx === -1) { alert('Usuario no encontrado.'); return; }
+      if (!confirm('¿Está seguro de borrar este usuario?')) return;
+      usuarios.splice(idx, 1);
+      try {
+        const json = JSON.stringify(usuarios);
+        function stringToHex(str) { return Array.from(str).map(c => c.charCodeAt(0).toString(16).padStart(2, '0')).join(''); }
+        localStorage.setItem('usuariosRegistrados', stringToHex(json));
+        alert('Usuario borrado exitosamente.');
+        tablaDiv.style.display = 'none';
+      } catch (e) { alert('No se pudo borrar el usuario.'); }
+    });
+  }
+});
+</script>
 </html>

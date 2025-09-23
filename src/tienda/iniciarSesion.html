@@ -163,19 +163,24 @@
         } else if (correo.length > 100) {
           mostrarError('correo', 'El correo no puede superar los 100 caracteres');
           esValido = false;
-        } else if (!/^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i.test(correo)) {
-          mostrarError('correo', 'Solo se permiten correos @duoc.cl, @profesor.duoc.cl o @gmail.com');
+        } else if (!/^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i.test(correo) && correo !== 'admin') {
+          mostrarError('correo', 'Solo se permiten correos @duoc.cl, @profesor.duoc.cl, @gmail.com o admin');
           esValido = false;
         }
         // Validación contraseña
         if (!password) {
           mostrarError('password', 'La contraseña es requerida');
           esValido = false;
-        } else if (password.length < 4 || password.length > 10) {
-          mostrarError('password', 'La contraseña debe tener entre 4 y 10 caracteres');
+        } else if ((password.length < 4 || password.length > 10) && password !== 'admin') {
+          mostrarError('password', 'La contraseña debe tener entre 4 y 10 caracteres o ser admin');
           esValido = false;
         }
         if (esValido) {
+          // Redirección especial para admin
+          if (correo === 'admin' && password === 'admin') {
+            window.location.href = '../admin/home.html';
+            return;
+          }
           const resultado = iniciarSesion(correo, password, recordar);
           if (resultado.exito) {
             mostrarExitoLogin();
