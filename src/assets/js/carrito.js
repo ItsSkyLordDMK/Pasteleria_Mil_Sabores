@@ -258,17 +258,11 @@ class CarritoManager {
             total += subtotal;
 
             let imagenSrc = producto.imagen_principal || '';
-            // Corregir ruta según ubicación de la página
-            if (imagenSrc.startsWith('../img/')) {
-                // Si estamos en index.html (raíz), anteponer 'src/assets/'
-                if (window.location.pathname.endsWith('/index.html') || window.location.pathname === '/index.html' || window.location.pathname === '/Pasteleria_Mil_Sabores/index.html') {
-                    imagenSrc = 'src/assets/' + imagenSrc.substring(3);
-                } else if (window.location.pathname.includes('/src/tienda/')) {
-                    // Si estamos en /src/tienda/, mantener la ruta tal cual
-                } else {
-                    // Otras ubicaciones, intentar ruta absoluta desde assets
-                    imagenSrc = '/src/assets/' + imagenSrc.substring(3);
-                }
+            // Corregir ruta para que siempre apunte a assets/img
+            if (imagenSrc.startsWith('../assets/img/')) {
+                imagenSrc = '/src/assets/img/' + imagenSrc.split('../assets/img/')[1];
+            } else if (imagenSrc.startsWith('../img/')) {
+                imagenSrc = '/src/assets/img/' + imagenSrc.split('../img/')[1];
             }
             const imagenHTML = imagenSrc ? 
                 `<img src="${imagenSrc}" alt="${producto.nombre}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">` :

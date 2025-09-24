@@ -1,3 +1,5 @@
+/* index.css: solo estilos globales y de layout general, sin formularios */
+
 /* Reset y fuentes */
 * { box-sizing: border-box; }
 html, body {
@@ -10,7 +12,6 @@ html, body {
   scroll-behavior: smooth;
 }
 
-/* Variables */
 :root {
   --primary-color: #8B4513;
   --secondary-color: #FFC0CB;
@@ -23,7 +24,6 @@ html, body {
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Links */
 a {
   color: #8D6E63;
   text-decoration: none;
@@ -32,8 +32,6 @@ a:hover {
   color: #4E342E;
 }
 
-/* Topbar y navegación */
-/* HEADER UNIFICADO */
 .topbar {
   display: flex;
   width: 100%;
@@ -140,12 +138,8 @@ a:hover {
   }
 }
 
-/* Main container */
 .main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
-
-
-/* Botones */
