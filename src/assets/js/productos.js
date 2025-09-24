@@ -10,12 +10,15 @@ function mostrarProductos(productos) {
 
   grid.innerHTML = '';
 
+  // Crear y añadir cada producto al grid
   productos.forEach((producto) => {
     const div = document.createElement("div");
     div.className = "producto-container";
 
+    // Crear URL para el detalle del producto
     const urlDetalle = `detalle_producto.html?id=${producto.id}`;
 
+    //
     div.innerHTML = `
       <img src="${producto.imagen_principal}" alt="${producto.nombre}" class="producto-img">
       
@@ -34,17 +37,20 @@ function mostrarProductos(productos) {
   console.log('Productos mostrados:', productos.length);
 }
 
+// Cargar productos desde el JSON al cargar la página
 document.addEventListener("DOMContentLoaded", () => {
   console.log('Cargando productos...');
   
-  // Ruta corregida según tu estructura
+  // Ruta 
   fetch("../assets/data/productos.json")
     .then((response) => {
+      // Verificar si la respuesta es correcta
       if (!response.ok) {
         throw new Error(`Error HTTP: ${response.status}`);
       }
       return response.json();
     })
+    // Procesar los productos cargados
     .then((productos) => {
       productosJSON = productos;
       mostrarProductos(productos);
@@ -59,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let lastScrollY = window.scrollY;
   let ticking = false;
 
+  // Función para manejar el scroll
   function onScroll() {
     if (window.innerWidth <= 768) {
       if (window.scrollY > lastScrollY) {
@@ -73,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ticking = false;
   }
 
+  // Escuchar el evento de scroll
   window.addEventListener("scroll", function () {
     if (!ticking) {
       window.requestAnimationFrame(onScroll);

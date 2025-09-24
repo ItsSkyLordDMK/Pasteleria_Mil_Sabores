@@ -1,11 +1,13 @@
 // detalle_producto.js - Con funcionalidad del carrito
 
+// Obtener el ID del producto desde la URL
 document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const productoId = params.get('id');
 
     console.log('Cargando detalle del producto:', productoId);
 
+    // Validar que se haya proporcionado un ID
     fetch('../assets/data/productos.json')
         .then(response => {
             if (!response.ok) {
@@ -13,10 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             return response.json();
         })
+        // Procesar los productos cargados
         .then(productos => {
             console.log('Productos cargados:', productos.length);
             const producto = productos.find(p => p.id === productoId);
 
+            // Verificar si se encontró el producto
             if (producto) {
                 console.log('Producto encontrado:', producto.nombre);
                 
@@ -39,8 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     producto.imagen3
                 ].filter(url => url && url.trim() !== '');
 
+                // Índice de la imagen actualmente mostrada
                 let imagenActualIndex = 0;
                 
+                // Función para actualizar la imagen principal
                 const actualizarImagen = () => {
                     if (todasLasImagenes.length > 0) {
                         imagenPrincipal.src = todasLasImagenes[imagenActualIndex];
@@ -52,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Carga las miniaturas
                 miniaturas.forEach((miniatura, index) => {
                     const imagenUrl = todasLasImagenes[index + 1]; // +1 porque la primera es la principal
+                    
                     if (imagenUrl) {
                         miniatura.src = imagenUrl;
                         miniatura.alt = `Miniatura ${index + 1}`;
@@ -69,10 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         actualizarImagen();
                     });
 
+                    // Maneja el clic en el botón anterior
                     prevBtn.addEventListener('click', () => {
                         imagenActualIndex = (imagenActualIndex - 1 + todasLasImagenes.length) % todasLasImagenes.length;
                         actualizarImagen();
                     });
+                    // Mostrar botones si hay más de una imagen
                 } else if (todasLasImagenes.length <= 1) {
                     // Ocultar botones si solo hay una imagen
                     if (prevBtn) prevBtn.style.display = 'none';
@@ -92,16 +101,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Muestra la primera imagen al cargar la página
                 actualizarImagen();
 
-                // ==========================================
+                // ===========================
                 // FUNCIONALIDAD DEL CARRITO
-                // ==========================================
+                // ===========================
                 
+                // Configurar el botón de añadir al carrito
                 const btnAnadirCarrito = document.getElementById('btn-anadir-carro');
+                // Input de cantidad
                 const inputCantidad = document.getElementById('cantidad');
                 
+                // Validar que existan los elementos
                 if (btnAnadirCarrito && inputCantidad) {
                     console.log('Botón de carrito configurado');
                     
+                    // Maneja el clic en el botón de añadir al carrito
                     btnAnadirCarrito.addEventListener('click', () => {
                         const cantidad = parseInt(inputCantidad.value) || 1;
                         
@@ -112,12 +125,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             return;
                         }
                         
+                        // Limitar la cantidad máxima a 10
                         if (cantidad > 10) {
                             alert('La cantidad máxima es 10 unidades');
                             inputCantidad.value = 10;
                             return;
                         }
                         
+                        // Agregar al carrito
                         console.log(`Agregando ${cantidad} unidades del producto ${productoId}`);
                         
                         // Verificar que el carrito esté disponible
@@ -145,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             // Resetear la cantidad a 1
                             inputCantidad.value = 1;
                             
+                        // Si el carrito no está disponible, mostrar un error
                         } else {
                             console.error('Sistema de carrito no disponible');
                             alert('Error: No se pudo agregar al carrito. Intenta recargar la página.');
@@ -180,10 +196,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     });
                     
+                
                 } else {
                     console.error('Botón de agregar al carrito o input de cantidad no encontrado');
                 }
 
+            // Si no se encontró el producto, mostrar un mensaje de error
             } else {
                 console.error('Producto no encontrado con ID:', productoId);
                 document.getElementById('producto-detalle-container').innerHTML = `
@@ -195,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
             }
         })
+        // Capturar errores en la carga del JSON
         .catch(error => {
             console.error('Error al cargar productos:', error);
             document.getElementById('producto-detalle-container').innerHTML = `
@@ -207,5 +226,4 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         });
 });
-
 console.log('Script detalle_producto.js cargado');
