@@ -1,0 +1,24 @@
+[
+  {
+    "id": "TC001",
+    "categoria": "Tortas Cuadradas",
+    "nombre": "Torta Cuadrada de Chocolate",
+    "descripcion": "Deliciosa torta de chocolate con capas de ganache y un toque de avellanas. Personalizable con mensajes especiales.",
+    "precio": 45000,
+    "imagen_principal": "/img/torta_cuadrada_chocolate.jpg",
+    "imagen1": "/img/tcc_mini_1.webp",
+    "imagen2": "/img/tcc_mini_2.webp",
+    "imagen3": "/img/tcc_mini_3.jpg"
+  },
+  {
+    "id": "TC002",
+    "categoria": "Tortas Cuadradas",
+    "nombre": "Torta Cuadrada de Frutas ",
+    "descripcion": "Una mezcla de frutas frescas y crema chantilly sobre un suave bizcocho de vainilla, ideal para celebraciones.",
+    "precio": 50000,
+    "imagen_principal": "/img/torta_cuadrada_frutas.png",
+    "imagen1": "/img/tcf_mini_1.png",
+    "imagen2": "/img/tcf_mini_2.jpg",
+    "imagen3": "/img/tcf_mini_3.jpg"
+  }
+]
