@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Header.css';
+import { getSession, logout } from '../utils/auth';
 
 export default function Header() {
   const [categorias, setCategorias] = useState([]);
   const [showCategorias, setShowCategorias] = useState(false);
+  const [session, setSession] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('/data/productos.json')
@@ -15,6 +18,16 @@ export default function Header() {
       })
       .catch(error => console.error('Error cargando categorías:', error));
   }, []);
+
+  useEffect(() => {
+    setSession(getSession());
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+    setSession(null);
+    navigate('/');
+  };
 
   return (
     <header className="topbar">
@@ -57,11 +70,20 @@ export default function Header() {
       </nav>
 
       <div className="usuario">
-        <span className="separar">|</span>
-        <Link to="/iniciar-sesion">Iniciar sesión</Link>
-        <span className="separar">|</span>
-        <Link to="/registro">Registrarse</Link>
-        <span className="separar">|</span>
+        {session ? (
+          <>
+            <span style={{ marginRight: 8 }}>Hola, {session.nombre || session.correo}</span>
+            <button className="btn small" onClick={handleLogout}>Cerrar sesión</button>
+          </>
+        ) : (
+          <>
+            <span className="separar">|</span>
+            <Link to="/iniciar-sesion">Iniciar sesión</Link>
+            <span className="separar">|</span>
+            <Link to="/registro">Registrarse</Link>
+            <span className="separar">|</span>
+          </>
+        )}
       </div>
     </header>
   );

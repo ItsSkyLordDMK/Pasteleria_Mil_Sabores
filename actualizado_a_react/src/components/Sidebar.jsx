@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { logout } from '../utils/auth';
 
 export default function Sidebar() {
   const location = useLocation();
@@ -60,22 +61,25 @@ export default function Sidebar() {
         ))}
       </nav>
 
-      <Link
-        to="/"
-        style={{
-          marginTop: 'auto',
-          textDecoration: 'none',
-          color: '#6c757d',
-          padding: '0.75rem 1rem',
-          borderRadius: '8px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px'
-        }}
-      >
-        <i className="bi bi-shop"></i>
-        Ver Tienda
-      </Link>
+      {/* Logout button placed above "Ver Tienda" */}
+      <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <LogoutButton />
+        <Link
+          to="/"
+          style={{
+            textDecoration: 'none',
+            color: '#6c757d',
+            padding: '0.75rem 1rem',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px'
+          }}
+        >
+          <i className="bi bi-shop"></i>
+          Ver Tienda
+        </Link>
+      </div>
 
       <div style={{
         marginTop: '1rem',
@@ -89,5 +93,32 @@ export default function Sidebar() {
         <span>Administrador</span>
       </div>
     </aside>
+  );
+}
+
+function LogoutButton() {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+  return (
+    <button
+      onClick={handleLogout}
+      style={{
+        background: '#b71c1c',
+        color: '#fff',
+        border: 'none',
+        padding: '0.6rem 1rem',
+        borderRadius: '8px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        cursor: 'pointer'
+      }}
+    >
+      <i className="bi bi-box-arrow-right"></i>
+      Cerrar sesión
+    </button>
   );
 }
