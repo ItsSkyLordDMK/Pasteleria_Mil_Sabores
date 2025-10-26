@@ -1,0 +1,11 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Admin",
+      "email": "admin@milsabores.com",
+      "rol": "admin",
+      "fechaRegistro": "2023-01-01"
+    }
+  ]
+}

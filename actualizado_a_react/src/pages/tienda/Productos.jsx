@@ -1,17 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
-import ProductCard from '../components/ProductCard';
-import productosData from '../../public/data/productos.json';
+import { useSearchParams } from 'react-router-dom';
+import Header from '../../components/Header';
+import ProductCard from '../../components/ProductCard';
 
 export default function Productos() {
+  const [searchParams] = useSearchParams();
+  const categoriaFromUrl = searchParams.get('categoria');
   const [productos, setProductos] = useState([]);
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todas');
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(categoriaFromUrl || 'Todas');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setProductos(productosData);
+    fetch('/data/productos.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('No se pudieron cargar los productos');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setProductos(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error cargando productos:', err);
+        setError(err.message);
+        setLoading(false);
+      });
   }, []);
 
-  const categorias = ['Todas', ...new Set(productosData.map(p => p.categoria))];
+  if (loading) return <div style={{ padding: '20px', textAlign: 'center' }}>Cargando productos...</div>;
+  if (error) return <div style={{ padding: '20px', textAlign: 'center', color: 'red' }}>{error}</div>;
+
+  const categorias = ['Todas', ...new Set(productos.map(p => p.categoria))];
 
   const productosFiltrados = categoriaSeleccionada === 'Todas'
     ? productos

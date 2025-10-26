@@ -56,6 +56,42 @@
   transform: translateY(-2px);
 }
 
+/* Estilos para el menú desplegable */
+.productos-dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 8px 0;
+  z-index: 1000;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 8px 16px;
+  color: #8b4513;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #fff5e1;
+}
+
+/* Separador para "Ver todas las categorías" */
+.dropdown-content a:first-child {
+  border-bottom: 1px solid #ffe4ec;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
 .navegacion a::after {
   content: "";
   position: absolute;
