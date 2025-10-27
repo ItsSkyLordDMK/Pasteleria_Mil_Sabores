@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Sidebar from '../../components/Sidebar';
-import StatCard from '../../components/admin/StatCard';
-import FeatureCard from '../../components/admin/FeatureCard';
+import AdminLayout from '../../components/layouts/AdminLayout';
+import DashboardCard from '../../components/cards/DashboardCard';
+import FeatureCard from '../../components/cards/FeatureCard';
+import '../../styles/pages/AdminDashboard.css';
 
 export default function AdminHome() {
   const [stats, setStats] = useState({
@@ -30,31 +31,22 @@ export default function AdminHome() {
   }, []);
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh' }}>
-      <Sidebar />
-      <main style={{ flex: 1, padding: '2rem', backgroundColor: '#f8f9fa' }}>
-        <h1 style={{ marginBottom: '2rem', color: '#333' }}>Dashboard</h1>
-        
-        {/* Tarjetas de estadísticas */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-          gap: '1.5rem',
-          marginBottom: '2rem'
-        }}>
-          <StatCard
+    <AdminLayout title="Dashboard">
+      <div className="admin-dashboard">
+        <div className="admin-dashboard__stats">
+          <DashboardCard
             title="Compras"
             value={stats.compras}
             subtitle="Probabilidad de aumento: 20%"
             backgroundColor="#0d6efd"
           />
-          <StatCard
+          <DashboardCard
             title="Productos"
             value={stats.productos}
             subtitle={`Inventario actual: ${stats.productos}`}
             backgroundColor="#198754"
           />
-          <StatCard
+          <DashboardCard
             title="Usuarios"
             value={stats.usuarios}
             subtitle={`Nuevos usuarios este mes: ${stats.usuarios}`}
@@ -62,62 +54,57 @@ export default function AdminHome() {
           />
         </div>
 
-        {/* Grid de características */}
-        <div style={{ 
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-          gap: '1.5rem'
-        }}>
-          <Link to="/admin" style={{ textDecoration: 'none' }}>
+        <div className="admin-dashboard__features">
+          <Link to="/admin" className="admin-dashboard__feature-link">
             <FeatureCard
               icon="📊"
               title="Dashboard"
               description="Visión general de todas las métricas y estadísticas clave del sistema."
             />
           </Link>
-          <Link to="/admin/ordenes" style={{ textDecoration: 'none' }}>
+          <Link to="/admin/ordenes" className="admin-dashboard__feature-link">
             <FeatureCard
               icon="🛍️"
               title="Órdenes"
               description="Gestión y seguimiento de todas las órdenes de compra realizadas."
             />
           </Link>
-          <Link to="/admin/productos" style={{ textDecoration: 'none' }}>
+          <Link to="/admin/productos" className="admin-dashboard__feature-link">
             <FeatureCard
               icon="📦"
               title="Productos"
               description="Administrar inventario y detalles de los productos disponibles."
             />
           </Link>
-          <Link to="/admin/categorias" style={{ textDecoration: 'none' }}>
+          <Link to="/admin/categorias" className="admin-dashboard__feature-link">
             <FeatureCard
               icon="🏷️"
               title="Categorías"
               description="Organizar productos en categorías para facilitar la navegación."
             />
           </Link>
-          <Link to="/admin/usuarios" style={{ textDecoration: 'none' }}>
+          <Link to="/admin/usuarios" className="admin-dashboard__feature-link">
             <FeatureCard
               icon="👥"
               title="Usuarios"
               description="Gestión de cuentas de usuario y sus roles dentro del sistema."
             />
           </Link>
-          <Link to="/admin/reportes" style={{ textDecoration: 'none' }}>
+          <Link to="/admin/reportes" className="admin-dashboard__feature-link">
             <FeatureCard
               icon="📈"
               title="Reportes"
               description="Generación de informes detallados sobre las operaciones del sistema."
             />
           </Link>
-          <Link to="/admin/perfil" style={{ textDecoration: 'none' }}>
+          <Link to="/admin/perfil" className="admin-dashboard__feature-link">
             <FeatureCard
               icon="👤"
               title="Perfil"
               description="Administración de la información personal y configuraciones de cuenta."
             />
           </Link>
-          <Link to="/" style={{ textDecoration: 'none' }}>
+          <Link to="/" className="admin-dashboard__feature-link">
             <FeatureCard
               icon="🏪"
               title="Tienda"
@@ -125,7 +112,7 @@ export default function AdminHome() {
             />
           </Link>
         </div>
-      </main>
-    </div>
+      </div>
+    </AdminLayout>
   );
 }
