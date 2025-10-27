@@ -140,16 +140,85 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: #8b4513;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #FFC0CB 0%, #ffb6c1 100%);
+  color: #8b4513;
+  padding: 10px 18px;
+  border-radius: 10px;
   transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 3px 8px rgba(255, 182, 193, 0.4);
+  border: 1px solid rgba(255, 182, 193, 0.6);
+  position: relative;
+  overflow: hidden;
 }
 
 .cart-button:hover {
+  background: linear-gradient(135deg, #ffb6c1 0%, #FFC0CB 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 182, 193, 0.6);
+  border-color: rgba(255, 182, 193, 0.8);
+}
+
+.cart-button:active {
+  transform: translateY(0);
+}
+
+.cart-button i {
+  font-size: 1.3rem;
+  color: #8b4513;
+}
+
+.cart-text {
+  font-size: 0.95rem;
+  color: #8b4513;
+}
+
+.cart-badge {
+  background: linear-gradient(135deg, #8b4513 0%, #6b3410 100%);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  min-width: 24px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(139, 69, 19, 0.3);
+}
+
+.login-link {
+  text-decoration: none;
+  color: white !important;
+  background-color: #8b4513;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.login-link:hover {
   background-color: #5d4037;
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: white !important;
+}
+
+.btn-logout {
+  background-color: #8b4513;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.btn-logout:hover {
+  background-color: #5d4037;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .brand-name {

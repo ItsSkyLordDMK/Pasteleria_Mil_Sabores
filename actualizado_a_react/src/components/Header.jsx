@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Header.css';
 import { getSession, logout } from '../utils/auth';
+import { useCarrito } from '../contexts/CarritoContext';
 
 export default function Header() {
+  const { obtenerCantidadTotal } = useCarrito();
   const [categorias, setCategorias] = useState([]);
   const [showCategorias, setShowCategorias] = useState(false);
   const [session, setSession] = useState(null);
@@ -49,7 +51,6 @@ export default function Header() {
           <Link to="/productos">Productos</Link>
           {showCategorias && (
             <div className="dropdown-content">
-              <Link to="/categorias">Ver todas las categorías</Link>
               {categorias.map(categoria => (
                 <Link 
                   key={categoria}
@@ -64,8 +65,10 @@ export default function Header() {
         <Link to="/nosotros">Nosotros</Link>
         <Link to="/blogs">Blog</Link>
         <Link to="/contacto">Contacto</Link>
-        <Link to="/productos" className="cart-button">
-          Carrito <i className="bi bi-cart3"></i> (<span>0</span>)
+        <Link to="/carrito" className="cart-button">
+          <i className="bi bi-cart3"></i>
+          <span className="cart-text">Carrito</span>
+          <span className="cart-badge">{obtenerCantidadTotal()}</span>
         </Link>
       </nav>
 
@@ -73,16 +76,10 @@ export default function Header() {
         {session ? (
           <>
             <span style={{ marginRight: 8 }}>Hola, {session.nombre || session.correo}</span>
-            <button className="btn small" onClick={handleLogout}>Cerrar sesión</button>
+            <button className="btn-logout" onClick={handleLogout}>Cerrar sesión</button>
           </>
         ) : (
-          <>
-            <span className="separar">|</span>
-            <Link to="/iniciar-sesion">Iniciar sesión</Link>
-            <span className="separar">|</span>
-            <Link to="/registro">Registrarse</Link>
-            <span className="separar">|</span>
-          </>
+          <Link to="/iniciar-sesion" className="login-link">Iniciar sesión</Link>
         )}
       </div>
     </header>

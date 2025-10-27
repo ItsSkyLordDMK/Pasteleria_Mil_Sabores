@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import { addUser, isAllowedDomain, setSession, isProfessorDomain } from '../../utils/auth';
 
 export default function Registro(){
@@ -43,21 +44,92 @@ export default function Registro(){
   return (
     <>
       <Header />
-      <div className="container">
-        <div className="hero">
-          <h1 style={{ fontFamily: 'Pacifico, cursive', color: '#8b4513' }}>Registro</h1>
-          <p className="muted">Crea tu cuenta.</p>
+      <div style={{ minHeight: '70vh', padding: '3rem 1rem', maxWidth: '500px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <h1 style={{ fontFamily: 'Pacifico, cursive', color: '#8b4513', fontSize: '2.5rem', marginBottom: '0.5rem' }}>
+            Registro
+          </h1>
+          <p style={{ color: '#666' }}>Crea tu cuenta y comienza a comprar</p>
         </div>
-        <div style={{ marginTop: 12 }}>
-          <form className="form" onSubmit={handleSubmit}>
-            <input placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
-            <input placeholder="Correo" value={correo} onChange={(e) => setCorreo(e.target.value)} />
-            <input placeholder="Contraseña" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <button className="btn primary" type="submit">Registrarse</button>
-            {mensaje && <div style={{ marginTop: 8, color: '#b71c1c' }}>{mensaje}</div>}
-          </form>
-        </div>
+        <form onSubmit={handleSubmit} style={{ 
+          backgroundColor: 'white', 
+          padding: '2rem', 
+          borderRadius: '8px',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+        }}>
+          <input 
+            placeholder="Nombre completo" 
+            value={nombre} 
+            onChange={(e) => setNombre(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '12px',
+              marginBottom: '1rem',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '1rem'
+            }}
+          />
+          <input 
+            placeholder="Correo electrónico" 
+            type="email"
+            value={correo} 
+            onChange={(e) => setCorreo(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '12px',
+              marginBottom: '1rem',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '1rem'
+            }}
+          />
+          <input 
+            placeholder="Contraseña" 
+            type="password" 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '12px',
+              marginBottom: '1rem',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '1rem'
+            }}
+          />
+          <button 
+            type="submit"
+            style={{
+              width: '100%',
+              padding: '12px',
+              backgroundColor: '#8b4513',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              fontSize: '1.1rem',
+              cursor: 'pointer',
+              fontWeight: 'bold',
+              marginBottom: '1rem'
+            }}
+          >
+            Registrarse
+          </button>
+          {mensaje && (
+            <div style={{ 
+              marginTop: '1rem', 
+              color: '#b71c1c', 
+              padding: '12px',
+              backgroundColor: '#ffebee',
+              borderRadius: '4px',
+              textAlign: 'center'
+            }}>
+              {mensaje}
+            </div>
+          )}
+        </form>
       </div>
+      <Footer />
     </>
   );
 }

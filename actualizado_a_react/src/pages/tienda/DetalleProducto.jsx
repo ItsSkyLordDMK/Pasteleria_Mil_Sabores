@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import { useCarrito } from '../../contexts/CarritoContext';
 
 export default function DetalleProducto() {
   const { id } = useParams();
+  const { agregarAlCarrito } = useCarrito();
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
   const [imagenActualIndex, setImagenActualIndex] = useState(0);
@@ -74,12 +77,7 @@ export default function DetalleProducto() {
 
   const handleAgregarAlCarrito = () => {
     try {
-      const raw = localStorage.getItem('carrito') || '[]';
-      const carrito = JSON.parse(raw);
-      const existing = carrito.find((it) => it.id === producto.id);
-      if (existing) existing.cantidad = Math.min(10, existing.cantidad + cantidad);
-      else carrito.push({ id: producto.id, nombre: producto.nombre, precio: producto.precio, cantidad });
-      localStorage.setItem('carrito', JSON.stringify(carrito));
+      agregarAlCarrito({ ...producto, cantidad });
       setMensaje('¡Producto agregado al carrito!');
       setTimeout(() => setMensaje(''), 2000);
     } catch (err) {
@@ -92,8 +90,9 @@ export default function DetalleProducto() {
   return (
     <>
       <Header />
-      <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+      <main className="main-content">
+        <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
         {/* Imágenes */}
         <div>
           <div style={{ position: 'relative' }}>
@@ -136,7 +135,9 @@ export default function DetalleProducto() {
           )}
         </div>
       </div>
-    </div>
+      </div>
+      </main>
+      <Footer />
     </>
   );
 }

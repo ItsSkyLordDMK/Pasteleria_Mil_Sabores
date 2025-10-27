@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Sidebar from '../navigation/Sidebar';
-import '../../../styles/components/layouts/AdminLayout.css';
+import '../../styles/components/layouts/AdminLayout.css';
 
 const AdminLayout = ({ children, title }) => {
   return (

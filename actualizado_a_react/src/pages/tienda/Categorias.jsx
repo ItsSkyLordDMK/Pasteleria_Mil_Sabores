@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 export default function Categorias() {
   const [categorias, setCategorias] = useState([]);
@@ -37,22 +38,25 @@ export default function Categorias() {
   return (
     <>
       <Header />
-      <div className="categorias-container">
-        <h1>Nuestras Categorías</h1>
-        <div className="categorias-grid">
-          {categorias.map((categoria) => (
-            <Link
-              key={categoria.nombre}
-              to={`/productos?categoria=${encodeURIComponent(categoria.nombre)}`}
-              className="categoria-card"
-            >
-              <img src={categoria.imagen} alt={categoria.nombre} />
-              <h2>{categoria.nombre}</h2>
-              <p>{categoria.productos.length} productos</p>
-            </Link>
-          ))}
+      <main className="main-content">
+        <div className="categorias-container">
+          <h1>Nuestras Categorías</h1>
+          <div className="categorias-grid">
+            {categorias.map((categoria) => (
+              <Link
+                key={categoria.nombre}
+                to={`/productos?categoria=${encodeURIComponent(categoria.nombre)}`}
+                className="categoria-card"
+              >
+                <img src={categoria.imagen} alt={categoria.nombre} />
+                <h2>{categoria.nombre}</h2>
+                <p>{categoria.productos.length} productos</p>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      </main>
+      <Footer />
     </>
   );
 }

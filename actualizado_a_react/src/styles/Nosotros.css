@@ -1,0 +1,164 @@
+/* Nosotros Page Styles */
+.nosotros-container {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #f3e6d8;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 36px 32px 28px 32px;
+}
+
+/* Hero Section */
+.nosotros-hero {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.nosotros-hero h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.1rem;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #5D4037;
+}
+
+.nosotros-hero p {
+  font-size: 1.08rem;
+  color: #5D4037;
+}
+
+/* Content Section */
+.nosotros-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.nosotros-content.reverse {
+  flex-direction: row-reverse;
+}
+
+.nosotros-text {
+  flex: 1 1 320px;
+  min-width: 280px;
+}
+
+.nosotros-text h2 {
+  font-family: 'Pacifico', cursive;
+  font-weight: 700;
+  color: #5D4037;
+  margin-bottom: 12px;
+}
+
+.nosotros-text p {
+  color: #5D4037;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.nosotros-image {
+  flex: 1 1 260px;
+  min-width: 220px;
+  text-align: center;
+}
+
+.nosotros-image img {
+  max-width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px #ffe4ec;
+}
+
+/* Values Section */
+.nosotros-values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  justify-items: center;
+  margin-bottom: 32px;
+}
+
+.value-card {
+  background: #fff8f0;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px #f3e6d8;
+  padding: 18px 16px;
+  width: 100%;
+  max-width: 260px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px #f3e6d8;
+}
+
+.value-card h3 {
+  font-family: 'Pacifico', cursive;
+  color: #5D4037;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.value-card p {
+  color: #5D4037;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.value-card .bi {
+  font-size: 1.3rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nosotros-container {
+    padding: 24px 20px;
+    margin: 20px auto;
+  }
+
+  .nosotros-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .nosotros-hero p {
+    font-size: 1rem;
+  }
+
+  .nosotros-content {
+    flex-direction: column;
+  }
+
+  .nosotros-content.reverse {
+    flex-direction: column;
+  }
+
+  .nosotros-values {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .value-card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .nosotros-hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .nosotros-text h2 {
+    font-size: 1.3rem;
+  }
+
+  .nosotros-container {
+    padding: 20px 16px;
+    margin: 10px auto;
+  }
+}
+

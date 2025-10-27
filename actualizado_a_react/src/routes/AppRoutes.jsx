@@ -9,6 +9,7 @@ import Registro from '../pages/tienda/Registro';
 import IniciarSesion from '../pages/tienda/IniciarSesion';
 import Nosotros from '../pages/tienda/Nosotros';
 import DetalleProducto from '../pages/tienda/DetalleProducto';
+import Carrito from '../pages/tienda/Carrito';
 import AdminHome from '../pages/admin/AdminHome';
 import AdminProducto from '../pages/admin/AdminProducto';
 import AdminUsuario from '../pages/admin/AdminUsuario';
@@ -20,6 +21,8 @@ export default function AppRoutes() {
       <Route path="/productos" element={<Productos />} />
       <Route path="/categorias" element={<Categorias />} />
       <Route path="/productos/:id" element={<DetalleProducto />} />
+      <Route path="/carrito" element={<Carrito />} />
+      <Route path="/nosotros" element={<Nosotros />} />
       <Route path="/blogs" element={<Blogs />} />
       <Route path="/contacto" element={<Contacto />} />
       <Route path="/registro" element={<Registro />} />

@@ -43,6 +43,19 @@ a:hover {
   padding: 0 20px;
 }
 
+/* Main content */
+.main-content {
+  min-height: calc(100vh - 200px);
+  padding: 40px 0;
+  flex: 1;
+}
+
+/* Main */
+.main {
+  min-height: calc(100vh - 200px);
+  padding: 20px 0;
+}
+
 /* Utility classes */
 .text-principal { 
   color: #8B4513 !important; 
@@ -54,4 +67,15 @@ a:hover {
 
 .text-center {
   text-align: center;
+}
+
+/* Button styles */
+.btn-home {
+  transition: all 0.3s ease;
+}
+
+.btn-home:hover {
+  background-color: #6b3410 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
 }

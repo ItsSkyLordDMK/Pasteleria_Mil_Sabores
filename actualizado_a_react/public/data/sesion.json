@@ -1,0 +1,18 @@
+
+[
+  {
+    "correo": "juan@correo.com",
+    "nombre": "Juan Pérez",
+    "fechaLogin": "2024-06-01T12:00:00.000Z"
+  },
+  {
+    "correo": "ana@duocuc.cl",
+    "nombre": "Ana Duoc",
+    "fechaLogin": "2024-06-01T12:00:00.000Z"
+  },
+  {
+    "correo": "pedro@correo.com",
+    "nombre": "Pedro Feliz",
+    "fechaLogin": "2024-06-01T12:00:00.000Z"
+  }
+]
