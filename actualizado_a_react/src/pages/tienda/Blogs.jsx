@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import PageHeaderCard from '../../components/cards/PageHeaderCard';
 import BlogCard from '../../components/BlogCard';
 import '../../styles/Blogs.css';
 
@@ -39,17 +40,9 @@ export default function Blogs() {
     <>
       <Header />
       <main className="blog-main">
-        <section className="blog-hero">
-          <div className="blog-hero-content">
-            <h1 className="blog-hero-title">
-              <i className="bi bi-cup-hot-fill"></i>
-              Blog de Repostería
-            </h1>
-            <p className="blog-hero-subtitle">
-              Descubre datos curiosos, historias dulces y técnicas secretas sobre el mundo de la pastelería
-            </p>
-          </div>
-        </section>
+        <div className="container">
+          <PageHeaderCard title={<>Blog de Repostería</>} subtitle="Descubre datos curiosos, historias dulces y técnicas secretas sobre el mundo de la pastelería" icon={<i className="bi bi-cup-hot-fill" />} />
+        </div>
 
         <div className="blog-container">
           <div className="blog-grid">

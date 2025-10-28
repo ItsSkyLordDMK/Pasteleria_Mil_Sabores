@@ -1,6 +1,12 @@
 /* Contacto Page Styles */
+.contacto-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* ensure page takes full viewport height */
+}
+
 .contacto-main {
-  min-height: calc(100vh - 200px);
+  flex: 1; /* allow main to grow and push footer to the bottom */
   padding: 0 0 60px 0;
 }
 

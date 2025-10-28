@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import PageHeaderCard from '../../components/cards/PageHeaderCard';
 import ProductCard from '../../components/ProductCard';
 import '../../styles/Productos.css';
 
@@ -55,10 +56,7 @@ export default function Productos() {
       <Header />
       <main className="main-content">
         <div className="container">
-          <div className="productos-hero">
-            <h1>Nuestros Productos</h1>
-            <p>Descubre nuestra variedad de productos dulces</p>
-          </div>
+          <PageHeaderCard title="Nuestros Productos" subtitle="Descubre nuestra variedad de productos dulces" />
           
           <div className="productos-contador">
             Mostrando <span>{productosFiltrados.length}</span> {productosFiltrados.length === 1 ? 'producto' : 'productos'}

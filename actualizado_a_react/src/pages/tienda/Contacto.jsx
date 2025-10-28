@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import PageHeaderCard from '../../components/cards/PageHeaderCard';
 import '../../styles/Contacto.css';
 
 export default function Contacto(){
@@ -8,14 +9,12 @@ export default function Contacto(){
     e.preventDefault();
     alert('¡Mensaje enviado! Te responderemos pronto.');
   };
-
   return (
-    <>
+    <div className="contacto-page">
       <Header />
       <main className="contacto-main">
-        <div className="contacto-header">
-          <h1>Contacto</h1>
-          <p>¡Nos encantaría saber de ti!</p>
+        <div className="container">
+          <PageHeaderCard title="Contacto" subtitle="¡Nos encantaría saber de ti!" />
         </div>
         <div className="contacto-container">
           <h2>Envíanos un mensaje</h2>
@@ -55,6 +54,6 @@ export default function Contacto(){
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
