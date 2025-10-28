@@ -10,6 +10,7 @@ export default function Header() {
   const [showCategorias, setShowCategorias] = useState(false);
   const [session, setSession] = useState(null);
   const navigate = useNavigate();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     fetch('/data/productos.json')
@@ -31,30 +32,43 @@ export default function Header() {
     navigate('/');
   };
 
+  const toggleMobile = () => setMobileOpen(v => !v);
+
   return (
     <header className="topbar">
-      <Link to="/" className="logo">
-        <img src="/img/logo.png" alt="Logo Mil Sabores" />
-      </Link>
-      
-      <div className="brand-name">
-        Tienda online - Mil Sabores
+      <div className="brand-left">
+        <Link to="/" className="logo">
+          <img src="/img/logo.png" alt="Logo Mil Sabores" />
+        </Link>
+
+        <div className="brand-name">
+          Tienda online - Mil Sabores
+        </div>
       </div>
 
-      <nav className="navegacion" aria-label="Navegación principal">
-        <Link to="/">Página Principal</Link>
+      <button className={`hamburger ${mobileOpen ? 'open' : ''}`} onClick={toggleMobile} aria-label="Abrir navegación">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav className={`navegacion ${mobileOpen ? 'open' : ''}`} aria-label="Navegación principal">
+        <Link to="/" onClick={() => setMobileOpen(false)}>Página Principal</Link>
+        <Link to="/productos" onClick={() => setMobileOpen(false)}>Productos</Link>
+
         <div 
-          className="productos-dropdown"
+          className="categorias-dropdown"
           onMouseEnter={() => setShowCategorias(true)}
           onMouseLeave={() => setShowCategorias(false)}
         >
-          <Link to="/productos">Productos</Link>
+          <Link to="/categorias" onClick={() => setMobileOpen(false)}>Categorías</Link>
           {showCategorias && (
             <div className="dropdown-content">
               {categorias.map(categoria => (
                 <Link 
                   key={categoria}
-                  to={`/productos?categoria=${encodeURIComponent(categoria)}`}
+                  to={`/categorias?categoria=${encodeURIComponent(categoria)}`}
+                  onClick={() => setMobileOpen(false)}
                 >
                   {categoria}
                 </Link>
@@ -62,10 +76,10 @@ export default function Header() {
             </div>
           )}
         </div>
-        <Link to="/nosotros">Nosotros</Link>
-        <Link to="/blogs">Blog</Link>
-        <Link to="/contacto">Contacto</Link>
-        <Link to="/carrito" className="cart-button">
+        <Link to="/nosotros" onClick={() => setMobileOpen(false)}>Nosotros</Link>
+        <Link to="/blogs" onClick={() => setMobileOpen(false)}>Blog</Link>
+        <Link to="/contacto" onClick={() => setMobileOpen(false)}>Contacto</Link>
+        <Link to="/carrito" className="cart-button" onClick={() => setMobileOpen(false)}>
           <i className="bi bi-cart3"></i>
           <span className="cart-text">Carrito</span>
           <span className="cart-badge">{obtenerCantidadTotal()}</span>

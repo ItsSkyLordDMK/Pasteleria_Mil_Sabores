@@ -86,21 +86,6 @@ export default function Productos() {
                 <span> en {categoriaSeleccionada}</span>
               )}
             </div>
-
-            <div className="productos-controls">
-              <div className="productos-filtros">
-                {categorias.map(categoria => (
-                  <button
-                    key={categoria}
-                    onClick={() => setCategoriaSeleccionada(categoria)}
-                    className={`filtro-btn ${categoriaSeleccionada === categoria ? 'active' : ''}`}
-                  >
-                    <i className={`bi ${categoria === 'Todas' ? 'bi-grid' : 'bi-tag'}`} style={{ marginRight: '6px' }}></i>
-                    {categoria}
-                  </button>
-                ))}
-              </div>
-            </div>
           </div>
 
           <div className="productos-grid" style={{

@@ -39,19 +39,17 @@ export default function Blogs() {
   return (
     <>
       <Header />
-      <main className="blog-main">
-        <div className="container">
-          <PageHeaderCard title={<>Blog de Repostería</>} subtitle="Descubre datos curiosos, historias dulces y técnicas secretas sobre el mundo de la pastelería" icon={<i className="bi bi-cup-hot-fill" />} />
-        </div>
+      <div className="container">
+        <PageHeaderCard title={<>Blog de Repostería</>} subtitle="Descubre datos curiosos, historias dulces y técnicas secretas sobre el mundo de la pastelería" icon={<i className="bi bi-cup-hot-fill" />} />
+      </div>
 
-        <div className="blog-container">
-          <div className="blog-grid">
-            {blogs.map(blog => (
-              <BlogCard key={blog.id} blog={blog} />
-            ))}
-          </div>
+      <div className="blog-container">
+        <div className="blog-grid">
+          {blogs.map(blog => (
+            <BlogCard key={blog.id} blog={blog} />
+          ))}
         </div>
-      </main>
+      </div>
       <Footer />
     </>
   );
