@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import LoginForm from '../../components/LoginForm';
 
 export default function IniciarSesion() {
@@ -9,8 +8,7 @@ export default function IniciarSesion() {
       <Header />
       <main style={{ minHeight: '70vh', padding: '3rem 1rem' }}>
         <LoginForm />
-      </main>
-      <Footer />
+  </main>
     </>
   );
 }

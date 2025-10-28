@@ -10,7 +10,7 @@ export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setMensaje('');
     setIsLoading(true);
@@ -37,8 +37,10 @@ export default function LoginForm() {
 
       // Redirect to admin if professor domain or user has admin flag
       const goAdmin = isProfessorDomain(correo) || (res.user && res.user.isAdmin);
+      setIsLoading(false);
       navigate(goAdmin ? '/admin' : '/');
     } catch (error) {
+      console.error('Error durante el inicio de sesión:', error);
       setMensaje('Error al iniciar sesión. Inténtalo de nuevo.');
       setIsLoading(false);
     }
@@ -111,4 +113,3 @@ export default function LoginForm() {
     </div>
   );
 }
-

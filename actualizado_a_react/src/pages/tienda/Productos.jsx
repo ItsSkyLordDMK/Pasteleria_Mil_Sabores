@@ -5,6 +5,9 @@ import Footer from '../../components/Footer';
 import PageHeaderCard from '../../components/cards/PageHeaderCard';
 import ProductCard from '../../components/ProductCard';
 import '../../styles/Productos.css';
+import '../../styles/components/ProductsFilters.css';
+import { useNavigate } from 'react-router-dom';
+import { getSession } from '../../utils/auth';
 
 export default function Productos() {
   const [searchParams] = useSearchParams();
@@ -13,6 +16,8 @@ export default function Productos() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todas');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [session, setSession] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('/data/productos.json')
@@ -42,14 +47,30 @@ export default function Productos() {
     }
   }, [categoriaFromUrl]);
 
+  // Obtener sesión (para mostrar botón de admin si corresponde)
+  useEffect(() => {
+    try {
+      setSession(getSession());
+    } catch (e) {
+      setSession(null);
+    }
+  }, []);
+
   if (loading) return <div style={{ padding: '20px', textAlign: 'center' }}>Cargando productos...</div>;
   if (error) return <div style={{ padding: '20px', textAlign: 'center', color: 'red' }}>{error}</div>;
 
-  const categorias = ['Todas', ...new Set(productos.map(p => p.categoria))];
+  // Ordenar productos por nombre (alfabéticamente) de forma segura
+  const productosOrdenados = [...productos].sort((a, b) => {
+    const aName = (a && a.nombre) ? String(a.nombre) : '';
+    const bName = (b && b.nombre) ? String(b.nombre) : '';
+    return aName.localeCompare(bName, undefined, { sensitivity: 'base' });
+  });
+
+  const categorias = ['Todas', ...new Set(productosOrdenados.map(p => p.categoria))];
 
   const productosFiltrados = categoriaSeleccionada === 'Todas'
-    ? productos
-    : productos.filter(p => p.categoria === categoriaSeleccionada);
+    ? productosOrdenados
+    : productosOrdenados.filter(p => p.categoria === categoriaSeleccionada);
 
   return (
     <>
@@ -58,27 +79,36 @@ export default function Productos() {
         <div className="container">
           <PageHeaderCard title="Nuestros Productos" subtitle="Descubre nuestra variedad de productos dulces" />
           
-          <div className="productos-contador">
-            Mostrando <span>{productosFiltrados.length}</span> {productosFiltrados.length === 1 ? 'producto' : 'productos'}
-            {categoriaSeleccionada !== 'Todas' && (
-              <span> en {categoriaSeleccionada}</span>
-            )}
-          </div>
-          
-          <div className="productos-filtros">
-            {categorias.map(categoria => (
-              <button
-                key={categoria}
-                onClick={() => setCategoriaSeleccionada(categoria)}
-                className={`filtro-btn ${categoriaSeleccionada === categoria ? 'active' : ''}`}
-              >
-                <i className={`bi ${categoria === 'Todas' ? 'bi-grid' : 'bi-tag'}`} style={{ marginRight: '6px' }}></i>
-                {categoria}
-              </button>
-            ))}
+          <div className="productos-top">
+            <div className="productos-contador">
+              Mostrando <span>{productosFiltrados.length}</span> {productosFiltrados.length === 1 ? 'producto' : 'productos'}
+              {categoriaSeleccionada !== 'Todas' && (
+                <span> en {categoriaSeleccionada}</span>
+              )}
+            </div>
+
+            <div className="productos-controls">
+              <div className="productos-filtros">
+                {categorias.map(categoria => (
+                  <button
+                    key={categoria}
+                    onClick={() => setCategoriaSeleccionada(categoria)}
+                    className={`filtro-btn ${categoriaSeleccionada === categoria ? 'active' : ''}`}
+                  >
+                    <i className={`bi ${categoria === 'Todas' ? 'bi-grid' : 'bi-tag'}`} style={{ marginRight: '6px' }}></i>
+                    {categoria}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="productos-grid">
+          <div className="productos-grid" style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+            gap: '1rem',
+            alignItems: 'start'
+          }}>
             {productosFiltrados.length === 0 ? (
               <div style={{ 
                 gridColumn: '1 / -1', 

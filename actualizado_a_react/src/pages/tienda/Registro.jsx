@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import { addUser, isAllowedDomain, setSession, isProfessorDomain } from '../../utils/auth';
 
 export default function Registro(){
@@ -128,8 +127,7 @@ export default function Registro(){
             </div>
           )}
         </form>
-      </div>
-      <Footer />
+  </div>
     </>
   );
 }

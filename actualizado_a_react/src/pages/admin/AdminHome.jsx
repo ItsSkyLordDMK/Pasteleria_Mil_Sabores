@@ -25,7 +25,14 @@ export default function AdminHome() {
     fetch('/data/usuarios.json')
       .then(res => res.json())
       .then(data => {
-        setStats(prev => ({ ...prev, usuarios: data.usuarios.length }));
+        // `usuarios.json` puede ser un array o un objeto { usuarios: [...] }
+        let usuariosCount = 0;
+        if (Array.isArray(data)) {
+          usuariosCount = data.length;
+        } else if (data && Array.isArray(data.usuarios)) {
+          usuariosCount = data.usuarios.length;
+        }
+        setStats(prev => ({ ...prev, usuarios: usuariosCount }));
       })
       .catch(err => console.error('Error cargando usuarios:', err));
   }, []);

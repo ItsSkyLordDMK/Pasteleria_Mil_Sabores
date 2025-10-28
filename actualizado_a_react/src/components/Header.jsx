@@ -76,6 +76,25 @@ export default function Header() {
         {session ? (
           <>
             <span style={{ marginRight: 8 }}>Hola, {session.nombre || session.correo}</span>
+            {session.isAdmin && (
+              <Link
+                to="/admin"
+                className="admin-nav-link"
+                style={{
+                  marginRight: 8,
+                  padding: '6px 10px',
+                  background: 'linear-gradient(90deg,#f6b8a1 0%, #ffd6c4 100%)',
+                  borderRadius: 6,
+                  color: '#6b3f2a',
+                  textDecoration: 'none',
+                  fontWeight: 600,
+                  boxShadow: '0 4px 12px rgba(139,69,19,0.06)'
+                }}
+              >
+                <i className="bi bi-speedometer2" style={{ marginRight: 6 }}></i>
+                Dashboard
+              </Link>
+            )}
             <button className="btn-logout" onClick={handleLogout}>Cerrar sesión</button>
           </>
         ) : (
