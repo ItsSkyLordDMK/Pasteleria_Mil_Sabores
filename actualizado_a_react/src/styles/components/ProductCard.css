@@ -5,6 +5,7 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   background: #fff;
   width: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -40,6 +41,19 @@
   gap: 8px;
   margin-top: 12px;
 }
+
+.stock-badge{
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.stock-badge.low{ background: #ff8a00; }
+.stock-badge.out{ background: #dc3545; }
 
 .detail-btn{
   flex: 1;

@@ -10,9 +10,15 @@ import IniciarSesion from '../pages/tienda/IniciarSesion';
 import Nosotros from '../pages/tienda/Nosotros';
 import DetalleProducto from '../pages/tienda/DetalleProducto';
 import Carrito from '../pages/tienda/Carrito';
+import Gracias from '../pages/tienda/Gracias';
 import AdminHome from '../pages/admin/AdminHome';
 import AdminProducto from '../pages/admin/AdminProducto';
 import AdminUsuario from '../pages/admin/AdminUsuario';
+import AdminOrdenes from '../pages/admin/AdminOrdenes';
+import AdminCategorias from '../pages/admin/AdminCategorias';
+import AdminPerfil from '../pages/admin/AdminPerfil';
+import AdminReportes from '../pages/admin/AdminReportes';
+import Perfil from '../pages/tienda/Perfil';
 
 export default function AppRoutes() {
   return (
@@ -22,6 +28,7 @@ export default function AppRoutes() {
       <Route path="/categorias" element={<Categorias />} />
       <Route path="/productos/:id" element={<DetalleProducto />} />
       <Route path="/carrito" element={<Carrito />} />
+  <Route path="/gracias" element={<Gracias />} />
       <Route path="/nosotros" element={<Nosotros />} />
       <Route path="/blogs" element={<Blogs />} />
       <Route path="/contacto" element={<Contacto />} />
@@ -30,12 +37,13 @@ export default function AppRoutes() {
 
       {/* Rutas de administración */}
       <Route path="/admin" element={<AdminHome />} />
-      <Route path="/admin/usuarios" element={<AdminUsuario />} />
-      <Route path="/admin/productos" element={<AdminProducto />} />
-      <Route path="/admin/ordenes" element={<AdminHome />} />
-      <Route path="/admin/categorias" element={<AdminHome />} />
-      <Route path="/admin/reportes" element={<AdminHome />} />
-      <Route path="/admin/perfil" element={<AdminHome />} />
+  <Route path="/admin/usuarios" element={<AdminUsuario />} />
+  <Route path="/admin/productos" element={<AdminProducto />} />
+  <Route path="/admin/ordenes" element={<AdminOrdenes />} />
+  <Route path="/admin/categorias" element={<AdminCategorias />} />
+  <Route path="/admin/reportes" element={<AdminReportes />} />
+      <Route path="/admin/perfil" element={<AdminPerfil />} />
+      <Route path="/perfil" element={<Perfil />} />
     </Routes>
   );
 }

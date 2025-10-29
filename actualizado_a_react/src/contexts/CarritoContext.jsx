@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { calculateItemPricing } from '../utils/offers';
 
 const CarritoContext = createContext();
 
@@ -70,7 +71,8 @@ export const CarritoProvider = ({ children }) => {
 
   const obtenerTotal = () => {
     return carrito.reduce((total, producto) => {
-      return total + (producto.precio * producto.cantidad);
+      const pricing = calculateItemPricing(producto);
+      return total + (pricing.finalUnitPrice * producto.cantidad);
     }, 0);
   };
 

@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './routes/AppRoutes';
 import { CarritoProvider } from './contexts/CarritoContext';
 import './index.css';
+import ThemedToast from './components/ThemedToast';
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
       <CarritoProvider>
         <BrowserRouter>
           <AppRoutes />
+          <ThemedToast />
         </BrowserRouter>
       </CarritoProvider>
     </div>

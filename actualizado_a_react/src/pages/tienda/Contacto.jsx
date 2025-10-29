@@ -3,11 +3,12 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PageHeaderCard from '../../components/cards/PageHeaderCard';
 import '../../styles/Contacto.css';
+import { showToast } from '../../utils/toast';
 
 export default function Contacto(){
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('¡Mensaje enviado! Te responderemos pronto.');
+    showToast('success', '¡Mensaje enviado! Te responderemos pronto.');
   };
   return (
     <div className="contacto-page">

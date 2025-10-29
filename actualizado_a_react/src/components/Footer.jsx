@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import { showToast } from '../utils/toast';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Email suscrito:', email);
-    setEmail('');
-    alert('¡Gracias por suscribirte!');
+  console.log('Email suscrito:', email);
+  setEmail('');
+  showToast('success', '¡Gracias por suscribirte!');
   };
   return (
     <footer style={{

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { getMergedProducts } from '../../utils/products';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useCarrito } from '../../contexts/CarritoContext';
@@ -16,11 +17,7 @@ export default function DetalleProducto() {
 
   useEffect(() => {
     setLoading(true);
-    fetch('/data/productos.json')
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
+    getMergedProducts()
       .then((productos) => {
         const encontrado = productos.find((p) => p.id === id);
         if (encontrado) setProducto(encontrado);
@@ -71,12 +68,20 @@ export default function DetalleProducto() {
   const handleCantidadChange = (e) => {
     let v = parseInt(e.target.value, 10);
     if (Number.isNaN(v) || v < 1) v = 1;
-    if (v > 10) v = 10;
+    // limit by stock when available
+    if (producto && typeof producto.stock === 'number') {
+      if (v > producto.stock) v = producto.stock;
+    } else if (v > 10) v = 10;
     setCantidad(v);
   };
 
   const handleAgregarAlCarrito = () => {
     try {
+      if (producto && typeof producto.stock === 'number' && producto.stock <= 0) {
+        setMensaje('Producto agotado');
+        setTimeout(() => setMensaje(''), 2000);
+        return;
+      }
       agregarAlCarrito({ ...producto, cantidad });
       setMensaje('¡Producto agregado al carrito!');
       setTimeout(() => setMensaje(''), 2000);
@@ -122,6 +127,18 @@ export default function DetalleProducto() {
           <h1 style={{ color: '#8b4513', marginBottom: '1rem' }}>{producto.nombre}</h1>
           <p style={{ color: '#666', fontSize: '1.1rem', marginBottom: '1rem' }}>{producto.descripcion}</p>
           <p style={{ fontSize: '2rem', color: '#8b4513', fontWeight: 'bold', marginBottom: '1rem' }}>${producto.precio.toLocaleString()}</p>
+
+          {typeof producto.stock === 'number' && (
+            <div style={{ marginBottom: '1rem' }}>
+              <strong>Stock: </strong> {producto.stock}
+              {producto.stock > 0 && producto.stock <= 5 && (
+                <div style={{ color: '#ff8a00', fontWeight: 700, marginTop: 6 }}>Últimas unidades</div>
+              )}
+              {producto.stock === 0 && (
+                <div style={{ color: '#dc3545', fontWeight: 700, marginTop: 6 }}>Agotado</div>
+              )}
+            </div>
+          )}
 
           <div style={{ marginBottom: '1rem' }}>
             <label htmlFor="cantidad" style={{ marginRight: '1rem' }}>Cantidad:</label>

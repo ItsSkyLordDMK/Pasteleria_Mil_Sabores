@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Header.css';
 import { getSession, logout } from '../utils/auth';
+import { getStoredCategories } from '../utils/categories';
 import { useCarrito } from '../contexts/CarritoContext';
 
 export default function Header() {
@@ -16,10 +17,39 @@ export default function Header() {
     fetch('/data/productos.json')
       .then(response => response.json())
       .then(productos => {
-        const categoriasUnicas = [...new Set(productos.map(p => p.categoria))];
-        setCategorias(categoriasUnicas);
+        const categoriasFromProducts = Array.from(new Set(productos.map(p => p.categoria).filter(Boolean)));
+        const stored = getStoredCategories();
+        // if admin has stored categories, use them as authoritative; otherwise fall back to product categories
+        if (stored && stored.length > 0) {
+          setCategorias(stored);
+        } else {
+          setCategorias(categoriasFromProducts);
+        }
       })
-      .catch(error => console.error('Error cargando categorías:', error));
+      .catch(error => {
+        console.error('Error cargando categorías:', error);
+        const stored = getStoredCategories();
+        setCategorias(stored);
+      });
+  }, []);
+
+  // update categories when admin edits them
+  useEffect(() => {
+    const onUpdate = () => {
+      const stored = getStoredCategories();
+      if (stored && stored.length > 0) {
+        setCategorias(stored);
+      } else {
+        // fallback to products
+        fetch('/data/productos.json')
+          .then(r => r.json())
+          .then(productos => setCategorias(Array.from(new Set(productos.map(p => p.categoria).filter(Boolean)))))
+          .catch(() => setCategorias([]));
+      }
+    };
+
+    window.addEventListener('categoriasUpdated', onUpdate);
+    return () => window.removeEventListener('categoriasUpdated', onUpdate);
   }, []);
 
   useEffect(() => {
@@ -90,7 +120,8 @@ export default function Header() {
         {session ? (
           <>
             <span style={{ marginRight: 8 }}>Hola, {session.nombre || session.correo}</span>
-            {session.isAdmin && (
+            {/* If user is admin, show Dashboard link; if not admin and logged, show small profile icon link */}
+            {session.isAdmin ? (
               <Link
                 to="/admin"
                 className="admin-nav-link"
@@ -107,6 +138,10 @@ export default function Header() {
               >
                 <i className="bi bi-speedometer2" style={{ marginRight: 6 }}></i>
                 Dashboard
+              </Link>
+            ) : (
+              <Link to="/perfil" title="Mi perfil" style={{ marginRight: 8, color: '#6b3f2a' }}>
+                <i className="bi bi-person-circle" style={{ fontSize: 20 }}></i>
               </Link>
             )}
             <button className="btn-logout" onClick={handleLogout}>Cerrar sesión</button>

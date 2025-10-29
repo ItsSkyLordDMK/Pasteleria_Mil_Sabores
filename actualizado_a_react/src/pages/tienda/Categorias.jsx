@@ -6,6 +6,8 @@ import PageHeaderCard from '../../components/cards/PageHeaderCard';
 import ProductCard from '../../components/ProductCard';
 import '../../styles/Productos.css';
 import '../../styles/components/ProductsFilters.css';
+import { getStoredCategories } from '../../utils/categories';
+import { getMergedProducts } from '../../utils/products';
 import { useNavigate } from 'react-router-dom';
 
 export default function Categorias() {
@@ -18,11 +20,7 @@ export default function Categorias() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('/data/productos.json')
-      .then(response => {
-        if (!response.ok) throw new Error('No se pudieron cargar los productos');
-        return response.json();
-      })
+    getMergedProducts()
       .then(data => {
         setProductos(data);
         setLoading(false);
@@ -32,6 +30,13 @@ export default function Categorias() {
         setError(err.message);
         setLoading(false);
       });
+
+    const onUpdate = () => {
+      setLoading(true);
+      getMergedProducts().then(data => { setProductos(data); setLoading(false); }).catch(() => setLoading(false));
+    };
+    window.addEventListener('productosUpdated', onUpdate);
+    return () => window.removeEventListener('productosUpdated', onUpdate);
   }, []);
 
   // update selected category when URL param changes
@@ -48,7 +53,9 @@ export default function Categorias() {
     return aName.localeCompare(bName, undefined, { sensitivity: 'base' });
   });
 
-  const categorias = ['Todas', ...new Set(productosOrdenados.map(p => p.categoria))];
+  const categoriasFromProducts = Array.from(new Set(productosOrdenados.map(p => p.categoria).filter(Boolean)));
+  const stored = getStoredCategories();
+  const categorias = ['Todas', ...(stored && stored.length > 0 ? stored : categoriasFromProducts)];
 
   const productosFiltrados = categoriaSeleccionada === 'Todas'
     ? productosOrdenados

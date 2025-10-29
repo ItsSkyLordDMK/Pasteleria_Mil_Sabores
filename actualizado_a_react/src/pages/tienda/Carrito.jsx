@@ -1,19 +1,119 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useCarrito } from '../../contexts/CarritoContext';
+import { getMergedProducts, saveStoredProducts, getStoredProducts } from '../../utils/products';
+import { addOrder } from '../../utils/orders';
+import { getSession } from '../../utils/auth';
+import { showToast } from '../../utils/toast';
+import { calculateItemPricing } from '../../utils/offers';
 
 export default function Carrito() {
+  const navigate = useNavigate();
   const { carrito, actualizarCantidad, eliminarProducto, obtenerTotal, vaciarCarrito } = useCarrito();
+  const handleIncrement = async (producto) => {
+    try {
+      const productos = await getMergedProducts();
+      const prod = productos.find(p => p.id === producto.id);
+      if (prod && typeof prod.stock === 'number') {
+        const disponible = prod.stock;
+        if (producto.cantidad + 1 > disponible) {
+          showToast('error', `No hay más stock disponible de ${producto.nombre}. Disponible: ${disponible}`);
+          return;
+        }
+      }
+      actualizarCantidad(producto.id, 1);
+    } catch (err) {
+      console.error('Error comprobando stock:', err);
+      actualizarCantidad(producto.id, 1);
+    }
+  };
 
   const handlePagar = () => {
     if (carrito.length === 0) {
-      alert('El carrito está vacío');
+      showToast('info', 'El carrito está vacío');
       return;
     }
-    alert('¡Compra realizada con éxito!');
-    vaciarCarrito();
+    // validate stock availability
+    (async () => {
+      try {
+        const productos = await getMergedProducts();
+        const map = new Map(productos.map(p => [p.id, p]));
+
+        for (const item of carrito) {
+          const prod = map.get(item.id);
+          if (!prod) {
+            showToast('error', `El producto ${item.nombre} ya no está disponible`);
+            return;
+          }
+          if (typeof prod.stock === 'number' && item.cantidad > prod.stock) {
+            showToast('error', `No hay suficiente stock de ${item.nombre}. Disponible: ${prod.stock}`);
+            return;
+          }
+        }
+
+        // decrement stock and save overrides
+        const merged = productos.map(p => ({ ...p }));
+        const updated = merged.map(p => {
+          const cartItem = carrito.find(c => c.id === p.id);
+          if (cartItem) {
+            const newStock = (typeof p.stock === 'number' ? p.stock : 0) - cartItem.cantidad;
+            return { ...p, stock: Math.max(0, newStock) };
+          }
+          return p;
+        });
+
+        // Save overrides in stored products (we only save the overridden list)
+        saveStoredProducts(updated);
+        // create order — include pricing breakdown (offers applied)
+        const session = getSession();
+        const itemsWithPricing = carrito.map(i => {
+          // keep original fields but compute final unit price using offers util
+          const prod = productos.find(p => p.id === i.id) || i;
+          const pricing = calculateItemPricing(prod);
+          const precio_original = Number(i.precio || pricing.unitPrice || 0);
+          const descuento_unitario = pricing.discountPerUnit || 0;
+          const precio_unitario_final = pricing.finalUnitPrice || precio_original;
+          const subtotal = precio_unitario_final * i.cantidad;
+          return {
+            id: i.id,
+            nombre: i.nombre,
+            cantidad: i.cantidad,
+            precio_original,
+            descuento_unitario,
+            precio_unitario_final,
+            subtotal,
+            oferta: prod.oferta || null
+          };
+        });
+
+        const total = itemsWithPricing.reduce((s, it) => s + (it.subtotal || 0), 0);
+
+        const orden = {
+          id: `O${Date.now()}`,
+          fecha: new Date().toISOString(),
+          usuario: session ? { correo: session.correo, nombre: session.nombre, run: session.run, telefono: session.telefono, direccion: session.direccion } : null,
+          items: itemsWithPricing,
+          total
+        };
+        addOrder(orden);
+
+        showToast('success', '¡Compra realizada con éxito!');
+        vaciarCarrito();
+        // notify other components
+        try { window.dispatchEvent(new Event('productosUpdated')); } catch(e){}
+        // redirect to thank-you page with order id
+        try {
+          navigate('/gracias', { state: { ordenId: orden.id } });
+        } catch (e) {
+          // ignore navigation errors
+        }
+      } catch (err) {
+        console.error('Error procesando pago:', err);
+  showToast('error', 'Ocurrió un error procesando la compra');
+      }
+    })();
   };
 
   return (
@@ -93,7 +193,7 @@ export default function Carrito() {
                     </button>
                     <span style={{ minWidth: 30, textAlign: 'center' }}>{producto.cantidad}</span>
                     <button
-                      onClick={() => actualizarCantidad(producto.id, 1)}
+                      onClick={() => handleIncrement(producto)}
                       style={{
                         width: 32,
                         height: 32,

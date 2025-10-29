@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AdminLayout from '../../components/layouts/AdminLayout';
+import { getStoredProducts, saveStoredProducts, getMergedProducts } from '../../utils/products';
+import { showToast } from '../../utils/toast';
 
 export default function AdminProducto() {
   const [productos, setProductos] = useState([]);
@@ -22,8 +24,7 @@ export default function AdminProducto() {
 
   const cargarProductos = async () => {
     try {
-      const response = await fetch('/data/productos.json');
-      const data = await response.json();
+      const data = await getMergedProducts();
       setProductos(data);
     } catch (error) {
       console.error('Error cargando productos:', error);
@@ -37,6 +38,7 @@ export default function AdminProducto() {
       categoria: '',
       descripcion: '',
       precio: '',
+      stock: 10,
       imagen_principal: '',
       imagen1: '',
       imagen2: '',
@@ -47,25 +49,29 @@ export default function AdminProducto() {
 
   const handleGuardar = async () => {
     if (!productoActual.nombre || !productoActual.precio || !productoActual.categoria) {
-      alert('Por favor complete todos los campos obligatorios');
+      showToast('warn', 'Por favor complete todos los campos obligatorios');
       return;
     }
 
     const nuevoProducto = {
       ...productoActual,
-      precio: parseInt(productoActual.precio)
+      precio: parseInt(productoActual.precio),
+      stock: parseInt(productoActual.stock || 0)
     };
 
     if (productoActual.id) {
       // Editar
       const actualizados = productos.map(p => p.id === productoActual.id ? nuevoProducto : p);
       setProductos(actualizados);
-      alert('Producto actualizado exitosamente');
+      saveStoredProducts(actualizados);
+      showToast('success', 'Producto actualizado exitosamente');
     } else {
       // Nuevo producto
       const nuevoId = `P${Date.now()}`;
-      setProductos([...productos, { ...nuevoProducto, id: nuevoId }]);
-      alert('Producto agregado exitosamente');
+      const created = [...productos, { ...nuevoProducto, id: nuevoId }];
+      setProductos(created);
+      saveStoredProducts(created);
+      showToast('success', 'Producto agregado exitosamente');
     }
 
     setMostrandoFormulario(false);
@@ -83,16 +89,18 @@ export default function AdminProducto() {
   };
 
   const handleEliminar = (id) => {
-    if (!confirm('¿Está seguro de eliminar este producto?')) return;
+  if (!confirm('¿Está seguro de eliminar este producto?')) return;
     const actualizados = productos.filter(p => p.id !== id);
     setProductos(actualizados);
-    alert('Producto eliminado exitosamente');
+    saveStoredProducts(actualizados);
+  showToast('success', 'Producto eliminado exitosamente');
   };
 
   const handleEditar = (producto) => {
     setProductoActual({
       ...producto,
-      precio: producto.precio.toString()
+      precio: producto.precio.toString(),
+      stock: producto.stock || 0
     });
     setMostrandoFormulario(true);
   };
@@ -173,6 +181,37 @@ export default function AdminProducto() {
               onChange={(e) => setProductoActual({ ...productoActual, precio: e.target.value })}
               style={{ padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
             />
+            <input
+              placeholder="Stock"
+              type="number"
+              value={productoActual.stock}
+              onChange={(e) => setProductoActual({ ...productoActual, stock: e.target.value })}
+              style={{ padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
+            />
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+            <select
+              value={productoActual.oferta?.type || ''}
+              onChange={(e) => setProductoActual({ ...productoActual, oferta: { ...(productoActual.oferta || {}), type: e.target.value } })}
+              style={{ padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
+            >
+              <option value="">Sin oferta</option>
+              <option value="percentage">% Porcentaje</option>
+              <option value="fixed">Monto fijo</option>
+            </select>
+            <input
+              placeholder="Valor oferta (ej: 20 para 20% o 500 para $500)"
+              type="number"
+              value={productoActual.oferta?.value ?? ''}
+              onChange={(e) => setProductoActual({ ...productoActual, oferta: { ...(productoActual.oferta || {}), value: e.target.value } })}
+              style={{ padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
+            />
+            <input
+              placeholder="Etiqueta oferta (ej: 'Promo Día')"
+              value={productoActual.oferta?.label || ''}
+              onChange={(e) => setProductoActual({ ...productoActual, oferta: { ...(productoActual.oferta || {}), label: e.target.value } })}
+              style={{ padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
+            />
           </div>
           <div style={{ display: 'flex', gap: '1rem' }}>
             <button
@@ -225,6 +264,7 @@ export default function AdminProducto() {
                   <th style={{ padding: '12px', textAlign: 'left', border: '1px solid #ddd' }}>Nombre</th>
                   <th style={{ padding: '12px', textAlign: 'left', border: '1px solid #ddd' }}>Categoría</th>
                   <th style={{ padding: '12px', textAlign: 'left', border: '1px solid #ddd' }}>Precio</th>
+                  <th style={{ padding: '12px', textAlign: 'left', border: '1px solid #ddd' }}>Stock</th>
                   <th style={{ padding: '12px', textAlign: 'left', border: '1px solid #ddd' }}>Acciones</th>
                 </tr>
               </thead>
@@ -235,6 +275,12 @@ export default function AdminProducto() {
                     <td style={{ padding: '12px', border: '1px solid #ddd' }}>{producto.nombre}</td>
                     <td style={{ padding: '12px', border: '1px solid #ddd' }}>{producto.categoria}</td>
                     <td style={{ padding: '12px', border: '1px solid #ddd' }}>${producto.precio.toLocaleString()}</td>
+                    <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                      <span style={{ fontWeight: 700 }}>{producto.stock ?? '-'}</span>
+                      {typeof producto.stock === 'number' && producto.stock <= 5 && (
+                        <div style={{ color: '#dc3545', fontSize: '0.85rem', marginTop: 4 }}>Stock crítico</div>
+                      )}
+                    </td>
                     <td style={{ padding: '12px', border: '1px solid #ddd' }}>
                       <button
                         onClick={() => handleEditar(producto)}

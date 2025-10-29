@@ -3,23 +3,32 @@ import { Link } from 'react-router-dom';
 import AdminLayout from '../../components/layouts/AdminLayout';
 import DashboardCard from '../../components/cards/DashboardCard';
 import FeatureCard from '../../components/cards/FeatureCard';
+import { getOrders } from '../../utils/orders';
+import { getMergedProducts } from '../../utils/products';
 import '../../styles/pages/AdminDashboard.css';
 
 export default function AdminHome() {
   const [stats, setStats] = useState({
     compras: 0,
     productos: 0,
-    usuarios: 0
+    usuarios: 0,
+    totalStock: 0,
+    lowStock: 0
   });
 
   useEffect(() => {
-    // Cargar productos para contar
-    fetch('/data/productos.json')
-      .then(res => res.json())
-      .then(productos => {
-        setStats(prev => ({ ...prev, productos: productos.length }));
-      })
-      .catch(err => console.error('Error cargando productos:', err));
+    // Cargar productos merged (incluye overrides guardados) para contar e inventario
+    const cargarProductos = async () => {
+      try {
+        const productos = await getMergedProducts();
+        const totalStock = productos.reduce((s, p) => s + (typeof p.stock === 'number' ? p.stock : 0), 0);
+        const lowStock = productos.filter(p => typeof p.stock === 'number' && p.stock <= 3).length;
+        setStats(prev => ({ ...prev, productos: productos.length, totalStock, lowStock }));
+      } catch (err) {
+        console.error('Error cargando productos:', err);
+      }
+    };
+    cargarProductos();
 
     // Cargar usuarios para contar
     fetch('/data/usuarios.json')
@@ -35,6 +44,33 @@ export default function AdminHome() {
         setStats(prev => ({ ...prev, usuarios: usuariosCount }));
       })
       .catch(err => console.error('Error cargando usuarios:', err));
+
+  // Cargar órdenes y calcular total de unidades compradas
+    const calcularCompras = () => {
+      try {
+        const ordenes = getOrders();
+        const totalUnidades = ordenes.reduce((acc, ord) => {
+          if (Array.isArray(ord.items)) {
+            return acc + ord.items.reduce((s, it) => s + (it.cantidad || 0), 0);
+          }
+          return acc;
+        }, 0);
+        setStats(prev => ({ ...prev, compras: totalUnidades }));
+      } catch (err) {
+        console.error('Error calculando compras:', err);
+      }
+    };
+
+    calcularCompras();
+    const onOrdenesUpdated = () => calcularCompras();
+    const onProductosUpdated = () => cargarProductos();
+    window.addEventListener('ordenesUpdated', onOrdenesUpdated);
+    window.addEventListener('productosUpdated', onProductosUpdated);
+    // cleanup listeners when component unmounts
+    return () => {
+      window.removeEventListener('ordenesUpdated', onOrdenesUpdated);
+      window.removeEventListener('productosUpdated', onProductosUpdated);
+    };
   }, []);
 
   return (
@@ -49,8 +85,9 @@ export default function AdminHome() {
           />
           <DashboardCard
             title="Productos"
-            value={stats.productos}
-            subtitle={`Inventario actual: ${stats.productos}`}
+            // mostrar en grande el total de unidades en inventario
+            value={stats.totalStock}
+            /* subtítulo eliminado a petición del diseño: la cantidad se muestra en grande */
             backgroundColor="#198754"
           />
           <DashboardCard

@@ -8,6 +8,7 @@ import '../../styles/Productos.css';
 import '../../styles/components/ProductsFilters.css';
 import { useNavigate } from 'react-router-dom';
 import { getSession } from '../../utils/auth';
+import { getMergedProducts } from '../../utils/products';
 
 export default function Productos() {
   const [searchParams] = useSearchParams();
@@ -20,13 +21,7 @@ export default function Productos() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('/data/productos.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('No se pudieron cargar los productos');
-        }
-        return response.json();
-      })
+    getMergedProducts()
       .then(data => {
         setProductos(data);
         setLoading(false);
@@ -36,6 +31,13 @@ export default function Productos() {
         setError(err.message);
         setLoading(false);
       });
+
+    const onUpdate = () => {
+      setLoading(true);
+      getMergedProducts().then(data => { setProductos(data); setLoading(false); }).catch(() => setLoading(false));
+    };
+    window.addEventListener('productosUpdated', onUpdate);
+    return () => window.removeEventListener('productosUpdated', onUpdate);
   }, []);
 
   // Actualizar categoría cuando cambia la URL

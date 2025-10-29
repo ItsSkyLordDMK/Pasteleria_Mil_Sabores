@@ -6,28 +6,48 @@ import { addUser, isAllowedDomain, setSession, isProfessorDomain } from '../../u
 export default function Registro(){
   const [nombre, setNombre] = useState('');
   const [correo, setCorreo] = useState('');
+  const [rut, setRut] = useState('');
   const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
   const [mensaje, setMensaje] = useState('');
+  const [fecha, setFecha] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [pais, setPais] = useState('Chile');
+  const [comuna, setComuna] = useState('Santiago');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setMensaje('');
-    if (!nombre || !correo || !password) {
-      setMensaje('Completa todos los campos.');
+    // basic validation
+    if (!rut || !nombre || !correo || !password || !password2) {
+      setMensaje('Completa todos los campos requeridos.');
       return;
     }
-    if (!isAllowedDomain(correo)) {
-      setMensaje('El correo debe ser @gmail.com o @duoc.cl');
+    // email pattern validation (simple)
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!EMAIL_RE.test(correo)) {
+      setMensaje('Ingresa un correo válido (ej: usuario@dominio.com).');
+      return;
+    }
+
+    if (password !== password2) {
+      setMensaje('Las contraseñas no coinciden.');
       return;
     }
     const nuevo = {
+      run: rut,
       nombre,
       correo,
       password,
-      fecha: '',
-      telefono: '',
-      comuna: '',
+      fecha: fecha || '',
+      telefono: telefono || '',
+      comuna: comuna || '',
+      pais: pais || 'Chile',
+      descuento: 0,
+      tortaGratis: false,
+      codigoUsado: '',
+      preferencias: {}
     };
     const res = addUser(nuevo);
     if (!res.ok) {
@@ -56,6 +76,19 @@ export default function Registro(){
           borderRadius: '8px',
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
         }}>
+          <input 
+            placeholder="RUT (sin puntos, con guion)" 
+            value={rut} 
+            onChange={(e) => setRut(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '12px',
+              marginBottom: '1rem',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '1rem'
+            }}
+          />
           <input 
             placeholder="Nombre completo" 
             value={nombre} 
@@ -97,6 +130,54 @@ export default function Registro(){
               fontSize: '1rem'
             }}
           />
+          <input 
+            placeholder="Confirmar contraseña" 
+            type="password" 
+            value={password2} 
+            onChange={(e) => setPassword2(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '12px',
+              marginBottom: '1rem',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '1rem'
+            }}
+          />
+
+          <label style={{ display: 'block', marginBottom: '6px', color: '#666' }}>Fecha de nacimiento</label>
+          <input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} style={{ width: '100%', padding: '10px', marginBottom: '1rem', borderRadius: '4px', border: '1px solid #ddd' }} />
+
+          <input 
+            placeholder="Teléfono" 
+            value={telefono} 
+            onChange={(e) => setTelefono(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '12px',
+              marginBottom: '1rem',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '1rem'
+            }}
+          />
+
+          <div style={{ display: 'flex', gap: '8px', marginBottom: '1rem' }}>
+            <select value={pais} onChange={(e) => setPais(e.target.value)} style={{ flex: 1, padding: '10px', borderRadius: '4px', border: '1px solid #ddd' }}>
+              <option>Chile</option>
+              <option>Argentina</option>
+              <option>Perú</option>
+              <option>Otro</option>
+            </select>
+
+            <select value={comuna} onChange={(e) => setComuna(e.target.value)} style={{ flex: 1, padding: '10px', borderRadius: '4px', border: '1px solid #ddd' }}>
+              <option>Santiago</option>
+              <option>Providencia</option>
+              <option>Ñuñoa</option>
+              <option>Maipú</option>
+              <option>Otra</option>
+            </select>
+          </div>
           <button 
             type="submit"
             style={{

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import AdminLayout from '../../components/layouts/AdminLayout';
 import { getUsers, saveUsers } from '../../utils/auth';
+import { showToast } from '../../utils/toast';
+import UserModal from '../../components/admin/UserModal';
 
 export default function AdminUsuario() {
   const [usuarios, setUsuarios] = useState([]);
@@ -13,6 +15,11 @@ export default function AdminUsuario() {
     comuna: '',
     fecha: ''
   });
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalInitialTab, setModalInitialTab] = useState('details');
+  const [modalStartEditing, setModalStartEditing] = useState(false);
+  const [selectedOriginalEmail, setSelectedOriginalEmail] = useState(null);
 
   useEffect(() => {
     cargarUsuarios();
@@ -21,6 +28,24 @@ export default function AdminUsuario() {
   const cargarUsuarios = () => {
     const users = getUsers();
     setUsuarios(users);
+  };
+
+  const handleExport = () => {
+    try {
+      const users = getUsers() || [];
+      const blob = new Blob([JSON.stringify(users, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'usuarios.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Error exportando usuarios:', err);
+      showToast('error', 'No se pudo exportar usuarios. Revisa la consola.');
+    }
   };
 
   const handleAgregar = () => {
@@ -37,13 +62,13 @@ export default function AdminUsuario() {
 
   const handleGuardar = () => {
     if (!usuarioActual.nombre || !usuarioActual.correo || !usuarioActual.password) {
-      alert('Por favor complete todos los campos obligatorios');
+      showToast('warn', 'Por favor complete todos los campos obligatorios');
       return;
     }
 
     // Verificar si el correo ya existe
     if (usuarios.some(u => u.correo === usuarioActual.correo)) {
-      alert('Este correo ya está registrado');
+      showToast('warn', 'Este correo ya está registrado');
       return;
     }
 
@@ -56,7 +81,7 @@ export default function AdminUsuario() {
     setUsuarios(actualizados);
     
     if (saveUsers(actualizados)) {
-      alert('Usuario agregado exitosamente');
+      showToast('success', 'Usuario agregado exitosamente');
       setMostrandoFormulario(false);
       setUsuarioActual({
         nombre: '',
@@ -67,22 +92,55 @@ export default function AdminUsuario() {
         fecha: ''
       });
     } else {
-      alert('Error al guardar usuario');
+      showToast('error', 'Error al guardar usuario');
     }
   };
 
   const handleEliminar = (correo) => {
-    if (!confirm('¿Está seguro de eliminar este usuario?')) return;
+  if (!confirm('¿Está seguro de eliminar este usuario?')) return;
     
     const actualizados = usuarios.filter(u => u.correo !== correo);
     setUsuarios(actualizados);
     
     if (saveUsers(actualizados)) {
-      alert('Usuario eliminado exitosamente');
+      showToast('success', 'Usuario eliminado exitosamente');
     } else {
-      alert('Error al eliminar usuario');
+      showToast('error', 'Error al eliminar usuario');
     }
   };
+
+  function openUserModal(user, tab = 'details', edit = false) {
+    setSelectedUser(user);
+    setSelectedOriginalEmail(user?.correo || null);
+    setModalInitialTab(tab);
+    setModalStartEditing(!!edit);
+    setModalOpen(true);
+    // if edit requested, let modal start editing
+    // modal has its own edit control
+  }
+
+  function closeUserModal() {
+    setModalOpen(false);
+    setSelectedUser(null);
+    setSelectedOriginalEmail(null);
+  }
+
+  function handleSaveFromModal(updatedUser) {
+    // validate unique email (allow same as original)
+    const other = usuarios.find(u => u.correo === updatedUser.correo && u.correo !== selectedOriginalEmail);
+    if (other) {
+      showToast('warn', 'El correo actualizado ya pertenece a otro usuario');
+      return;
+    }
+    const updated = usuarios.map(u => (u.correo === selectedOriginalEmail ? { ...u, ...updatedUser } : u));
+    setUsuarios(updated);
+    if (saveUsers(updated)) {
+      showToast('success', 'Usuario actualizado correctamente');
+      closeUserModal();
+    } else {
+      showToast('error', 'Error guardando los cambios');
+    }
+  }
 
   return (
     <AdminLayout title="Gestión de Usuarios">
@@ -114,6 +172,20 @@ export default function AdminUsuario() {
           }}
         >
           🔄 Actualizar
+        </button>
+        <button
+          onClick={handleExport}
+          style={{
+            padding: '10px 20px',
+            borderRadius: '8px',
+            background: '#6f42c1',
+            color: '#fff',
+            border: 'none',
+            fontWeight: 600,
+            cursor: 'pointer'
+          }}
+        >
+          ⤓ Exportar usuarios
         </button>
       </div>
 
@@ -233,19 +305,35 @@ export default function AdminUsuario() {
                     <td style={{ padding: '12px', border: '1px solid #ddd' }}>{usuario.telefono || '-'}</td>
                     <td style={{ padding: '12px', border: '1px solid #ddd' }}>{usuario.comuna || '-'}</td>
                     <td style={{ padding: '12px', border: '1px solid #ddd' }}>
-                      <button
-                        onClick={() => handleEliminar(usuario.correo)}
-                        style={{
-                          padding: '6px 12px',
-                          borderRadius: '4px',
-                          background: '#dc3545',
-                          color: '#fff',
-                          border: 'none',
-                          cursor: 'pointer'
-                        }}
-                      >
-                        Eliminar
-                      </button>
+                      <div style={{ display: 'flex', gap: 8 }}>
+                        <button
+                          onClick={() => openUserModal(usuario, 'details', false)}
+                          style={{ padding: '6px 12px', borderRadius: '4px', background: '#2b7cff', color: '#fff', border: 'none', cursor: 'pointer' }}
+                        >
+                          Mostrar
+                        </button>
+
+                        <button
+                          onClick={() => openUserModal(usuario, 'details', true)}
+                          style={{ padding: '6px 12px', borderRadius: '4px', background: '#0d6efd', color: '#fff', border: 'none', cursor: 'pointer' }}
+                        >
+                          Editar
+                        </button>
+
+                        <button
+                          onClick={() => openUserModal(usuario, 'orders', false)}
+                          style={{ padding: '6px 12px', borderRadius: '4px', background: '#6f42c1', color: '#fff', border: 'none', cursor: 'pointer' }}
+                        >
+                          Historial
+                        </button>
+
+                        <button
+                          onClick={() => handleEliminar(usuario.correo)}
+                          style={{ padding: '6px 12px', borderRadius: '4px', background: '#dc3545', color: '#fff', border: 'none', cursor: 'pointer' }}
+                        >
+                          Eliminar
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -254,6 +342,7 @@ export default function AdminUsuario() {
           </div>
         )}
       </div>
+  <UserModal user={selectedUser} open={modalOpen} onClose={closeUserModal} onSave={handleSaveFromModal} initialTab={modalInitialTab} startEditing={modalStartEditing} />
     </AdminLayout>
   );
 }
