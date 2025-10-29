@@ -1,0 +1,101 @@
+/* Profile page and form styles */
+.profile-page {
+  padding: 24px;
+}
+
+.profile-card {
+  max-width: 900px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #fff 0%, #fff 100%);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(139,69,19,0.06);
+  border: 1px solid rgba(139,69,19,0.04);
+}
+
+/* when used inside the admin layout we want the card to stretch full width to match dashboard layout */
+.profile-card.admin-full {
+  max-width: none;
+  margin: 0;
+  padding: 18px;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  align-items: start;
+}
+
+.profile-sidebar {
+  background: #fff9f6;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(139,69,19,0.03);
+}
+
+.profile-form .input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+.profile-form .input[disabled], .profile-form .input[readonly] {
+  background: #faf7f5;
+  color: #5d4037;
+  opacity: 1;
+}
+
+.profile-form label { display: block; margin-bottom: 6px; font-weight: 700; color: var(--primary-color); }
+
+.profile-actions { display:flex; gap: 12px; margin-top: 18px; align-items: center; }
+
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  min-width: 120px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(139,69,19,0.12);
+}
+
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+
+.btn-secondary {
+  background: #fff;
+  color: var(--primary-color);
+  border: 1px solid rgba(139,69,19,0.12);
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  min-width: 110px;
+}
+
+.profile-actions .btn-primary:focus, .profile-actions .btn-secondary:focus {
+  outline: 3px solid rgba(139,69,19,0.12);
+}
+
+/* Enforce visibility for primary button when other styles might conflict */
+.profile-actions .btn-primary {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 22px rgba(139,69,19,0.14) !important;
+  border: none !important;
+}
+
+.profile-actions .btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+
+.profile-header { display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px; }
+
+@media (max-width: 860px) {
+  .profile-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "run": "12345678",
+    "nombre": "Juan Pérez",
+    "correo": "juan@correo.com",
+    "password": "1234",
+    "fecha": "1970-01-01",
+    "telefono": "912345678",
+    "comuna": "Santiago",
+    "descuento": 50,
+    "tortaGratis": false,
+    "codigoUsado": "",
+    "preferencias": {}
+  },
+  {
+    "run": "87654321",
+    "nombre": "Ana Duoc",
+    "correo": "ana@duocuc.cl",
+    "password": "abcd",
+    "fecha": "2000-06-01",
+    "telefono": "911223344",
+    "comuna": "Providencia",
+    "descuento": 0,
+    "tortaGratis": true,
+    "codigoUsado": "",
+    "preferencias": {}
+  },
+  {
+    "run": "11223344",
+    "nombre": "Pedro Feliz",
+    "correo": "pedro@profesor.duoc.cl",
+    "password": "feliz",
+    "fecha": "1980-05-10",
+    "telefono": "911112222",
+    "comuna": "Ñuñoa",
+    "descuento": 10,
+    "tortaGratis": false,
+    "codigoUsado": "FELICES50",
+    "preferencias": {}
+  }
+]

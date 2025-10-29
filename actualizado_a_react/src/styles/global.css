@@ -1,0 +1,130 @@
+/* Reset y fuentes */
+* { 
+  box-sizing: border-box; 
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #5D4037;
+  background: linear-gradient(135deg, #FFF5E1 0%, #FFF8DC 100%);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* Variables */
+:root {
+  --primary-color: #8B4513;
+  --secondary-color: #FFC0CB;
+  --accent-color: #5D4037;
+  --background-color: #FFF5E1;
+  --text-color: #5D4037;
+  --border-color: #e5e7eb;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Links */
+a {
+  color: #8D6E63;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #4E342E;
+}
+
+/* Main container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Main content */
+.main-content {
+  min-height: calc(100vh - 200px);
+  padding: 40px 0;
+  flex: 1;
+}
+
+/* Main */
+.main {
+  min-height: calc(100vh - 200px);
+  padding: 20px 0;
+}
+
+/* Utility classes */
+.text-principal { 
+  color: #8B4513 !important; 
+}
+
+.text-secundario { 
+  color: #B0BEC5 !important; 
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Button styles */
+.btn-home {
+  transition: all 0.3s ease;
+}
+
+.btn-home:hover {
+  background-color: #6b3410 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+}
+
+/* Responsive básico para móviles */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .main-content {
+    padding: 20px 0;
+  }
+  
+  .main {
+    padding: 15px 0;
+  }
+  
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.3rem; }
+  h4 { font-size: 1.1rem; }
+  
+  .btn-home {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+  
+  .main-content {
+    padding: 15px 0;
+  }
+  
+  .main {
+    padding: 10px 0;
+  }
+  
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.4rem; }
+  h3 { font-size: 1.2rem; }
+  h4 { font-size: 1rem; }
+  
+  .btn-home {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+}

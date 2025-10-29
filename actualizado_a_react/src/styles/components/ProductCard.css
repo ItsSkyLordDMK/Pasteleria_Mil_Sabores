@@ -1,0 +1,153 @@
+.product-card{
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  background: #fff;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-image{
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.product-title{
+  margin-top: 12px;
+  color: #8b4513;
+  font-size: 1.05rem;
+}
+
+.product-category{
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
+
+.product-price{
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #2c1810;
+  margin-top: 8px;
+}
+
+.product-actions{
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.stock-badge{
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.stock-badge.low{ background: #ff8a00; }
+.stock-badge.out{ background: #dc3545; }
+
+.detail-btn{
+  flex: 1;
+  padding: 10px 14px;
+  background: #8b4513;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.add-btn{
+  padding: 10px 12px;
+  background: #ffc107;
+  color: #8b4513;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px){
+  .product-image{ height: 200px; }
+}
+
+@media (max-width: 640px){
+  .product-image{ height: 160px; }
+  .product-actions{ flex-direction: column; }
+  .detail-btn{ width: 100%; }
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .product-card {
+    padding: 10px;
+  }
+  
+  .product-image {
+    height: 180px;
+  }
+  
+  .product-title {
+    font-size: 1rem;
+  }
+  
+  .product-category {
+    font-size: 0.85rem;
+  }
+  
+  .product-price {
+    font-size: 1.1rem;
+  }
+  
+  .detail-btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .add-btn {
+    padding: 8px 10px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    padding: 8px;
+  }
+  
+  .product-image {
+    height: 150px;
+  }
+  
+  .product-title {
+    font-size: 0.95rem;
+  }
+  
+  .product-category {
+    font-size: 0.8rem;
+  }
+  
+  .product-price {
+    font-size: 1.05rem;
+  }
+  
+  .detail-btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+  
+  .add-btn {
+    padding: 6px 8px;
+    font-size: 0.9rem;
+  }
+}
