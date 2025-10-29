@@ -69,3 +69,61 @@
 .footer .newsletter button:hover {
   opacity: 0.9;
 }
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .footer {
+    padding: 24px 0 16px 0;
+  }
+  
+  .footer nav a {
+    display: block;
+    margin: 8px 0;
+    font-size: 1rem;
+  }
+  
+  .footer .separator {
+    display: none;
+  }
+  
+  .footer .newsletter {
+    max-width: 280px;
+    padding: 0 20px;
+  }
+  
+  .footer .newsletter input {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+  
+  .footer .newsletter button {
+    padding: 10px 18px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 20px 0 14px 0;
+  }
+  
+  .footer nav a {
+    font-size: 0.9rem;
+    padding: 6px 0;
+  }
+  
+  .footer .newsletter {
+    max-width: 260px;
+    padding: 0 15px;
+  }
+  
+  .footer .newsletter input {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+  
+  .footer .newsletter button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
