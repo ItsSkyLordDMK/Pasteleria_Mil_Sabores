@@ -174,7 +174,14 @@ export default function Carrito() {
                       {producto.descripcion || producto.categoria}
                     </p>
                     <p style={{ fontSize: '1.1rem', fontWeight: 'bold', margin: '4px 0 0 0' }}>
-                      ${(producto.precio * producto.cantidad).toLocaleString()}
+                      {(() => {
+                        try {
+                          const pricing = calculateItemPricing(producto);
+                          return `$${(pricing.finalUnitPrice * producto.cantidad).toLocaleString()}`;
+                        } catch (e) {
+                          return `$${(producto.precio * producto.cantidad).toLocaleString()}`;
+                        }
+                      })()}
                     </p>
                   </div>
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>

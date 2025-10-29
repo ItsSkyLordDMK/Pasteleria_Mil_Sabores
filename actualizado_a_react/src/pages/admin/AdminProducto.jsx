@@ -274,7 +274,14 @@ export default function AdminProducto() {
                     <td style={{ padding: '12px', border: '1px solid #ddd' }}>{producto.id}</td>
                     <td style={{ padding: '12px', border: '1px solid #ddd' }}>{producto.nombre}</td>
                     <td style={{ padding: '12px', border: '1px solid #ddd' }}>{producto.categoria}</td>
-                    <td style={{ padding: '12px', border: '1px solid #ddd' }}>${producto.precio.toLocaleString()}</td>
+                    <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                      {"$" + producto.precio.toLocaleString()}
+                      {producto.oferta && (
+                        <div style={{ fontSize: '0.85rem', color: '#198754', marginTop: 6 }}>
+                          {producto.oferta.label || (producto.oferta.type === 'percentage' ? `-${producto.oferta.value}%` : `$${producto.oferta.value} off`)}
+                        </div>
+                      )}
+                    </td>
                     <td style={{ padding: '12px', border: '1px solid #ddd' }}>
                       <span style={{ fontWeight: 700 }}>{producto.stock ?? '-'}</span>
                       {typeof producto.stock === 'number' && producto.stock <= 5 && (

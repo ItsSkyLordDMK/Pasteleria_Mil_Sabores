@@ -16,6 +16,14 @@ export default function SalesMetrics() {
   const totalRevenue = orders.reduce((s, o) => s + (typeof o.total === 'number' ? o.total : 0), 0);
   const avgOrder = totalOrders ? (totalRevenue / totalOrders) : 0;
 
+  const totalDiscounts = orders.reduce((sum, o) => {
+    if (!Array.isArray(o.items)) return sum;
+    return sum + o.items.reduce((s2, it) => {
+      const descuento = Number(it.descuento_unitario || 0);
+      return s2 + (descuento * (it.cantidad || 0));
+    }, 0);
+  }, 0);
+
   const recent = orders.slice().sort((a,b)=> new Date(b.fecha) - new Date(a.fecha)).slice(0,5);
 
   return (
@@ -24,7 +32,8 @@ export default function SalesMetrics() {
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
         <div style={{ minWidth: 160 }}><strong>Órdenes:</strong> {totalOrders}</div>
         <div style={{ minWidth: 160 }}><strong>Ingresos:</strong> ${totalRevenue.toLocaleString()}</div>
-        <div style={{ minWidth: 160 }}><strong>Ticket promedio:</strong> ${avgOrder.toFixed(2)}</div>
+  <div style={{ minWidth: 160 }}><strong>Ticket promedio:</strong> ${avgOrder.toFixed(2)}</div>
+  <div style={{ minWidth: 160 }}><strong>Descuentos totales:</strong> ${totalDiscounts.toLocaleString()}</div>
       </div>
 
       <div style={{ marginTop: 12 }}>

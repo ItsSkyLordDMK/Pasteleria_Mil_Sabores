@@ -41,16 +41,14 @@ export default function ProductCard({ producto }) {
       <p className="product-price">
         {producto.oferta ? (
           <span>
-            <span style={{ textDecoration: 'line-through', color: '#a0a0a0', marginRight: 8 }}>${producto.precio.toLocaleString()}</span>
-            <span style={{ color: '#fff', fontWeight: '700' }}>${(producto.precio - (producto.oferta.type === 'percentage' ? (producto.precio * (producto.oferta.value/100)) : (producto.oferta.value || 0))).toLocaleString()}</span>
+            <span style={{ textDecoration: 'line-through', color: '#a0a0a0', marginRight: 8 }}>{"$" + producto.precio.toLocaleString()}</span>
+            <span style={{ color: '#fff', fontWeight: '700' }}>{"$" + (producto.precio - (producto.oferta.type === 'percentage' ? (producto.precio * (producto.oferta.value/100)) : (producto.oferta.value || 0))).toLocaleString()}</span>
           </span>
-        ) : (
-          `$${producto.precio.toLocaleString()}`
-        )}
+        ) : ('$' + producto.precio.toLocaleString())}
       </p>
       {producto.oferta && (
         <div style={{ position: 'absolute', top: 8, left: 8, background: '#ff7043', color: 'white', padding: '4px 8px', borderRadius: 6, fontSize: 12 }}>
-          {producto.oferta.label || (producto.oferta.type === 'percentage' ? `-${producto.oferta.value}%` : `$${producto.oferta.value} off`)}
+          {producto.oferta.label || (producto.oferta.type === 'percentage' ? `-${producto.oferta.value}%` : ("$" + producto.oferta.value + " off"))}
         </div>
       )}
       <div className="product-actions">

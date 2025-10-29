@@ -146,7 +146,7 @@ export default function AdminOrdenes() {
                     <td style={{ padding: 12, border: '1px solid #eee' }}>
                       {o.items.map(it => (
                         <div key={it.id} style={{ marginBottom: 6 }}>
-                          {it.nombre} x{it.cantidad} — ${ ((it.subtotal != null) ? it.subtotal : ( (it.precio_unitario_final ?? it.precio ?? it.precio_original || 0) * it.cantidad )).toLocaleString() }
+                          {it.nombre} x{it.cantidad} — ${ ((it.subtotal != null) ? it.subtotal : (( (it.precio_unitario_final ?? it.precio ?? it.precio_original) * it.cantidad ) )).toLocaleString() }
                         </div>
                       ))}
                     </td>
