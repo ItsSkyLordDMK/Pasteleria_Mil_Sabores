@@ -109,7 +109,9 @@ export default function Categorias() {
                 </div>
               ) : (
                 productosFiltrados.map(producto => (
-                  <ProductCard key={producto.id} producto={producto} />
+                  <div key={producto.id} style={{ width: '100%', display: 'block' }}>
+                    <ProductCard producto={producto} />
+                  </div>
                 ))
               )}
             </div>

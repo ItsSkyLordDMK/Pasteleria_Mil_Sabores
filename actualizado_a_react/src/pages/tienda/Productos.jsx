@@ -91,10 +91,10 @@ export default function Productos() {
           </div>
 
           <div className="productos-grid" style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+            display: 'flex',
+            flexWrap: 'wrap',
             gap: '1rem',
-            alignItems: 'start'
+            alignItems: 'flex-start'
           }}>
             {productosFiltrados.length === 0 ? (
               <div style={{ 
@@ -111,7 +111,9 @@ export default function Productos() {
               </div>
             ) : (
               productosFiltrados.map(producto => (
-                <ProductCard key={producto.id} producto={producto} />
+                <div key={producto.id} style={{ flex: '0 0 220px', display: 'block' }}>
+                  <ProductCard producto={producto} />
+                </div>
               ))
             )}
           </div>
